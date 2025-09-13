@@ -5,8 +5,8 @@ import type { APIRoute, MiddlewareNext } from "astro";
 const SITE_URL = import.meta.env.PROD
   ? "https://generacion-urbana.cl"
   : import.meta.env.DEV
-  ? "http://localhost:3000"
-  : "http://127.0.0.1:3000";
+  ? "http://localhost:4321"
+  : "http://127.0.0.1:4321";
 const CSP_POLICY = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com;

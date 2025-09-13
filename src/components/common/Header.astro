@@ -9,26 +9,26 @@ const { transparent = false } = Astro.props;
 ---
 
 <header class:list={[
-  'sticky top-0 z-50 w-full transition-all duration-300',
-  { 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm': !transparent },
+  'fixed top-0 z-50 w-full transition-all duration-500 ease-in-out',
+  { 'bg-white/90 backdrop-blur-lg border-b border-gray-200/50 shadow-lg': !transparent },
   { 'bg-transparent': transparent }
-]}>
+]} id="main-header">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex h-20 items-center justify-between">
+    <div class="flex h-16 lg:h-20 items-center justify-between transition-all duration-300" id="header-content">
       <!-- Logo -->
       <div class="flex items-center">
-        <a href="/" class="group flex items-center space-x-3 transition-transform hover:scale-105">
+        <a href="/" class="group flex items-center space-x-3 transition-all duration-300 hover:scale-105">
           <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-            <div class="relative w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-xl">GU</span>
+            <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+            <div class="relative w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-lg flex items-center justify-center transition-all duration-300" id="logo-container">
+              <span class="text-white font-bold text-lg lg:text-xl" id="logo-text">GU</span>
             </div>
           </div>
           <div class="hidden sm:block">
-            <div class="text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+            <div class="text-lg lg:text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-all duration-300" id="brand-text">
               Generación Urbana
             </div>
-            <div class="text-xs text-gray-500 -mt-1">
+            <div class="text-xs text-gray-500 -mt-1 transition-all duration-300" id="tagline">
               Costura • San Bernardo
             </div>
           </div>
@@ -134,7 +134,14 @@ const { transparent = false } = Astro.props;
   document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
+    const header = document.getElementById('main-header');
+    const headerContent = document.getElementById('header-content');
+    const logoContainer = document.getElementById('logo-container');
+    const logoText = document.getElementById('logo-text');
+    const brandText = document.getElementById('brand-text');
+    const tagline = document.getElementById('tagline');
     
+    // Mobile menu functionality
     if (button && menu) {
       button.addEventListener('click', () => {
         const expanded = button.getAttribute('aria-expanded') === 'true';
@@ -143,18 +150,145 @@ const { transparent = false } = Astro.props;
       });
     }
     
+    // Enhanced scroll behavior for header
+    let lastScrollTop = 0;
+    let scrolled = false;
+    
+    function updateHeader() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const isScrollingDown = scrollTop > lastScrollTop;
+      const hasScrolled = scrollTop > 20;
+      
+      if (header) {
+        if (hasScrolled && !scrolled) {
+          // Scrolled state - more compact and solid background
+          header.classList.remove('bg-transparent');
+          header.classList.add('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-gray-200/60', 'shadow-xl');
+          
+          // Make header more compact
+          if (headerContent) {
+            headerContent.classList.remove('h-16', 'lg:h-20');
+            headerContent.classList.add('h-14', 'lg:h-16');
+          }
+          
+          // Make logo smaller
+          if (logoContainer) {
+            logoContainer.classList.remove('w-10', 'h-10', 'lg:w-12', 'lg:h-12');
+            logoContainer.classList.add('w-8', 'h-8', 'lg:w-10', 'lg:h-10');
+          }
+          
+          if (logoText) {
+            logoText.classList.remove('text-lg', 'lg:text-xl');
+            logoText.classList.add('text-base', 'lg:text-lg');
+          }
+          
+          // Make brand text smaller
+          if (brandText) {
+            brandText.classList.remove('text-lg', 'lg:text-xl');
+            brandText.classList.add('text-base', 'lg:text-lg');
+          }
+          
+          // Hide tagline on mobile when scrolled
+          if (tagline) {
+            tagline.classList.add('hidden', 'lg:block');
+          }
+          
+          scrolled = true;
+        } else if (!hasScrolled && scrolled) {
+          // Top state - restore original size
+          header.classList.add('bg-transparent');
+          header.classList.remove('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-gray-200/60', 'shadow-xl');
+          
+          // Restore header height
+          if (headerContent) {
+            headerContent.classList.remove('h-14', 'lg:h-16');
+            headerContent.classList.add('h-16', 'lg:h-20');
+          }
+          
+          // Restore logo size
+          if (logoContainer) {
+            logoContainer.classList.remove('w-8', 'h-8', 'lg:w-10', 'lg:h-10');
+            logoContainer.classList.add('w-10', 'h-10', 'lg:w-12', 'lg:h-12');
+          }
+          
+          if (logoText) {
+            logoText.classList.remove('text-base', 'lg:text-lg');
+            logoText.classList.add('text-lg', 'lg:text-xl');
+          }
+          
+          // Restore brand text size
+          if (brandText) {
+            brandText.classList.remove('text-base', 'lg:text-lg');
+            brandText.classList.add('text-lg', 'lg:text-xl');
+          }
+          
+          // Show tagline again
+          if (tagline) {
+            tagline.classList.remove('hidden', 'lg:block');
+          }
+          
+          scrolled = false;
+        }
+        
+        // Hide/show header on scroll (optional - uncomment if you want this behavior)
+        /*
+        if (isScrollingDown && scrollTop > 200) {
+          header.style.transform = 'translateY(-100%)';
+        } else {
+          header.style.transform = 'translateY(0)';
+        }
+        */
+      }
+      
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    }
+    
+    // Throttled scroll event
+    let ticking = false;
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateHeader);
+        ticking = true;
+        setTimeout(() => { ticking = false; }, 16); // ~60fps
+      }
+    }
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Initial check
+    updateHeader();
+    
     // Smooth scroll behavior for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          const headerHeight = header ? header.offsetHeight : 80;
+          const targetPosition = target.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
           });
         }
       });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (menu && button && !menu.contains(e.target) && !button.contains(e.target)) {
+        menu.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+    
+    // Close mobile menu when window is resized to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && menu) {
+        menu.classList.add('hidden');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      }
     });
   });
 </script>
