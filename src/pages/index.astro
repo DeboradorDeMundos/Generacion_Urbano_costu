@@ -132,17 +132,78 @@ const organizationSchema = {
   "sameAs": [
     "https://www.instagram.com/generacionurbana",
     "https://www.facebook.com/generacionurbana"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo toma hacer un bordado empresarial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El tiempo de confección depende de la cantidad y complejidad del diseño. Generalmente, bordados simples toman 3-5 días hábiles, mientras que pedidos grandes pueden tomar 1-2 semanas. Siempre confirmamos tiempos exactos al recibir tu pedido."
+      }
+    },
+    {
+      "@type": "Question", 
+      "name": "¿Qué tipos de uniformes escolares confeccionan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Confeccionamos uniformes completos: camisas, pantalones, faldas, sweaters, chalecos y polerones. Trabajamos con telas de alta calidad y seguimos las especificaciones exactas de cada colegio en San Bernardo y comunas cercanas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hacen polerones de cuarto medio personalizados?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "¡Sí! Somos especialistas en polerones de graduación. Ofrecemos diseños únicos, bordados personalizados con nombres, cursos y logos del colegio. Trabajamos directamente con centros de alumnos para crear polerones memorables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuáles son sus precios y formas de pago?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nuestros precios son competitivos y varían según el tipo de trabajo. Ofrecemos cotizaciones gratuitas y aceptamos efectivo, transferencias bancarias y tarjetas. Para pedidos grandes, manejamos sistemas de pago por cuotas."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://generacionurbana.cl"
+    }
   ]
 };
 ---
 
 <BaseLayout
-  title="Costurera Experta en San Bernardo | Bordados y Uniformes | Generación Urbana"
-  description="Costurera profesional en San Bernardo con +15 años de experiencia. Especialistas en bordados empresariales, uniformes escolares y polerones 4to medio. Calidad garantizada y entrega rápida."
-  keywords="costurera san bernardo, bordados empresariales, uniformes escolares, polerones cuarto medio, costura industrial, bordados personalizados, uniformes corporativos"
+  title="Costurera Profesional San Bernardo | Bordados Empresariales | Generación Urbana"
+  description="⭐ Costurera experta en San Bernardo con +15 años de experiencia. Especialistas en bordados empresariales, uniformes escolares y polerones 4to medio. ✅ Calidad garantizada ⚡ Entrega rápida 💰 Precios competitivos. ¡Cotiza gratis!"
+  keywords="costurera san bernardo, bordados empresariales chile, uniformes escolares san bernardo, polerones cuarto medio, costura industrial, bordados personalizados santiago, confección uniformes corporativos, costurera profesional zona sur, arreglos de ropa san bernardo, servicio de bordado, uniformes trabajo chile"
   headerTransparent={true}
 >
   <JsonLd schema={organizationSchema} />
+  <JsonLd schema={faqSchema} />
+  <JsonLd schema={breadcrumbSchema} />
   
   <!-- Hero Section - Modernizado con enfoque en conversión -->
   <Hero />

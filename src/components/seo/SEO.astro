@@ -38,7 +38,14 @@ const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 <meta name="description" content={description} />
 {keywords && <meta name="keywords" content={keywords} />}
 {author && <meta name="author" content={author} />}
-{noindex && <meta name="robots" content="noindex, nofollow" />}
+{noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
+
+<!-- Language and Location -->
+<meta name="language" content="es" />
+<meta name="geo.region" content="CL-RM" />
+<meta name="geo.placename" content="San Bernardo" />
+<meta name="geo.position" content="-33.5828;-70.7004" />
+<meta name="ICBM" content="-33.5828, -70.7004" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalUrl} />

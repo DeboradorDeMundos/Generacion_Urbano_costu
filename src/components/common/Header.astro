@@ -10,8 +10,8 @@ const { transparent = false } = Astro.props;
 
 <header class:list={[
   'fixed top-0 z-50 w-full transition-all duration-500 ease-in-out',
-  { 'bg-white/90 backdrop-blur-lg border-b border-gray-200/50 shadow-lg': !transparent },
-  { 'bg-transparent': transparent }
+  { 'bg-white/80 backdrop-blur-md border-b border-gray-200/30 shadow-sm': !transparent },
+  { 'bg-white/60 backdrop-blur-md border-b border-white/20': transparent }
 ]} id="main-header">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 lg:h-20 items-center justify-between transition-all duration-300" id="header-content">
@@ -25,10 +25,10 @@ const { transparent = false } = Astro.props;
             </div>
           </div>
           <div class="hidden sm:block">
-            <div class="text-lg lg:text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-all duration-300" id="brand-text">
+            <div class="text-lg lg:text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-all duration-300 drop-shadow-sm" id="brand-text">
               Generación Urbana
             </div>
-            <div class="text-xs text-gray-500 -mt-1 transition-all duration-300" id="tagline">
+            <div class="text-xs text-gray-700 -mt-1 transition-all duration-300 drop-shadow-sm" id="tagline">
               Costura • San Bernardo
             </div>
           </div>
@@ -42,7 +42,7 @@ const { transparent = false } = Astro.props;
       <div class="hidden lg:flex items-center space-x-4">
         <a 
           href="tel:+56912345678" 
-          class="text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors"
+          class="text-primary-700 hover:text-primary-800 font-semibold text-sm transition-colors drop-shadow-sm"
         >
           +56 9 1234 5678
         </a>
@@ -61,7 +61,7 @@ const { transparent = false } = Astro.props;
       <div class="md:hidden">
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-xl p-2 text-gray-700 hover:bg-gray-100 hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-colors"
+          class="inline-flex items-center justify-center rounded-xl p-2 text-gray-800 hover:bg-white/80 hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-all duration-200 backdrop-blur-sm"
           aria-controls="mobile-menu"
           aria-expanded="false"
           id="mobile-menu-button"
@@ -162,8 +162,8 @@ const { transparent = false } = Astro.props;
       if (header) {
         if (hasScrolled && !scrolled) {
           // Scrolled state - more compact and solid background
-          header.classList.remove('bg-transparent');
-          header.classList.add('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-gray-200/60', 'shadow-xl');
+          header.classList.remove('bg-white/60', 'backdrop-blur-md', 'border-white/20');
+          header.classList.add('bg-white/95', 'backdrop-blur-xl', 'border-gray-200/60', 'shadow-xl');
           
           // Make header more compact
           if (headerContent) {
@@ -195,9 +195,9 @@ const { transparent = false } = Astro.props;
           
           scrolled = true;
         } else if (!hasScrolled && scrolled) {
-          // Top state - restore original size
-          header.classList.add('bg-transparent');
-          header.classList.remove('bg-white/95', 'backdrop-blur-xl', 'border-b', 'border-gray-200/60', 'shadow-xl');
+          // Top state - restore original size with subtle background
+          header.classList.remove('bg-white/95', 'backdrop-blur-xl', 'border-gray-200/60', 'shadow-xl');
+          header.classList.add('bg-white/60', 'backdrop-blur-md', 'border-white/20');
           
           // Restore header height
           if (headerContent) {
