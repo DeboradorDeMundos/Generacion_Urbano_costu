@@ -10,21 +10,21 @@ const { transparent = false } = Astro.props;
 
 <header class:list={[
   'fixed top-0 z-40 w-full transition-all duration-700 ease-out transform-gpu',
-  'bg-white/85 backdrop-blur-xl border-b border-white/20 shadow-lg',
-  'before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/5 before:via-white/3 before:to-white/5 before:opacity-60',
-  'after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:via-transparent after:to-white/3'
+  'bg-white/95 backdrop-blur-2xl border-b border-white/30 shadow-xl',
+  'before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/8 before:via-white/5 before:to-white/8 before:opacity-70',
+  'after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:via-transparent after:to-white/8'
 ]} id="main-header" data-header="enhanced">
   
-  <!-- Advanced Background Effects with Reduced Opacity -->
+  <!-- Advanced Background Effects with Improved Visibility -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <!-- Animated mesh background -->
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary-500/5 via-transparent to-secondary-500/5 animate-gradient-x"></div>
-      <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-purple-500/3 via-transparent to-pink-500/3 animate-gradient-x animation-delay-3s"></div>
+    <div class="absolute inset-0 opacity-15">
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary-500/8 via-transparent to-secondary-500/8 animate-gradient-x"></div>
+      <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-purple-500/5 via-transparent to-pink-500/5 animate-gradient-x animation-delay-3s"></div>
     </div>
     
-    <!-- Floating particles with reduced visibility -->
-    <div class="absolute inset-0 opacity-30">
+    <!-- Floating particles with better visibility -->
+    <div class="absolute inset-0 opacity-40">
       <div class="header-particle particle-1"></div>
       <div class="header-particle particle-2"></div>
       <div class="header-particle particle-3"></div>
@@ -32,7 +32,7 @@ const { transparent = false } = Astro.props;
     </div>
     
     <!-- Interactive grid pattern -->
-    <div class="absolute inset-0 opacity-3">
+    <div class="absolute inset-0 opacity-5">
       <div class="grid-pattern-header"></div>
     </div>
   </div>
