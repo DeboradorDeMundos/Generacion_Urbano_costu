@@ -58,20 +58,7 @@ export async function onRequest(context: any, next: MiddlewareNext) {
     }
   }
 
-  // Canonical URL handling
-  const canonicalUrl = normalizeUrl(url);
-  locals.canonicalUrl = canonicalUrl;
-
-  // Handle redirects for SEO (only in production)
-  if (import.meta.env.PROD && shouldRedirect(url, canonicalUrl)) {
-    return new Response(null, {
-      status: 301,
-      headers: {
-        Location: canonicalUrl,
-        ...Object.fromEntries(headers.entries()),
-      },
-    });
-  }
+  // No canonical URL or redirect logic
 
   // Rate limiting (only in production)
   if (import.meta.env.PROD) {
@@ -95,18 +82,6 @@ export async function onRequest(context: any, next: MiddlewareNext) {
     for (const [key, value] of headers.entries()) {
       response.headers.set(key, value);
     }
-  }
-
-  // Add canonical link to HTML responses
-  if (response.headers.get("content-type")?.includes("text/html")) {
-    const html = await response.text();
-    const updatedHtml = addCanonicalLink(html, canonicalUrl);
-
-    return new Response(updatedHtml, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: response.headers,
-    });
   }
 
   return response;
