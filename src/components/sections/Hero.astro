@@ -11,131 +11,1024 @@ export interface Props {
 }
 
 const {
-  title = "Costurera Experta en San Bernardo",
+  title = "Tu Costurera de Confianza",
   subtitle = "Generación Urbana",
-  description = "Especialistas en bordados empresariales, uniformes escolares y polerones para 4to medio. Más de 15 años creando piezas únicas con calidad profesional.",
+  description = "Transformamos tus ideas textiles en realidad con más de 15 años de experiencia",
   image = "/images/hero-bg.jpg",
-  ctaText = "Solicitar Cotización",
+  ctaText = "Comenzar mi Proyecto",
   ctaLink = "/contacto",
-  secondaryCtaText = "Ver Trabajos",
+  secondaryCtaText = "Ver Ejemplos",
   secondaryCtaLink = "/productos"
 } = Astro.props;
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Background con gradiente moderno -->
-  <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600">
-    <!-- Patrón decorativo sutil -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden user-journey-hero">
+  <!-- Advanced Background System -->
+  <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-primary-900 to-slate-800">
+    <!-- Animated Mesh Gradient -->
+    <div class="absolute inset-0 opacity-40">
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20 animate-gradient-shift"></div>
+      <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-purple-500/15 via-transparent to-pink-500/15 animate-gradient-shift animation-delay-3000"></div>
+    </div>
+    
+    <!-- Interactive Particles System -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <!-- Primary floating elements -->
+      <div class="particle particle-1" data-speed="1"></div>
+      <div class="particle particle-2" data-speed="1.5"></div>
+      <div class="particle particle-3" data-speed="0.8"></div>
+      <div class="particle particle-4" data-speed="1.2"></div>
+      <div class="particle particle-5" data-speed="2"></div>
+      
+      <!-- Secondary micro-elements -->
+      <div class="micro-particle micro-1"></div>
+      <div class="micro-particle micro-2"></div>
+      <div class="micro-particle micro-3"></div>
+      <div class="micro-particle micro-4"></div>
+      <div class="micro-particle micro-5"></div>
+      <div class="micro-particle micro-6"></div>
+    </div>
+
+    <!-- Dynamic Grid Pattern -->
     <div class="absolute inset-0 opacity-10">
-      <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <defs>
-          <pattern id="hero-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="10" cy="10" r="1" fill="currentColor" opacity="0.3"/>
-          </pattern>
-        </defs>
-        <rect width="100" height="100" fill="url(#hero-pattern)"/>
-      </svg>
+      <div class="grid-pattern"></div>
     </div>
   </div>
 
-  <!-- Elementos decorativos flotantes -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-1/4 left-10 w-2 h-2 bg-secondary-400 rounded-full opacity-60 animate-pulse"></div>
-    <div class="absolute top-1/3 right-20 w-3 h-3 bg-secondary-300 rounded-full opacity-40 animate-bounce"></div>
-    <div class="absolute bottom-1/4 left-1/4 w-1.5 h-1.5 bg-secondary-500 rounded-full opacity-50 animate-pulse"></div>
-    <div class="absolute bottom-1/3 right-1/3 w-2.5 h-2.5 bg-secondary-400 rounded-full opacity-30 animate-bounce"></div>
-  </div>
-
-  <!-- Contenido principal -->
+  <!-- Main Content - UX Journey Optimized -->
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div class="space-y-8 animate-fade-in">
-      <!-- Badge de ubicación -->
-      <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium border border-white/20">
-        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-        </svg>
-        San Bernardo, Región Metropolitana
-      </div>
-
-      <!-- Título principal -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight font-heading">
-        <span class="block">{title}</span>
-        <span class="block text-secondary-300 text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2">
-          desde 2008
-        </span>
-      </h1>
-
-      <!-- Subtítulo -->
-      <p class="text-xl sm:text-2xl md:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed">
-        {description}
-      </p>
-
-      <!-- Puntos clave de valor -->
-      <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-white/80 text-sm md:text-base">
-        <div class="flex items-center">
-          <svg class="w-5 h-5 mr-2 text-secondary-300" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          +15 años experiencia
+    
+    <!-- Trust Indicator (Step 1: Build Confidence) -->
+    <div class="mb-8 animate-fade-in-up">
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:scale-105 group cursor-pointer">
+        <!-- Location Badge -->
+        <div class="flex items-center gap-2">
+          <div class="relative">
+            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            <div class="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-40"></div>
+          </div>
+          <span class="text-white/90 text-sm font-medium">San Bernardo, RM</span>
         </div>
-        <div class="flex items-center">
-          <svg class="w-5 h-5 mr-2 text-secondary-300" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          Garantía de calidad
+        
+        <div class="w-px h-4 bg-white/30"></div>
+        
+        <!-- Experience Badge -->
+        <div class="flex items-center gap-2">
+          <div class="text-yellow-400">⭐</div>
+          <span class="text-white/90 text-sm font-medium">+15 años</span>
         </div>
-        <div class="flex items-center">
-          <svg class="w-5 h-5 mr-2 text-secondary-300" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        
+        <div class="w-px h-4 bg-white/30"></div>
+        
+        <!-- Clients Badge -->
+        <div class="flex items-center gap-2">
+          <div class="text-blue-400">👥</div>
+          <span class="text-white/90 text-sm font-medium">500+ clientes</span>
+        </div>
+        
+        <!-- Arrow indicator -->
+        <div class="text-white/60 group-hover:text-white/90 transition-colors group-hover:translate-x-1 duration-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
-          Entrega oportuna
         </div>
       </div>
+    </div>
 
-      <!-- CTAs -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+    <!-- Problem-Solution Headline (Step 2: Address Pain Points) -->
+    <div class="mb-12 space-y-6">
+      <!-- Problem Statement -->
+      <div class="animate-fade-in-up animation-delay-300">
+        <p class="text-lg md:text-xl text-gray-300 font-medium mb-4">
+          ¿Necesitas uniformes de calidad que realmente duren?
+        </p>
+      </div>
+      
+      <!-- Solution Statement -->
+      <div class="animate-fade-in-up animation-delay-600">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+          <span class="block relative">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-white">
+              {title}
+            </span>
+            <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-400 to-transparent animate-expand-width"></div>
+          </span>
+          <span class="block text-2xl sm:text-3xl md:text-4xl text-primary-300 mt-4 font-normal">
+            en San Bernardo
+          </span>
+        </h1>
+      </div>
+      
+      <!-- Value Proposition -->
+      <div class="animate-fade-in-up animation-delay-900">
+        <p class="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
+          {description}
+          <span class="block mt-3 text-lg text-primary-200 font-medium">
+            ✨ Desde la primera puntada hasta la entrega perfecta
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Service Categories (Step 3: Show What We Do) -->
+    <div class="mb-12 animate-fade-in-up animation-delay-1200">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Uniformes Escolares -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+          <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 transform hover:-translate-y-2 cursor-pointer">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🎓</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Uniformes Escolares</h3>
+            <p class="text-gray-300 text-sm">Calidad que resiste todo el año escolar</p>
+            <div class="mt-4 flex items-center text-primary-300 text-sm font-medium">
+              <span>Ver más</span>
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bordados Empresariales -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-2xl transform -rotate-1 group-hover:-rotate-2 transition-transform duration-500"></div>
+          <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 transform hover:-translate-y-2 cursor-pointer">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">👔</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Bordados Empresariales</h3>
+            <p class="text-gray-300 text-sm">Identidad profesional en cada prenda</p>
+            <div class="mt-4 flex items-center text-primary-300 text-sm font-medium">
+              <span>Ver más</span>
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polerones 4to Medio -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-secondary-500/20 to-secondary-600/20 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+          <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-500 transform hover:-translate-y-2 cursor-pointer">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🎉</div>
+            <h3 class="text-lg font-semibold text-white mb-2">Polerones 4to Medio</h3>
+            <p class="text-gray-300 text-sm">Recuerdos únicos para la graduación</p>
+            <div class="mt-4 flex items-center text-secondary-300 text-sm font-medium">
+              <span>Ver más</span>
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Proof (Step 4: Build Trust) -->
+    <div class="mb-12 animate-fade-in-up animation-delay-1500">
+      <div class="flex flex-wrap justify-center items-center gap-6 text-white/80 text-sm">
+        <div class="flex items-center bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+          <div class="flex -space-x-1 mr-3">
+            <div class="w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+              <span class="text-xs text-white font-bold">A</span>
+            </div>
+            <div class="w-6 h-6 bg-gradient-to-r from-green-400 to-green-500 rounded-full border-2 border-white flex items-center justify-center">
+              <span class="text-xs text-white font-bold">B</span>
+            </div>
+            <div class="w-6 h-6 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+              <span class="text-xs text-white font-bold">C</span>
+            </div>
+          </div>
+          <span>500+ clientes satisfechos</span>
+        </div>
+        
+        <div class="flex items-center bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+          <div class="flex text-yellow-400 mr-2">
+            <span>⭐⭐⭐⭐⭐</span>
+          </div>
+          <span>4.9/5 valoración</span>
+        </div>
+        
+        <div class="flex items-center bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+          <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse mr-2"></div>
+          <span>Entrega garantizada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section (Step 5: Clear Next Steps) -->
+    <div class="space-y-8 animate-fade-in-up animation-delay-1800">
+      <!-- Primary CTA Flow -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <!-- Main CTA -->
         <a
           href={ctaLink}
-          class="group inline-flex items-center px-8 py-4 bg-secondary-500 text-primary-900 text-lg font-semibold rounded-xl hover:bg-secondary-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg min-w-[200px] justify-center"
+          class="group relative inline-flex items-center px-10 py-5 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-lg font-bold rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl shadow-lg min-w-[280px] justify-center border-2 border-transparent hover:border-primary-300"
         >
-          {ctaText}
-          <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
+          <!-- Animated Background -->
+          <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-secondary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+          
+          <!-- CTA Content -->
+          <div class="relative z-10 flex items-center">
+            <div class="mr-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="text-left">
+              <div class="font-bold">{ctaText}</div>
+              <div class="text-sm opacity-90">Cotización gratuita en 24hrs</div>
+            </div>
+            <svg class="ml-4 w-6 h-6 group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </div>
+          
+          <!-- Success Particles -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div class="absolute top-2 left-8 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
+            <div class="absolute top-4 right-12 w-1 h-1 bg-white rounded-full animate-ping animation-delay-500"></div>
+            <div class="absolute bottom-3 left-16 w-1 h-1 bg-white rounded-full animate-ping animation-delay-700"></div>
+          </div>
         </a>
         
+        <!-- Secondary CTA -->
         <a
           href={secondaryCtaLink}
-          class="group inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white text-lg font-semibold rounded-xl border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl shadow-lg min-w-[200px] justify-center"
+          class="group relative inline-flex items-center px-8 py-5 bg-white/10 backdrop-blur-lg text-white text-lg font-semibold rounded-2xl border-2 border-white/30 hover:bg-white/20 hover:border-white/60 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl shadow-lg min-w-[250px] justify-center overflow-hidden"
         >
-          {secondaryCtaText}
-          <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-          </svg>
+          <!-- Shimmer Effect -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          
+          <div class="relative z-10 flex items-center">
+            <svg class="mr-3 w-5 h-5 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            {secondaryCtaText}
+          </div>
         </a>
       </div>
 
-      <!-- Contacto rápido -->
-      <div class="pt-8 border-t border-white/20">
-        <p class="text-white/70 text-sm mb-2">¿Necesitas ayuda inmediata?</p>
-        <a 
-          href="tel:+56912345678" 
-          class="inline-flex items-center text-secondary-300 hover:text-secondary-200 font-semibold text-lg transition-colors"
-        >
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
-          </svg>
-          +56 9 1234 5678
-        </a>
+      <!-- Contact Methods (Step 6: Multiple Contact Options) -->
+      <div class="pt-8 border-t border-white/10">
+        <p class="text-white/70 text-sm mb-6">¿Prefieres hablar directamente?</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <!-- WhatsApp -->
+          <a 
+            href="https://wa.me/56912345678?text=Hola,%20necesito%20información%20sobre%20sus%20servicios" 
+            class="group inline-flex items-center bg-green-600/20 backdrop-blur-sm rounded-xl px-6 py-3 text-green-300 hover:text-white hover:bg-green-600/30 font-semibold transition-all duration-300 border border-green-400/30 hover:border-green-300 transform hover:scale-105"
+          >
+            <div class="relative mr-3">
+              <svg class="w-6 h-6 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.515z"/>
+              </svg>
+              <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+            </div>
+            <div>
+              <div class="text-sm font-bold">WhatsApp</div>
+              <div class="text-xs opacity-80">Respuesta inmediata</div>
+            </div>
+          </a>
+          
+          <!-- Phone -->
+          <a 
+            href="tel:+56912345678" 
+            class="group inline-flex items-center bg-blue-600/20 backdrop-blur-sm rounded-xl px-6 py-3 text-blue-300 hover:text-white hover:bg-blue-600/30 font-semibold transition-all duration-300 border border-blue-400/30 hover:border-blue-300 transform hover:scale-105"
+          >
+            <div class="relative mr-3">
+              <svg class="w-6 h-6 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+              </svg>
+              <div class="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full animate-ping"></div>
+            </div>
+            <div>
+              <div class="text-sm font-bold">+56 9 1234 5678</div>
+              <div class="text-xs opacity-80">Llamada directa</div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
+  <!-- Enhanced Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in-up animation-delay-2000">
+    <div class="group flex flex-col items-center cursor-pointer">
+      <div class="text-white/60 text-xs mb-3 group-hover:text-white transition-colors animate-pulse">
+        Descubre nuestros trabajos
+      </div>
+      <div class="relative">
+        <div class="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center group-hover:border-white/60 transition-colors">
+          <div class="w-1.5 h-4 bg-gradient-to-b from-white/60 to-transparent rounded-full mt-2 animate-bounce group-hover:bg-white transition-colors"></div>
+        </div>
+        <!-- Pulse rings -->
+        <div class="absolute inset-0 border-2 border-primary-400/30 rounded-full animate-ping opacity-40"></div>
+        <div class="absolute inset-0 border-2 border-secondary-400/20 rounded-full animate-ping animation-delay-1000 opacity-30"></div>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  /* UX-Optimized User Journey Styles */
+  .user-journey-hero {
+    background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
+  }
+
+  /* Advanced Animation System */
+  @keyframes gradient-shift {
+    0%, 100% { transform: translate(0%, 0%) rotate(0deg); }
+    25% { transform: translate(-5%, 5%) rotate(1deg); }
+    50% { transform: translate(5%, -5%) rotate(-1deg); }
+    75% { transform: translate(-5%, -5%) rotate(1deg); }
+  }
+
+  @keyframes expand-width {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+
+  @keyframes float-medium {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    33% { transform: translateY(-15px) translateX(5px) rotate(2deg); }
+    66% { transform: translateY(-5px) translateX(-5px) rotate(-1deg); }
+  }
+
+  @keyframes float-dynamic {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+    25% { transform: translateY(-20px) translateX(10px) rotate(3deg) scale(1.1); }
+    50% { transform: translateY(-10px) translateX(-10px) rotate(-2deg) scale(1.05); }
+    75% { transform: translateY(-15px) translateX(5px) rotate(1deg) scale(1.08); }
+  }
+
+  @keyframes micro-float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.2); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+      opacity: 0.6;
+    }
+    50% { 
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+      opacity: 1;
+    }
+  }
+
+  /* Enhanced Grid Pattern */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  @keyframes grid-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
+
+  /* Particle System */
+  .particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, rgba(147, 51, 234, 0.4) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float-dynamic 6s ease-in-out infinite;
+  }
+
+  .particle-1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+    animation-duration: 8s;
+  }
+
+  .particle-2 {
+    top: 60%;
+    right: 20%;
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+
+  .particle-3 {
+    bottom: 30%;
+    left: 30%;
+    animation-delay: -4s;
+    animation-duration: 9s;
+  }
+
+  .particle-4 {
+    top: 40%;
+    right: 40%;
+    animation-delay: -6s;
+    animation-duration: 6s;
+  }
+
+  .particle-5 {
+    top: 80%;
+    left: 60%;
+    animation-delay: -8s;
+    animation-duration: 10s;
+  }
+
+  /* Micro Particles */
+  .micro-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: micro-float 3s ease-in-out infinite;
+  }
+
+  .micro-1 {
+    top: 25%;
+    left: 25%;
+    animation-delay: 0s;
+  }
+
+  .micro-2 {
+    top: 35%;
+    right: 30%;
+    animation-delay: -1s;
+  }
+
+  .micro-3 {
+    bottom: 40%;
+    left: 50%;
+    animation-delay: -2s;
+  }
+
+  .micro-4 {
+    top: 70%;
+    right: 60%;
+    animation-delay: -3s;
+  }
+
+  .micro-5 {
+    top: 15%;
+    left: 70%;
+    animation-delay: -4s;
+  }
+
+  .micro-6 {
+    bottom: 60%;
+    right: 25%;
+    animation-delay: -5s;
+  }
+
+  /* Animation Classes */
+  .animate-gradient-shift {
+    animation: gradient-shift 15s ease-in-out infinite;
+  }
+
+  .animate-expand-width {
+    animation: expand-width 2s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float-gentle 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Animation Delays */
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .animation-delay-900 {
+    animation-delay: 0.9s;
+  }
+
+  .animation-delay-1200 {
+    animation-delay: 1.2s;
+  }
+
+  .animation-delay-1500 {
+    animation-delay: 1.5s;
+  }
+
+  .animation-delay-1800 {
+    animation-delay: 1.8s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-3000 {
+    animation-delay: 3s;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  /* Interactive Elements */
+  .service-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .service-card:hover {
+    transform: translateY(-12px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 60px rgba(59, 130, 246, 0.2);
+  }
+
+  /* Trust Indicators */
+  .trust-badge {
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .trust-badge:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05) translateY(-2px);
+  }
+
+  /* CTA Enhancements */
+  .cta-primary {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 10px 30px rgba(59, 130, 246, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .cta-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+  }
+
+  .cta-primary:hover::before {
+    left: 100%;
+  }
+
+  /* Responsive Optimizations */
+  @media (max-width: 768px) {
+    .particle {
+      width: 4px;
+      height: 4px;
+    }
+    
+    .micro-particle {
+      width: 2px;
+      height: 2px;
+    }
+    
+    .grid-pattern {
+      background-size: 30px 30px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .user-journey-hero {
+      min-height: 100vh;
+      padding-top: 2rem;
+    }
+  }
+
+  /* Accessibility Improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient-shift,
+    .animate-float,
+    .animate-pulse-glow,
+    .particle,
+    .micro-particle {
+      animation: none;
+    }
+    
+    .grid-pattern {
+      animation: none;
+    }
+  }
+
+  /* Enhanced Focus States */
+  .focus\:ring-4:focus {
+    box-shadow: 
+      0 0 0 4px rgba(59, 130, 246, 0.3),
+      0 10px 30px rgba(59, 130, 246, 0.2);
+    outline: none;
+  }
+
+  /* Performance Optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* Advanced Hover States */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 0 60px rgba(59, 130, 246, 0.1);
+  }
+
+  /* Merge existing styles */
+  @keyframes blob {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes fill-bar {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 3s ease infinite;
+  }
+
+  .animate-fill-bar {
+    animation: fill-bar 2s ease-out forwards;
+  }
+
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  /* Efecto typewriter */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid rgba(255,255,255,0.75);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.1em;
+    animation: typewriter 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: rgba(255,255,255,0.75);
+    }
+  }
+
+  /* Counter animation */
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Glassmorphism enhancement */
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+  }
+
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+
+  /* Enhanced hover effects */
+  .group:hover .animate-bounce {
+    animation-duration: 0.5s;
+  }
+
+  /* Parallax elements */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-float {
+      animation-play-state: running;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blob,
+    .animate-spin-slow {
+      animation-play-state: paused;
+    }
+  }
+</style>
+
+<script>
+  // Enhanced UX Journey Implementation
+  class UserJourneyHero {
+    constructor() {
+      this.init();
+      this.setupInteractiveElements();
+      this.setupScrollEffects();
+      this.setupParticleSystem();
+    }
+
+    init() {
+      // Intersection Observer for progressive reveal
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+
+      // Observe all animation elements
+      const elements = document.querySelectorAll('[class*="animation-delay-"]');
+      elements.forEach(el => this.observer.observe(el));
+    }
+
+    setupInteractiveElements() {
+      // Service cards hover effects
+      const serviceCards = document.querySelectorAll('.group.relative');
+      serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          this.addParticleEffect(card);
+        });
+      });
+
+      // Trust indicators interaction
+      const trustBadges = document.querySelectorAll('.bg-white\\/5');
+      trustBadges.forEach(badge => {
+        badge.addEventListener('click', () => {
+          this.showTrustDetail(badge);
+        });
+      });
+
+      // Enhanced CTA tracking
+      const ctaButtons = document.querySelectorAll('a[href*="contacto"], a[href*="productos"]');
+      ctaButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          this.trackUserAction(e.target);
+        });
+      });
+    }
+
+    setupScrollEffects() {
+      let ticking = false;
+      const updateScrollEffects = () => {
+        const scrollY = window.scrollY;
+        const particles = document.querySelectorAll('.particle, .micro-particle');
+        
+        particles.forEach((particle, index) => {
+          const speed = parseFloat(particle.dataset.speed) || 1;
+          const yPos = -(scrollY * speed * 0.5);
+          const rotation = scrollY * 0.02 * (index % 2 === 0 ? 1 : -1);
+          
+          particle.style.transform = `translateY(${yPos}px) rotate(${rotation}deg)`;
+        });
+
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateScrollEffects);
+          ticking = true;
+        }
+      });
+    }
+
+    setupParticleSystem() {
+      // Dynamic particle generation based on user interaction
+      const hero = document.querySelector('.user-journey-hero');
+      
+      hero.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.98) { // 2% chance per mousemove
+          this.createInteractiveParticle(e.clientX, e.clientY);
+        }
+      });
+    }
+
+    addParticleEffect(element) {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          this.createInteractiveParticle(centerX, centerY);
+        }, i * 100);
+      }
+    }
+
+    createInteractiveParticle(x, y) {
+      const particle = document.createElement('div');
+      particle.className = 'absolute pointer-events-none z-50';
+      particle.style.cssText = `
+        left: ${x}px;
+        top: ${y}px;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: micro-float 2s ease-out forwards;
+      `;
+
+      document.body.appendChild(particle);
+
+      // Remove after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 2000);
+    }
+
+    showTrustDetail(badge) {
+      // Add micro-interaction feedback
+      badge.style.transform = 'scale(1.1)';
+      badge.style.transition = 'transform 0.2s ease';
+      
+      setTimeout(() => {
+        badge.style.transform = 'scale(1)';
+      }, 200);
+
+      // Could integrate with analytics or modal system
+      console.log('Trust indicator activated:', badge.textContent);
+    }
+
+    trackUserAction(element) {
+      // Enhanced user journey tracking
+      const action = element.textContent;
+      const timestamp = new Date().toISOString();
+      const section = 'hero';
+      
+      // Could integrate with analytics platform
+      console.log('User journey event:', {
+        action,
+        section,
+        timestamp,
+        element: element.href
+      });
+
+      // Visual feedback
+      element.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        element.style.transform = 'scale(1)';
+      }, 150);
+    }
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    new UserJourneyHero();
+    
+    // Initialize existing counter functionality
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counter.classList.contains('counted')) {
+            counter.classList.add('counted');
+            animateCounter(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(counter);
+    });
+  });
+
+  function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const start = performance.now();
+    
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const current = Math.floor(target * progress);
+      
+      element.textContent = current.toLocaleString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
+
+  // Performance monitoring
+  if ('performance' in window) {
+    window.addEventListener('load', () => {
+      const perfData = performance.getEntriesByType('navigation')[0];
+      if (perfData.loadEventEnd - perfData.loadEventStart > 3000) {
+        console.warn('Hero section load time exceeds 3s:', perfData.loadEventEnd - perfData.loadEventStart);
+      }
+    });
+  }
+</script>
