@@ -46,31 +46,37 @@ const { transparent = false } = Astro.props;
           <!-- Logo Container with Advanced Effects -->
           <div class="relative" id="logo-container">
             <!-- Glow effect -->
-            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500 via-secondary-500 to-purple-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-700 animate-pulse-glow"></div>
+            <div class="absolute -inset-2 bg-gradient-to-r from-red-500 via-black to-red-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-700 animate-pulse-glow"></div>
             <!-- Spinning ring -->
-            <div class="absolute -inset-1 border-2 border-transparent bg-gradient-to-r from-primary-400 via-secondary-400 to-purple-400 rounded-2xl opacity-0 group-hover:opacity-60 transition-all duration-500 animate-spin-slow"></div>
+            <div class="absolute -inset-1 border-2 border-transparent bg-gradient-to-r from-red-400 via-gray-800 to-red-400 rounded-2xl opacity-0 group-hover:opacity-60 transition-all duration-500 animate-spin-slow"></div>
             
             <!-- Main logo -->
-            <div class="relative w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-primary-600 via-secondary-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl transform-gpu transition-all duration-500 group-hover:rotate-6" id="logo-icon">
-              <!-- Logo text with 3D effect -->
-              <span class="text-white font-black text-xl lg:text-2xl tracking-tight transform transition-all duration-300 group-hover:scale-110" id="logo-text" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3)">GU</span>
+            <div class="relative w-12 h-12 sm:w-14 sm:h-14 lg:w-20 lg:h-20 bg-white rounded-2xl flex items-center justify-center shadow-2xl transform-gpu transition-all duration-500 group-hover:rotate-3 overflow-hidden" id="logo-icon">
+              <!-- Logo image -->
+              <img 
+                src="/images/generacion_urbana.jpg" 
+                alt="Generación Urbana - Logo" 
+                class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 rounded-xl logo-enhanced"
+                loading="eager"
+                id="logo-image"
+              />
               
               <!-- Shine effect -->
               <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
             </div>
             
-            <!-- Orbiting elements -->
-            <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-bounce animation-delay-200"></div>
-            <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse animation-delay-500"></div>
+            <!-- Orbiting elements with brand colors -->
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-bounce animation-delay-200"></div>
+            <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-gray-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse animation-delay-500"></div>
           </div>
           
           <!-- Brand Text with Enhanced Typography -->
           <div class="hidden sm:block relative" id="brand-container">
             <div class="relative">
               <!-- Main brand text -->
-              <h1 class="text-xl lg:text-2xl font-black text-white leading-tight tracking-tight group-hover:text-primary-300 transition-all duration-500" id="brand-text" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3)">
+              <h1 class="text-xl lg:text-2xl font-black text-white leading-tight tracking-tight group-hover:text-red-300 transition-all duration-500" id="brand-text" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3)">
                 Generación
-                <span class="block text-lg lg:text-xl text-secondary-300 group-hover:text-secondary-200 transition-colors duration-500">Urbana</span>
+                <span class="block text-lg lg:text-xl text-gray-300 group-hover:text-gray-200 transition-colors duration-500">Urbana</span>
               </h1>
               
               <!-- Tagline with typewriter effect -->
@@ -491,3 +497,11 @@ const { transparent = false } = Astro.props;
     });
   });
 </script>
+
+<style>
+  /* Enhanced logo visibility and color */
+  .logo-enhanced {
+    filter: brightness(1.15) contrast(1.15) saturate(1.25);
+    border-radius: inherit;
+  }
+</style>
