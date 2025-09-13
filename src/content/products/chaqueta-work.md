@@ -5,12 +5,13 @@ category: "Ropa de Trabajo"
 price: "Desde $35.990"
 featured: true
 image: "/images/products/chaqueta-work-main.jpg"
-gallery: [
-  "/images/products/chaqueta-work-1.jpg",
-  "/images/products/chaqueta-work-2.jpg",
-  "/images/products/chaqueta-work-3.jpg",
-  "/images/products/chaqueta-work-4.jpg"
-]
+gallery:
+  [
+    "/images/products/chaqueta-work-1.jpg",
+    "/images/products/chaqueta-work-2.jpg",
+    "/images/products/chaqueta-work-3.jpg",
+    "/images/products/chaqueta-work-4.jpg",
+  ]
 specifications:
   material: "Gabardina 65% Poliéster - 35% Algodón"
   sizes: ["S", "M", "L", "XL", "XXL", "3XL"]
@@ -41,6 +42,7 @@ Fabricada con **gabardina industrial de 280 GSM**, nuestra chaqueta ofrece la re
 ### Diseño Funcional
 
 - **Múltiples bolsillos estratégicamente ubicados:**
+
   - 2 bolsillos frontales con cierre
   - 1 bolsillo en el pecho con velcro
   - 2 bolsillos internos para documentos
@@ -66,12 +68,14 @@ Esta chaqueta es ideal para diversos sectores industriales:
 Ofrecemos servicios completos de **personalización corporativa** incluyendo:
 
 ### Bordados Empresariales
+
 - Logo de la empresa en pecho y espalda
 - Nombre del trabajador
 - Cargo o departamento
 - Múltiples colores de hilo disponibles
 
 ### Estampados Reflectivos
+
 - Cintas reflectivas para mayor seguridad
 - Logos con material reflectivo
 - Cumplimiento de normas de seguridad laboral
@@ -79,6 +83,7 @@ Ofrecemos servicios completos de **personalización corporativa** incluyendo:
 ## Especificaciones de Seguridad
 
 Nuestra chaqueta cumple con estándares básicos de seguridad laboral:
+
 - Resistencia a llamas moderada
 - Protección UV básica
 - Materiales no tóxicos
@@ -87,6 +92,7 @@ Nuestra chaqueta cumple con estándares básicos de seguridad laboral:
 ## Cuidado y Mantenimiento
 
 Para mantener las propiedades de la chaqueta:
+
 - Lavar en agua tibia (40°C máximo)
 - Usar detergente industrial si es necesario
 - Evitar suavizantes que puedan afectar la resistencia
@@ -96,6 +102,7 @@ Para mantener las propiedades de la chaqueta:
 ## Pedidos Corporativos
 
 Para empresas que requieren uniformes de trabajo, ofrecemos:
+
 - **Descuentos por volumen** (a partir de 20 unidades)
 - **Personalización incluida** en pedidos grandes
 - **Tiempos de entrega garantizados**

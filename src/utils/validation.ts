@@ -14,28 +14,35 @@ export interface ValidationResult {
   errors: string[];
 }
 
-export function validateField(value: string, rules: ValidationRule): ValidationResult {
+export function validateField(
+  value: string,
+  rules: ValidationRule
+): ValidationResult {
   const errors: string[] = [];
 
-  if (rules.required && (!value || value.trim() === '')) {
-    errors.push(rules.message || 'Este campo es requerido');
+  if (rules.required && (!value || value.trim() === "")) {
+    errors.push(rules.message || "Este campo es requerido");
     return { isValid: false, errors };
   }
 
   if (value && rules.minLength && value.length < rules.minLength) {
-    errors.push(rules.message || `Debe tener al menos ${rules.minLength} caracteres`);
+    errors.push(
+      rules.message || `Debe tener al menos ${rules.minLength} caracteres`
+    );
   }
 
   if (value && rules.maxLength && value.length > rules.maxLength) {
-    errors.push(rules.message || `No debe exceder ${rules.maxLength} caracteres`);
+    errors.push(
+      rules.message || `No debe exceder ${rules.maxLength} caracteres`
+    );
   }
 
   if (value && rules.pattern && !rules.pattern.test(value)) {
-    errors.push(rules.message || 'El formato no es válido');
+    errors.push(rules.message || "El formato no es válido");
   }
 
   if (value && rules.custom && !rules.custom(value)) {
-    errors.push(rules.message || 'El valor no es válido');
+    errors.push(rules.message || "El valor no es válido");
   }
 
   return {
@@ -46,32 +53,32 @@ export function validateField(value: string, rules: ValidationRule): ValidationR
 
 export function validateEmail(email: string): ValidationResult {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
+
   return validateField(email, {
     required: true,
     pattern: emailPattern,
-    message: 'Ingrese un email válido',
+    message: "Ingrese un email válido",
   });
 }
 
 export function validatePhone(phone: string): ValidationResult {
   // Chilean phone number validation
   const phonePattern = /^(\+56)?[2-9]\d{7,8}$/;
-  const cleanPhone = phone.replace(/[\s-]/g, '');
-  
+  const cleanPhone = phone.replace(/[\s-]/g, "");
+
   return validateField(cleanPhone, {
     pattern: phonePattern,
-    message: 'Ingrese un teléfono válido (ej: +56 9 1234 5678)',
+    message: "Ingrese un teléfono válido (ej: +56 9 1234 5678)",
   });
 }
 
 export function validateRUT(rut: string): ValidationResult {
-  const cleanRUT = rut.replace(/[^0-9kK]/g, '');
-  
+  const cleanRUT = rut.replace(/[^0-9kK]/g, "");
+
   if (cleanRUT.length < 8 || cleanRUT.length > 9) {
     return {
       isValid: false,
-      errors: ['RUT debe tener entre 8 y 9 caracteres'],
+      errors: ["RUT debe tener entre 8 y 9 caracteres"],
     };
   }
 
@@ -87,11 +94,16 @@ export function validateRUT(rut: string): ValidationResult {
   }
 
   const remainder = sum % 11;
-  const calculatedDV = remainder < 2 ? remainder.toString() : remainder === 2 ? 'K' : (11 - remainder).toString();
+  const calculatedDV =
+    remainder < 2
+      ? remainder.toString()
+      : remainder === 2
+      ? "K"
+      : (11 - remainder).toString();
 
   return {
     isValid: dv === calculatedDV,
-    errors: dv === calculatedDV ? [] : ['RUT no es válido'],
+    errors: dv === calculatedDV ? [] : ["RUT no es válido"],
   };
 }
 
@@ -99,23 +111,23 @@ export function validatePassword(password: string): ValidationResult {
   const errors: string[] = [];
 
   if (!password || password.length < 8) {
-    errors.push('La contraseña debe tener al menos 8 caracteres');
+    errors.push("La contraseña debe tener al menos 8 caracteres");
   }
 
   if (!/[A-Z]/.test(password)) {
-    errors.push('Debe contener al menos una mayúscula');
+    errors.push("Debe contener al menos una mayúscula");
   }
 
   if (!/[a-z]/.test(password)) {
-    errors.push('Debe contener al menos una minúscula');
+    errors.push("Debe contener al menos una minúscula");
   }
 
   if (!/\d/.test(password)) {
-    errors.push('Debe contener al menos un número');
+    errors.push("Debe contener al menos un número");
   }
 
   if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    errors.push('Debe contener al menos un carácter especial');
+    errors.push("Debe contener al menos un carácter especial");
   }
 
   return {
@@ -124,31 +136,38 @@ export function validatePassword(password: string): ValidationResult {
   };
 }
 
-export function validateForm(data: Record<string, string>, rules: Record<string, ValidationRule>): Record<string, ValidationResult> {
+export function validateForm(
+  data: Record<string, string>,
+  rules: Record<string, ValidationRule>
+): Record<string, ValidationResult> {
   const results: Record<string, ValidationResult> = {};
 
   for (const [field, rule] of Object.entries(rules)) {
-    results[field] = validateField(data[field] || '', rule);
+    results[field] = validateField(data[field] || "", rule);
   }
 
   return results;
 }
 
-export function hasFormErrors(validationResults: Record<string, ValidationResult>): boolean {
-  return Object.values(validationResults).some(result => !result.isValid);
+export function hasFormErrors(
+  validationResults: Record<string, ValidationResult>
+): boolean {
+  return Object.values(validationResults).some((result) => !result.isValid);
 }
 
-export function getFormErrors(validationResults: Record<string, ValidationResult>): string[] {
+export function getFormErrors(
+  validationResults: Record<string, ValidationResult>
+): string[] {
   return Object.values(validationResults)
-    .filter(result => !result.isValid)
-    .flatMap(result => result.errors);
+    .filter((result) => !result.isValid)
+    .flatMap((result) => result.errors);
 }
 
 export function sanitizeInput(input: string): string {
   return input
     .trim()
-    .replace(/[<>]/g, '') // Remove potential HTML tags
-    .replace(/[^\w\s@.-]/g, ''); // Keep only alphanumeric, spaces, email chars
+    .replace(/[<>]/g, "") // Remove potential HTML tags
+    .replace(/[^\w\s@.-]/g, ""); // Keep only alphanumeric, spaces, email chars
 }
 
 export function isValidURL(url: string): boolean {

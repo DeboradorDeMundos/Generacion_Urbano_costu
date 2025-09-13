@@ -2,29 +2,36 @@
 // Navigation component for desktop menu
 ---
 
-<nav class="hidden md:flex md:items-center md:space-x-8">
+<nav class="hidden md:flex md:items-center md:space-x-1">
   <a 
     href="/productos" 
-    class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+    class="group relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors rounded-lg hover:bg-primary-50"
   >
-    Productos
+    <span class="relative z-10">Productos</span>
+    <div class="absolute inset-x-0 bottom-0 h-0.5 bg-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center"></div>
   </a>
+  
   <a 
     href="/servicios" 
-    class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+    class="group relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors rounded-lg hover:bg-primary-50"
   >
-    Servicios
+    <span class="relative z-10">Servicios</span>
+    <div class="absolute inset-x-0 bottom-0 h-0.5 bg-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center"></div>
   </a>
+  
+  <a 
+    href="/nosotros" 
+    class="group relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors rounded-lg hover:bg-primary-50"
+  >
+    <span class="relative z-10">Nosotros</span>
+    <div class="absolute inset-x-0 bottom-0 h-0.5 bg-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center"></div>
+  </a>
+  
   <a 
     href="/blog" 
-    class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+    class="group relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors rounded-lg hover:bg-primary-50"
   >
-    Blog
-  </a>
-  <a 
-    href="/contacto" 
-    class="rounded-md bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors"
-  >
-    Contacto
+    <span class="relative z-10">Blog</span>
+    <div class="absolute inset-x-0 bottom-0 h-0.5 bg-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-center"></div>
   </a>
 </nav>

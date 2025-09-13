@@ -5,11 +5,12 @@ category: "Ropa Urbana"
 price: "Desde $25.990"
 featured: true
 image: "/images/products/poleron-urbano-main.jpg"
-gallery: [
-  "/images/products/poleron-urbano-1.jpg",
-  "/images/products/poleron-urbano-2.jpg",
-  "/images/products/poleron-urbano-3.jpg"
-]
+gallery:
+  [
+    "/images/products/poleron-urbano-1.jpg",
+    "/images/products/poleron-urbano-2.jpg",
+    "/images/products/poleron-urbano-3.jpg",
+  ]
 specifications:
   material: "Algodón 80% - Poliéster 20%"
   sizes: ["XS", "S", "M", "L", "XL", "XXL"]

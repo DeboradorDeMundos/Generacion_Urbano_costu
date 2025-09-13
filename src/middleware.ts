@@ -1,12 +1,12 @@
 // Middleware for handling canonical URLs and basic security
-import type { APIRoute, MiddlewareNext } from 'astro';
+import type { APIRoute, MiddlewareNext } from "astro";
 
 // Configuration - Use environment-specific URLs
-const SITE_URL = import.meta.env.PROD 
-  ? 'https://generacion-urbana.cl' 
-  : import.meta.env.DEV 
-    ? 'http://localhost:3000'
-    : 'http://127.0.0.1:3000';
+const SITE_URL = import.meta.env.PROD
+  ? "https://generacion-urbana.cl"
+  : import.meta.env.DEV
+  ? "http://localhost:3000"
+  : "http://127.0.0.1:3000";
 const CSP_POLICY = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com;
@@ -22,44 +22,52 @@ const CSP_POLICY = `
   base-uri 'self';
   form-action 'self';
   upgrade-insecure-requests;
-`.replace(/\s+/g, ' ').trim();
+`
+  .replace(/\s+/g, " ")
+  .trim();
 
 export async function onRequest(context: any, next: MiddlewareNext) {
   const { request, url, locals } = context;
-  
+
   // Security headers
   const headers = new Headers();
-  
+
   // Only apply strict security headers in production
   if (import.meta.env.PROD) {
     // Content Security Policy
-    headers.set('Content-Security-Policy', CSP_POLICY);
-    
+    headers.set("Content-Security-Policy", CSP_POLICY);
+
     // Other security headers
-    headers.set('X-Frame-Options', 'DENY');
-    headers.set('X-Content-Type-Options', 'nosniff');
-    headers.set('X-XSS-Protection', '1; mode=block');
-    headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
-    
+    headers.set("X-Frame-Options", "DENY");
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("X-XSS-Protection", "1; mode=block");
+    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    headers.set(
+      "Permissions-Policy",
+      "camera=(), microphone=(), geolocation=(), payment=()"
+    );
+
     // HSTS for HTTPS
-    if (url.protocol === 'https:') {
-      headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+    if (url.protocol === "https:") {
+      headers.set(
+        "Strict-Transport-Security",
+        "max-age=31536000; includeSubDomains; preload"
+      );
     }
   }
 
   // Canonical URL handling
   const canonicalUrl = normalizeUrl(url);
   locals.canonicalUrl = canonicalUrl;
-  
+
   // Handle redirects for SEO (only in production)
   if (import.meta.env.PROD && shouldRedirect(url, canonicalUrl)) {
     return new Response(null, {
       status: 301,
       headers: {
-        'Location': canonicalUrl,
-        ...Object.fromEntries(headers.entries())
-      }
+        Location: canonicalUrl,
+        ...Object.fromEntries(headers.entries()),
+      },
     });
   }
 
@@ -67,12 +75,12 @@ export async function onRequest(context: any, next: MiddlewareNext) {
   if (import.meta.env.PROD) {
     const clientIP = getClientIP(request);
     if (isRateLimited(clientIP)) {
-      return new Response('Too Many Requests', {
+      return new Response("Too Many Requests", {
         status: 429,
         headers: {
-          'Retry-After': '60',
-          ...Object.fromEntries(headers.entries())
-        }
+          "Retry-After": "60",
+          ...Object.fromEntries(headers.entries()),
+        },
       });
     }
   }
@@ -88,14 +96,14 @@ export async function onRequest(context: any, next: MiddlewareNext) {
   }
 
   // Add canonical link to HTML responses
-  if (response.headers.get('content-type')?.includes('text/html')) {
+  if (response.headers.get("content-type")?.includes("text/html")) {
     const html = await response.text();
     const updatedHtml = addCanonicalLink(html, canonicalUrl);
-    
+
     return new Response(updatedHtml, {
       status: response.status,
       statusText: response.statusText,
-      headers: response.headers
+      headers: response.headers,
     });
   }
 
@@ -105,29 +113,29 @@ export async function onRequest(context: any, next: MiddlewareNext) {
 function normalizeUrl(url: URL): string {
   // In development, use the current origin
   const baseUrl = import.meta.env.PROD ? SITE_URL : url.origin;
-  
+
   // Remove trailing slash except for root
   let pathname = url.pathname;
-  if (pathname.length > 1 && pathname.endsWith('/')) {
+  if (pathname.length > 1 && pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1);
   }
-  
+
   // Remove index.html
-  pathname = pathname.replace(/\/index\.html?$/, '');
-  
+  pathname = pathname.replace(/\/index\.html?$/, "");
+
   // Build canonical URL
   return `${baseUrl}${pathname}${url.search}`;
 }
 
 function shouldRedirect(currentUrl: URL, canonicalUrl: string): boolean {
   const currentFull = `${currentUrl.origin}${currentUrl.pathname}${currentUrl.search}`;
-  
+
   // Check if we need to redirect
   return (
     // Trailing slash redirect
-    (currentUrl.pathname.length > 1 && currentUrl.pathname.endsWith('/')) ||
+    (currentUrl.pathname.length > 1 && currentUrl.pathname.endsWith("/")) ||
     // Index.html redirect
-    currentUrl.pathname.includes('/index.html') ||
+    currentUrl.pathname.includes("/index.html") ||
     // Different domain (if applicable)
     currentFull !== canonicalUrl
   );
@@ -135,16 +143,16 @@ function shouldRedirect(currentUrl: URL, canonicalUrl: string): boolean {
 
 function getClientIP(request: Request): string {
   // Try various headers to get real IP
-  const forwarded = request.headers.get('x-forwarded-for');
+  const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    return forwarded.split(',')[0].trim();
+    return forwarded.split(",")[0].trim();
   }
-  
+
   return (
-    request.headers.get('x-real-ip') ||
-    request.headers.get('cf-connecting-ip') ||
-    request.headers.get('x-client-ip') ||
-    'unknown'
+    request.headers.get("x-real-ip") ||
+    request.headers.get("cf-connecting-ip") ||
+    request.headers.get("x-client-ip") ||
+    "unknown"
   );
 }
 
@@ -155,18 +163,18 @@ function isRateLimited(ip: string): boolean {
   const now = Date.now();
   const limit = 100; // requests per window
   const windowMs = 15 * 60 * 1000; // 15 minutes
-  
+
   const record = rateLimitMap.get(ip);
-  
+
   if (!record || now > record.resetTime) {
     rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs });
     return false;
   }
-  
+
   if (record.count >= limit) {
     return true;
   }
-  
+
   record.count++;
   return false;
 }
@@ -176,10 +184,10 @@ function addCanonicalLink(html: string, canonicalUrl: string): string {
   if (html.includes('<link rel="canonical"')) {
     return html;
   }
-  
+
   // Add canonical link before closing head tag
   const canonicalTag = `  <link rel="canonical" href="${canonicalUrl}">`;
-  return html.replace('</head>', `${canonicalTag}\n</head>`);
+  return html.replace("</head>", `${canonicalTag}\n</head>`);
 }
 
 // Utility function to clean up rate limit map periodically

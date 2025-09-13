@@ -47,19 +47,23 @@ Los **bordados empresariales** son la forma más elegante y duradera de personal
 ## Servicios de Bordado Empresarial
 
 ### Bordado de Logos Corporativos
+
 Transformamos la identidad visual de tu empresa en bordados de alta calidad:
+
 - **Logos complejos** con múltiples colores y detalles
 - **Lettering corporativo** con tipografías personalizadas
 - **Emblemas y escudos** institucionales
 - **Símbolos especializados** por sector
 
 ### Personalización de Uniformes
+
 - **Bordado en camisas** y polos corporativos
 - **Personalización de chaquetas** de trabajo
 - **Nombres y cargos** en uniformes
 - **Departamentos y sucursales**
 
 ### Artículos Promocionales
+
 - **Gorras corporativas** bordadas
 - **Bolsos y mochilas** con logo
 - **Toallas y textiles** promocionales
@@ -68,13 +72,16 @@ Transformamos la identidad visual de tu empresa en bordados de alta calidad:
 ## Tecnología y Equipamiento
 
 ### Máquinas de Bordado Computarizado
+
 Nuestro taller cuenta con:
+
 - **Máquinas Tajima** de 12 cabezales
 - **Sistema computarizado** de última generación
 - **Bastidores múltiples** para diferentes tamaños
 - **Software profesional** de diseño y digitalización
 
 ### Capacidades Técnicas
+
 - **Bordados multicolor** hasta 15 colores simultáneos
 - **Área de bordado** hasta 30cm x 40cm
 - **Bordado en 3D** para efectos especiales
@@ -83,16 +90,19 @@ Nuestro taller cuenta con:
 ## Tipos de Bordado Disponibles
 
 ### Bordado Plano Tradicional
+
 - **Relleno sólido** para logos simples
 - **Contorno definido** para claridad
 - **Degradados suaves** entre colores
 
 ### Bordado 3D con Relieve
+
 - **Efecto dimensional** para mayor impacto
 - **Letras en relieve** que destacan
 - **Logos con volumen** y textura
 
 ### Bordado Especial
+
 - **Hilos metálicos** dorado y plateado
 - **Hilos reflectivos** para seguridad
 - **Combinación de texturas** mate y brillante
@@ -100,14 +110,18 @@ Nuestro taller cuenta con:
 ## Digitalización de Diseños
 
 ### Servicio de Digitalización Profesional
+
 Nuestro equipo de diseñadores especializados:
+
 - **Convierte logos** a formato de bordado
 - **Optimiza diseños** para mejor resultado
 - **Ajusta densidades** según material
 - **Simula el resultado** antes de bordar
 
 ### Formatos Aceptados
+
 Recibimos diseños en:
+
 - **Archivos vectoriales:** AI, EPS, PDF
 - **Imágenes de alta resolución:** PNG, JPG
 - **Formatos nativos:** CDR, PSD
@@ -116,13 +130,16 @@ Recibimos diseños en:
 ## Calidad y Materiales
 
 ### Hilos de Primera Calidad
+
 Utilizamos exclusivamente:
+
 - **Hilos Madeira** y **Gunold** importados
 - **Resistencia al lavado** garantizada
 - **Colores sólidos** que no decoloran
 - **Acabado brillante** y duradero
 
 ### Control de Calidad
+
 - **Revisión individual** de cada bordado
 - **Verificación de medidas** y posicionamiento
 - **Control de tensión** y densidad
@@ -131,24 +148,28 @@ Utilizamos exclusivamente:
 ## Sectores Especializados
 
 ### Sector Corporativo
+
 - **Bancos y financieras**
 - **Empresas de servicios**
 - **Consultoras y oficinas**
 - **Retail y comercio**
 
 ### Sector Industrial
+
 - **Minería y construcción**
 - **Manufactura e industria**
 - **Transporte y logística**
 - **Energía y utilities**
 
 ### Sector Salud
+
 - **Clínicas y hospitales**
 - **Consultas médicas**
 - **Laboratorios**
 - **Centros de salud**
 
 ### Instituciones Educativas
+
 - **Colegios y universidades**
 - **Institutos técnicos**
 - **Jardines infantiles**
@@ -157,18 +178,21 @@ Utilizamos exclusivamente:
 ## Ventajas del Bordado Empresarial
 
 ### Durabilidad Superior
+
 - **Resistencia al lavado** industrial
 - **No se despega** ni agrieta como el estampado
 - **Mantiene colores** por años
 - **Resiste fricción** y uso intensivo
 
 ### Imagen Profesional
+
 - **Apariencia premium** y elegante
 - **Textura distintiva** que se siente al tacto
 - **Colores vibrantes** y definidos
 - **Prestigio corporativo** elevado
 
 ### Versatilidad
+
 - **Funciona en cualquier color** de tela
 - **Aplicable en múltiples materiales**
 - **Tamaños variables** según necesidad
@@ -177,6 +201,7 @@ Utilizamos exclusivamente:
 ## Precios y Cotizaciones
 
 ### Factores que Influyen en el Precio
+
 - **Complejidad del diseño** (número de colores y detalles)
 - **Tamaño del bordado**
 - **Cantidad de piezas** a bordar
@@ -184,6 +209,7 @@ Utilizamos exclusivamente:
 - **Urgencia en la entrega**
 
 ### Descuentos por Volumen
+
 - **50-100 piezas:** 10% descuento
 - **100-300 piezas:** 15% descuento
 - **300+ piezas:** 20% descuento
@@ -192,11 +218,13 @@ Utilizamos exclusivamente:
 ## Tiempos de Entrega
 
 ### Producción Estándar
+
 - **Diseños simples:** 3-5 días hábiles
 - **Logos complejos:** 5-8 días hábiles
 - **Grandes volúmenes:** 1-2 semanas
 
 ### Servicio Express
+
 - **Entrega en 24-48 horas** (recargo adicional)
 - **Disponible para pedidos pequeños**
 - **Confirmación de factibilidad** requerida
@@ -204,15 +232,19 @@ Utilizamos exclusivamente:
 ## Proceso de Pedido
 
 ### 1. Consulta Inicial
+
 Envía tu logo y especificaciones para evaluación gratuita.
 
 ### 2. Cotización Detallada
+
 Recibe presupuesto con desglose de costos y tiempos.
 
 ### 3. Digitalización y Muestra
+
 Creamos archivo digital y muestra física para aprobación.
 
 ### 4. Producción y Entrega
+
 Ejecutamos el pedido completo con calidad garantizada.
 
 ¿Necesitas bordados empresariales para tu organización? Contáctanos para recibir asesoramiento especializado y una cotización personalizada que se ajuste a tu presupuesto y necesidades corporativas.
