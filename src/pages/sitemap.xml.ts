@@ -8,9 +8,9 @@ export const GET: APIRoute = async ({ site }) => {
     "",
     "productos",
     "servicios",
+    "nosotros",
     "blog",
     "contacto",
-    "about",
   ];
 
   // Generate XML

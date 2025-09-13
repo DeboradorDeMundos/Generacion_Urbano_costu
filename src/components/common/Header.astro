@@ -9,126 +9,325 @@ const { transparent = false } = Astro.props;
 ---
 
 <header class:list={[
-  'fixed top-0 z-50 w-full transition-all duration-500 ease-in-out',
-  { 'bg-white/80 backdrop-blur-md border-b border-gray-200/30 shadow-sm': !transparent },
-  { 'bg-white/60 backdrop-blur-md border-b border-white/20': transparent }
-]} id="main-header">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex h-16 lg:h-20 items-center justify-between transition-all duration-300" id="header-content">
-      <!-- Logo -->
-      <div class="flex items-center">
-        <a href="/" class="group flex items-center space-x-3 transition-all duration-300 hover:scale-105">
-          <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-            <div class="relative w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-lg flex items-center justify-center transition-all duration-300" id="logo-container">
-              <span class="text-white font-bold text-lg lg:text-xl" id="logo-text">GU</span>
+  'fixed top-0 z-40 w-full transition-all duration-700 ease-out transform-gpu',
+  'bg-white/85 backdrop-blur-xl border-b border-white/20 shadow-lg',
+  'before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/5 before:via-white/3 before:to-white/5 before:opacity-60',
+  'after:absolute after:inset-0 after:bg-gradient-to-b after:from-transparent after:via-transparent after:to-white/3'
+]} id="main-header" data-header="enhanced">
+  
+  <!-- Advanced Background Effects with Reduced Opacity -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Animated mesh background -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary-500/5 via-transparent to-secondary-500/5 animate-gradient-x"></div>
+      <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-purple-500/3 via-transparent to-pink-500/3 animate-gradient-x animation-delay-3s"></div>
+    </div>
+    
+    <!-- Floating particles with reduced visibility -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="header-particle particle-1"></div>
+      <div class="header-particle particle-2"></div>
+      <div class="header-particle particle-3"></div>
+      <div class="header-particle particle-4"></div>
+    </div>
+    
+    <!-- Interactive grid pattern -->
+    <div class="absolute inset-0 opacity-3">
+      <div class="grid-pattern-header"></div>
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 lg:h-24 items-center justify-between transition-all duration-700" id="header-content">
+      
+      <!-- Enhanced Logo Section -->
+      <div class="flex items-center group">
+        <a href="/" class="group-logo flex items-center space-x-4 transition-all duration-500 hover:scale-105 transform-gpu">
+          <!-- Logo Container with Advanced Effects -->
+          <div class="relative" id="logo-container">
+            <!-- Glow effect -->
+            <div class="absolute -inset-2 bg-gradient-to-r from-primary-500 via-secondary-500 to-purple-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-700 animate-pulse-glow"></div>
+            <!-- Spinning ring -->
+            <div class="absolute -inset-1 border-2 border-transparent bg-gradient-to-r from-primary-400 via-secondary-400 to-purple-400 rounded-2xl opacity-0 group-hover:opacity-60 transition-all duration-500 animate-spin-slow"></div>
+            
+            <!-- Main logo -->
+            <div class="relative w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-primary-600 via-secondary-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-2xl transform-gpu transition-all duration-500 group-hover:rotate-6" id="logo-icon">
+              <!-- Logo text with 3D effect -->
+              <span class="text-white font-black text-xl lg:text-2xl tracking-tight transform transition-all duration-300 group-hover:scale-110" id="logo-text" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3)">GU</span>
+              
+              <!-- Shine effect -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-2xl"></div>
             </div>
+            
+            <!-- Orbiting elements -->
+            <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-bounce animation-delay-200"></div>
+            <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse animation-delay-500"></div>
           </div>
-          <div class="hidden sm:block">
-            <div class="text-lg lg:text-xl font-bold text-gray-900 group-hover:text-primary-600 transition-all duration-300 drop-shadow-sm" id="brand-text">
-              Generación Urbana
+          
+          <!-- Brand Text with Enhanced Typography -->
+          <div class="hidden sm:block relative" id="brand-container">
+            <div class="relative">
+              <!-- Main brand text -->
+              <h1 class="text-xl lg:text-2xl font-black text-white leading-tight tracking-tight group-hover:text-primary-300 transition-all duration-500" id="brand-text" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3)">
+                Generación
+                <span class="block text-lg lg:text-xl text-secondary-300 group-hover:text-secondary-200 transition-colors duration-500">Urbana</span>
+              </h1>
+              
+              <!-- Tagline with typewriter effect -->
+              <div class="text-xs lg:text-sm text-white/80 -mt-1 font-medium tracking-wide transition-all duration-500 group-hover:text-white/90" id="tagline">
+                <span class="typewriter-header">Especialistas en San Bernardo</span>
+              </div>
+              
+              <!-- Decorative line -->
+              <div class="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-400 via-secondary-400 to-transparent w-0 group-hover:w-full transition-all duration-700 rounded-full"></div>
             </div>
-            <div class="text-xs text-gray-700 -mt-1 transition-all duration-300 drop-shadow-sm" id="tagline">
-              Costura • San Bernardo
+            
+            <!-- Badge overlay -->
+            <div class="absolute -top-2 -right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+              <div class="bg-gradient-to-r from-yellow-400 to-orange-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                ✨ +15 años
+              </div>
             </div>
           </div>
         </a>
       </div>
 
-      <!-- Navigation -->
-      <Nav />
+      <!-- Enhanced Navigation -->
+      <div class="hidden lg:flex items-center space-x-1" id="nav-container">
+        <Nav />
+      </div>
 
-      <!-- CTA Button -->
-      <div class="hidden lg:flex items-center space-x-4">
-        <a 
-          href="tel:+56912345678" 
-          class="text-primary-700 hover:text-primary-800 font-semibold text-sm transition-colors drop-shadow-sm"
-        >
-          +56 9 1234 5678
-        </a>
+      <!-- Professional CTA Section -->
+      <div class="hidden lg:flex items-center space-x-4" id="cta-section">
+        <!-- Main CTA Button with Professional Design -->
         <a
           href="/contacto"
-          class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 duration-200"
+          class="group relative inline-flex items-center px-8 py-3 bg-gradient-to-r from-slate-700 via-slate-800 to-gray-900 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-gray-800/30 transform hover:-translate-y-0.5 border border-gray-600/50 hover:border-gray-500"
+          id="main-cta"
         >
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-          </svg>
-          Cotizar
+          <!-- Professional background effect -->
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-600 via-gray-700 to-slate-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+          
+          <!-- Button content -->
+          <div class="relative z-10 flex items-center space-x-2">
+            <svg class="w-5 h-5 group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span>Solicitar Cotización</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </div>
+          
+          <!-- Subtle shimmer effect -->
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </a>
       </div>
 
-      <!-- Mobile menu button -->
-      <div class="md:hidden">
+      <!-- Enhanced Mobile Menu Button -->
+      <div class="lg:hidden relative">
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-xl p-2 text-gray-800 hover:bg-white/80 hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-all duration-200 backdrop-blur-sm"
+          class="group relative inline-flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-sm rounded-2xl text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-300 border border-white/20 hover:border-white/40 transform hover:scale-110"
           aria-controls="mobile-menu"
           aria-expanded="false"
           id="mobile-menu-button"
         >
           <span class="sr-only">Abrir menú principal</span>
-          <!-- Hamburger icon -->
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
+          
+          <!-- Animated hamburger -->
+          <div class="relative w-6 h-6">
+            <span class="hamburger-line top-line absolute left-0 top-1 w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-5"></span>
+            <span class="hamburger-line middle-line absolute left-0 top-1/2 -translate-y-0.5 w-6 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+            <span class="hamburger-line bottom-line absolute left-0 bottom-1 w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-5"></span>
+          </div>
+          
+          <!-- Background glow -->
+          <div class="absolute inset-0 bg-gradient-to-r from-primary-500/20 via-secondary-500/20 to-purple-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Mobile menu -->
-  <div class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg" id="mobile-menu">
-    <div class="px-4 py-6 space-y-4">
-      <a href="/productos" class="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-xl transition-colors">
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-        </svg>
-        Productos
-      </a>
-      <a href="/servicios" class="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-xl transition-colors">
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-        </svg>
-        Servicios
-      </a>
-      <a href="/blog" class="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-xl transition-colors">
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
-        </svg>
-        Blog
-      </a>
-      <a href="/contacto" class="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-xl transition-colors">
-        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-        </svg>
-        Contacto
-      </a>
+  <!-- Revolutionary Mobile Menu -->
+  <div class="lg:hidden fixed inset-0 z-40 opacity-0 invisible transition-all duration-500 transform-gpu" id="mobile-menu-overlay">
+    <!-- Backdrop with blur -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-xl" id="mobile-backdrop"></div>
+    
+    <!-- Menu content -->
+    <div class="relative z-50 h-full flex flex-col">
+      <!-- Menu header -->
+      <div class="bg-gradient-to-r from-primary-600 via-secondary-500 to-purple-600 px-6 py-8">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-lg">GU</span>
+            </div>
+            <div>
+              <div class="text-white font-bold text-lg">Generación Urbana</div>
+              <div class="text-white/80 text-sm">Especialistas en San Bernardo</div>
+            </div>
+          </div>
+          
+          <!-- Close button -->
+          <button
+            type="button"
+            class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            id="mobile-close-button"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
       
-      <!-- Mobile CTA -->
-      <div class="pt-4 border-t border-gray-100">
-        <a
-          href="/contacto"
-          class="flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg"
-        >
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-          </svg>
-          Solicitar Cotización
-        </a>
+      <!-- Menu items with improved visibility -->
+      <div class="flex-1 bg-white/95 backdrop-blur-xl px-6 py-8 space-y-2" id="mobile-menu-items">
+        <div class="space-y-1">
+          <a href="/" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Inicio</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Página principal</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="/productos" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Productos</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Nuestros trabajos</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="/servicios" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Servicios</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Lo que ofrecemos</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="/blog" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Blog</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Noticias y consejos</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="/nosotros" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Nosotros</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Conoce nuestro equipo</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="/contacto" class="mobile-nav-item group flex items-center space-x-4 px-4 py-4 rounded-2xl text-gray-800 hover:bg-gradient-to-r hover:from-slate-50 hover:to-gray-50 hover:text-slate-700 transition-all duration-300 transform hover:scale-105">
+            <div class="w-10 h-10 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex items-center justify-center group-hover:from-slate-600 group-hover:to-gray-700 transition-all duration-300">
+              <svg class="w-5 h-5 text-slate-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-semibold text-gray-800">Contacto</div>
+              <div class="text-sm text-gray-600 group-hover:text-slate-600">Hablemos</div>
+            </div>
+            <svg class="w-5 h-5 text-gray-500 group-hover:text-slate-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
         
-        <a 
-          href="tel:+56912345678" 
-          class="flex items-center justify-center w-full mt-3 px-6 py-3 border-2 border-primary-600 text-primary-600 font-medium rounded-xl hover:bg-primary-50 transition-colors"
-        >
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
-          </svg>
-          +56 9 1234 5678
-        </a>
+        <!-- Mobile CTAs with Professional Design -->
+        <div class="pt-8 space-y-4">
+          <a
+            href="/contacto"
+            class="group flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-slate-700 via-slate-800 to-gray-900 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-gray-800/30 transition-all duration-300 transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span>Solicitar Cotización</span>
+            <svg class="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+          
+          <!-- Contact options -->
+          <div class="grid grid-cols-2 gap-3">
+            <a 
+              href="tel:+56912345678" 
+              class="group flex items-center justify-center px-4 py-3 bg-white border-2 border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 hover:border-slate-400 transition-all duration-300 transform hover:scale-105"
+            >
+              <svg class="w-4 h-4 mr-2 group-hover:animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+              </svg>
+              <span class="text-sm">Llamar</span>
+            </a>
+            
+            <a 
+              href="https://wa.me/56912345678" 
+              class="group flex items-center justify-center px-4 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all duration-300 transform hover:scale-105"
+            >
+              <svg class="w-4 h-4 mr-2 group-hover:animate-spin" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.515z"/>
+              </svg>
+              <span class="text-sm">WhatsApp</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </header>
+
+<style>
+  /* Import enhanced header styles */
+  @import url('/src/styles/header-enhanced.css');
+</style>
+
+<script>
+  // Import enhanced header functionality
+  import '/src/scripts/header-enhanced.js';
+</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

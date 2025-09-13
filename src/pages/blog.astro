@@ -1,0 +1,988 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+const blogPosts = [
+  {
+    id: 1,
+    title: "Nueva Colección de Uniformes Escolares 2025",
+    excerpt: "Descubre nuestros nuevos diseños de uniformes escolares con materiales de alta calidad y acabados perfectos para el año escolar 2025.",
+    content: "Con la llegada del nuevo año escolar, en Generación Urbana hemos preparado una nueva colección de uniformes que combina calidad, comodidad y durabilidad. Utilizamos telas premium que resisten el uso diario y mantienen su color y forma después de múltiples lavados.",
+    category: "Productos",
+    date: "2024-12-15",
+    image: "/images/blog/uniformes-2025.jpg",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "¡Promoción Especial en Bordados Empresariales!",
+    excerpt: "Durante todo enero, aprovecha un 20% de descuento en bordados para uniformes corporativos. ¡Dale identidad profesional a tu empresa!",
+    content: "Sabemos lo importante que es proyectar una imagen profesional. Por eso, durante todo el mes de enero ofrecemos un descuento especial del 20% en todos nuestros servicios de bordados empresariales. Incluye logos, nombres y cargo en camisas, chalecos y chaquetas corporativas.",
+    category: "Promociones",
+    date: "2024-12-20",
+    image: "/images/blog/promo-bordados.jpg",
+    featured: true
+  },
+  {
+    id: 3,
+    title: "Tips para el Cuidado de tus Prendas Bordadas",
+    excerpt: "Aprende cómo mantener tus bordados como nuevos con estos consejos profesionales de cuidado y lavado.",
+    content: "Un bordado bien cuidado puede durar décadas. Te compartimos los mejores consejos para lavar, secar y planchar tus prendas bordadas sin dañar los hilos ni perder la calidad del diseño. Desde la temperatura del agua hasta el tipo de detergente más recomendado.",
+    category: "Consejos",
+    date: "2024-12-10",
+    image: "/images/blog/cuidado-bordados.jpg",
+    featured: false
+  },
+  {
+    id: 4,
+    title: "Tendencias en Polerones de Graduación 2025",
+    excerpt: "Conoce las últimas tendencias en diseños de polerones para cuarto medio que están marcando la diferencia este año.",
+    content: "Los polerones de graduación son más que una prenda, son un recuerdo para toda la vida. Este año vemos tendencias hacia diseños minimalistas, colores vibrantes y bordados con efectos especiales. Te contamos todas las novedades.",
+    category: "Tendencias",
+    date: "2024-12-05",
+    image: "/images/blog/tendencias-polerones.jpg",
+    featured: false
+  },
+  {
+    id: 5,
+    title: "Celebramos 15 Años de Excelencia",
+    excerpt: "Un recorrido por nuestra historia, desde nuestros inicios hasta convertirnos en líderes en bordados y confección en San Bernardo.",
+    content: "Han pasado 15 años desde que Ruth Morales fundó Generación Urbana con una máquina de coser y un gran sueño. Hoy celebramos este hito recordando los momentos más importantes de nuestro crecimiento y agradeciendo a todos los clientes que han confiado en nosotros.",
+    category: "Empresa",
+    date: "2024-11-30",
+    image: "/images/blog/15-anos.jpg",
+    featured: false
+  },
+  {
+    id: 6,
+    title: "Nuevas Técnicas de Bordado 3D",
+    excerpt: "Incorporamos bordados tridimensionales que dan un efecto visual único y profesional a logos empresariales.",
+    content: "La innovación es parte de nuestro ADN. Por eso hemos incorporado nuevas técnicas de bordado 3D que permiten crear efectos visuales impresionantes en logos y diseños corporativos. Esta técnica da volumen y textura, haciendo que los bordados se destaquen como nunca antes.",
+    category: "Innovación",
+    date: "2024-11-25",
+    image: "/images/blog/bordado-3d.jpg",
+    featured: false
+  }
+];
+
+const categories = ["Todos", "Productos", "Promociones", "Consejos", "Tendencias", "Empresa", "Innovación"];
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog Generación Urbana",
+  "description": "Noticias, consejos y novedades sobre bordados, confección y uniformes en San Bernardo",
+  "url": "https://generacionurbana.cl/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Generación Urbana",
+    "logo": "https://generacionurbana.cl/images/logos/logo.svg"
+  },
+  "blogPost": blogPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.date,
+    "author": {
+      "@type": "Organization",
+      "name": "Generación Urbana"
+    },
+    "publisher": {
+      "@type": "Organization", 
+      "name": "Generación Urbana"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://generacionurbana.cl/blog/${post.id}`
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Blog | Noticias y Consejos de Costura | Generación Urbana"
+  description="Mantente al día con las últimas noticias, promociones, consejos y tendencias en bordados empresariales, uniformes escolares y confección textil en San Bernardo."
+  keywords="blog costura, noticias bordados, promociones uniformes, consejos textiles, tendencias confección, novedades generacion urbana, tips bordados empresariales"
+>
+  <JsonLd schema={blogSchema} />
+
+  <!-- Hero Section with Header Padding -->
+  <section class="relative bg-gradient-to-br from-gray-900 via-primary-900 to-secondary-900 pt-32 pb-20 overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+      <div class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+      <div class="absolute bottom-0 left-1/3 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-1/4 left-10 w-8 h-8 border-2 border-secondary-400/30 rotate-45 animate-float"></div>
+      <div class="absolute top-1/3 right-20 w-6 h-6 bg-primary-400/30 rounded-full animate-float animation-delay-1000"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-4 h-4 bg-purple-400/40 rounded-full animate-pulse"></div>
+      <div class="absolute bottom-1/3 right-1/3 w-10 h-10 border border-secondary-400/20 animate-spin-slow"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Animated Badge -->
+        <div class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-lg rounded-full text-white/90 text-sm font-medium border border-white/30 mb-8 hover:bg-white/20 transition-all duration-500 transform hover:scale-105">
+          <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse mr-3"></div>
+          <span>Blog actualizado semanalmente</span>
+          <div class="ml-3 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+            <span class="text-xs">📝</span>
+          </div>
+        </div>
+
+        <!-- Animated Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <span class="block relative">
+            Nuestro
+            <div class="absolute -top-2 -right-2 w-4 h-4 bg-secondary-400 rounded-full animate-ping"></div>
+          </span>
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-primary-300 to-purple-300 animate-gradient-text">
+            Blog
+          </span>
+        </h1>
+        
+        <!-- Subtitle with Typewriter Effect -->
+        <p class="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-12 typewriter-effect">
+          Mantente al día con las últimas noticias, promociones exclusivas, consejos profesionales y tendencias en el mundo de la confección y bordados.
+        </p>
+        
+        <!-- Enhanced Newsletter Signup -->
+        <div class="max-w-md mx-auto">
+          <div class="group relative">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+            <div class="relative flex rounded-2xl shadow-2xl overflow-hidden bg-white backdrop-blur-lg">
+              <input 
+                type="email" 
+                placeholder="Tu email para recibir novedades"
+                class="flex-1 px-6 py-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-transparent"
+              >
+              <button class="px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden group">
+                <span class="relative z-10">Suscribirse</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-secondary-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+          <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:-translate-y-2">
+            <div class="text-3xl font-bold text-secondary-300 mb-2 counter" data-target="52">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">Artículos Publicados</div>
+          </div>
+          <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:-translate-y-2">
+            <div class="text-3xl font-bold text-primary-300 mb-2 counter" data-target="1200">0</div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">Lectores Mensuales</div>
+          </div>
+          <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 transform hover:-translate-y-2">
+            <div class="text-3xl font-bold text-purple-300 mb-2">4.9<span class="text-xl">★</span></div>
+            <div class="text-white/80 text-sm uppercase tracking-wider">Valoración Promedio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Categories Mejorado -->
+  <section class="py-12 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-4">
+        {categories.map((category, index) => (
+          <button 
+            class="group relative px-8 py-3 rounded-full border-2 border-gray-200 text-gray-600 hover:border-primary-500 hover:text-primary-600 transition-all duration-300 focus:outline-none focus:border-primary-500 focus:text-primary-600 overflow-hidden transform hover:scale-105 hover:-translate-y-1"
+            data-category={category}
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <!-- Hover Effect Background -->
+            <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left opacity-10"></div>
+            
+            <!-- Icon for each category -->
+            <span class="relative z-10 flex items-center">
+              {category === "Todos" && <span class="mr-2">🔍</span>}
+              {category === "Productos" && <span class="mr-2">🛍️</span>}
+              {category === "Promociones" && <span class="mr-2">🏷️</span>}
+              {category === "Consejos" && <span class="mr-2">💡</span>}
+              {category === "Tendencias" && <span class="mr-2">📈</span>}
+              {category === "Empresa" && <span class="mr-2">🏢</span>}
+              {category === "Innovación" && <span class="mr-2">⚡</span>}
+              {category}
+            </span>
+            
+            <!-- Particle Effect -->
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div class="absolute top-1 left-4 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
+              <div class="absolute top-2 right-6 w-1 h-1 bg-white rounded-full animate-ping animation-delay-500"></div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Posts Mejorado -->
+  <section class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-grid-subtle opacity-20"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Artículos <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">Destacados</span>
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        {blogPosts.filter(post => post.featured).map((post, index) => (
+          <article class="group relative">
+            <!-- Card Background with 3D Effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-3xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500 opacity-20"></div>
+            
+            <div class="relative bg-white rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 overflow-hidden transform group-hover:-translate-y-2 group-hover:scale-105 border-2 border-transparent group-hover:border-white">
+              
+              <!-- Image Section with Overlay Effects -->
+              <div class="relative aspect-w-16 aspect-h-9 bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden">
+                <!-- Animated Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20">
+                  <div class="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full animate-pulse"></div>
+                  <div class="absolute bottom-4 right-4 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
+                </div>
+                
+                <!-- Content -->
+                <div class="relative flex items-center justify-center p-8 z-10">
+                  <div class="text-center">
+                    <div class="relative inline-block">
+                      <div class="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg group-hover:shadow-2xl">
+                        <span class="text-white text-3xl">📝</span>
+                      </div>
+                      <!-- Floating particles -->
+                      <div class="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping opacity-75"></div>
+                      <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-pink-400 rounded-full animate-pulse opacity-60"></div>
+                    </div>
+                    <p class="text-gray-600 text-sm font-medium bg-white/80 rounded-lg px-3 py-1 inline-block">
+                      Imagen: {post.image}
+                    </p>
+                  </div>
+                </div>
+                
+                <!-- Overlay Effect -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+              
+              <!-- Content Section -->
+              <div class="p-8 relative">
+                <!-- Category and Date with Enhanced Design -->
+                <div class="flex items-center justify-between mb-6">
+                  <div class="relative">
+                    <span class="px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-sm font-bold rounded-full shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                      {post.category}
+                    </span>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-secondary-400 rounded-full animate-ping"></div>
+                  </div>
+                  <time class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full font-medium" datetime={post.date}>
+                    {new Date(post.date).toLocaleDateString('es-CL', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </time>
+                </div>
+                
+                <!-- Title with Hover Effect -->
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300 relative">
+                  {post.title}
+                  <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-500"></div>
+                </h3>
+                
+                <!-- Excerpt -->
+                <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                  {post.excerpt}
+                </p>
+                
+                <!-- Read More Button with Advanced Effects -->
+                <a 
+                  href={`/blog/${post.id}`}
+                  class="group/btn relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg"
+                >
+                  <!-- Button Background Animation -->
+                  <div class="absolute inset-0 bg-gradient-to-r from-secondary-500 to-purple-500 transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-700 origin-left"></div>
+                  
+                  <!-- Button Content -->
+                  <span class="relative z-10 mr-3">Leer más</span>
+                  <svg class="relative z-10 w-5 h-5 group-hover/btn:translate-x-2 group-hover/btn:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                  
+                  <!-- Button Particles -->
+                  <div class="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
+                    <div class="absolute top-2 left-6 w-1 h-1 bg-white rounded-full animate-ping animation-delay-200"></div>
+                    <div class="absolute top-3 right-8 w-1 h-1 bg-white rounded-full animate-ping animation-delay-500"></div>
+                    <div class="absolute bottom-3 left-12 w-1 h-1 bg-white rounded-full animate-ping animation-delay-700"></div>
+                  </div>
+                </a>
+                
+                <!-- Reading Time and Engagement -->
+                <div class="flex items-center justify-between mt-6 pt-6 border-t border-gray-100">
+                  <div class="flex items-center text-gray-500 text-sm">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    5 min lectura
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <div class="flex items-center text-gray-500 text-sm">
+                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                      </svg>
+                      {250 + index * 50} vistas
+                    </div>
+                    <div class="flex items-center text-gray-500 text-sm">
+                      <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                      </svg>
+                      {45 + index * 15}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All Posts Mejorado -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <!-- Background Decorations -->
+    <div class="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-full blur-3xl opacity-50"></div>
+    <div class="absolute bottom-10 left-10 w-24 h-24 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full blur-2xl opacity-40"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Todos los <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">Artículos</span>
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Explora nuestra biblioteca completa de conocimiento sobre bordados, confección y tendencias textiles
+        </p>
+        <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto rounded-full mt-6"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 article-grid">
+        {blogPosts.filter(post => !post.featured).map((post, index) => (
+          <article class="group relative article-card" data-category={post.category} style={`animation-delay: ${index * 0.1}s`}>
+            <!-- 3D Card Effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform duration-500"></div>
+            
+            <div class="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-700 overflow-hidden border border-gray-100 group-hover:border-primary-200 transform group-hover:-translate-y-3 group-hover:scale-105 hover-lift">
+              
+              <!-- Image Section Enhanced -->
+              <div class="relative aspect-w-16 aspect-h-9 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                <!-- Animated Background Pattern -->
+                <div class="absolute inset-0">
+                  <div class="absolute top-2 left-2 w-16 h-16 bg-primary-200/30 rounded-full animate-pulse"></div>
+                  <div class="absolute bottom-2 right-2 w-12 h-12 bg-secondary-200/30 rounded-full animate-bounce"></div>
+                  <div class="absolute top-1/2 left-1/2 w-8 h-8 bg-purple-200/20 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-spin"></div>
+                </div>
+                
+                <div class="relative flex items-center justify-center p-6 z-10">
+                  <div class="text-center">
+                    <div class="relative inline-block">
+                      <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mx-auto mb-3 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 shadow-lg">
+                        <span class="text-white text-xl">📰</span>
+                      </div>
+                      <!-- Floating Elements -->
+                      <div class="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-ping opacity-60"></div>
+                      <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-pink-400 rounded-full animate-pulse opacity-70"></div>
+                    </div>
+                    <p class="text-gray-500 text-xs bg-white/80 rounded-lg px-2 py-1 inline-block font-medium">
+                      {post.image}
+                    </p>
+                  </div>
+                </div>
+                
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+              
+              <!-- Content Section Enhanced -->
+              <div class="p-6 relative">
+                <!-- Category and Date Enhanced -->
+                <div class="flex items-center justify-between mb-4">
+                  <div class="relative">
+                    <span class="px-3 py-1.5 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white text-xs font-bold rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                      {post.category}
+                    </span>
+                    <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-primary-400 rounded-full animate-ping opacity-75"></div>
+                  </div>
+                  <time class="text-gray-400 text-xs bg-gray-50 px-2 py-1 rounded-full font-medium" datetime={post.date}>
+                    {new Date(post.date).toLocaleDateString('es-CL', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </time>
+                </div>
+                
+                <!-- Title Enhanced -->
+                <h3 class="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-300 line-clamp-2 relative">
+                  {post.title}
+                  <div class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-500"></div>
+                </h3>
+                
+                <!-- Excerpt -->
+                <p class="text-gray-600 text-sm mb-6 leading-relaxed line-clamp-3">
+                  {post.excerpt}
+                </p>
+                
+                <!-- Enhanced Footer -->
+                <div class="flex items-center justify-between">
+                  <!-- Read More Button -->
+                  <a 
+                    href={`/blog/${post.id}`}
+                    class="group/link relative inline-flex items-center text-primary-600 font-bold text-sm hover:text-primary-700 transition-all duration-300 transform hover:scale-105"
+                  >
+                    <span class="mr-2">Leer artículo</span>
+                    <svg class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    
+                    <!-- Hover Underline -->
+                    <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover/link:w-full transition-all duration-300"></div>
+                  </a>
+                  
+                  <!-- Engagement Icons -->
+                  <div class="flex items-center space-x-3 text-gray-400 text-xs">
+                    <div class="flex items-center hover:text-primary-500 transition-colors cursor-pointer">
+                      <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                      </svg>
+                      {150 + index * 25}
+                    </div>
+                    <div class="flex items-center hover:text-red-500 transition-colors cursor-pointer">
+                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                      </svg>
+                      {20 + index * 5}
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Reading Time -->
+                <div class="mt-4 pt-4 border-t border-gray-100 flex items-center text-gray-500 text-xs">
+                  <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  {3 + (index % 3)} min lectura
+                  <div class="ml-auto flex items-center">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-1"></div>
+                    <span>Actualizado</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Hover Shine Effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      <!-- Load More Button -->
+      <div class="text-center mt-16">
+        <button class="group relative inline-flex items-center px-10 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg">
+          <div class="absolute inset-0 bg-gradient-to-r from-secondary-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
+          <span class="relative z-10 mr-3">Cargar más artículos</span>
+          <svg class="relative z-10 w-5 h-5 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Newsletter -->
+  <section class="py-16 bg-gradient-to-r from-primary-600 to-secondary-600">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        ¡No Te Pierdas Nuestras Novedades!
+      </h2>
+      <p class="text-xl text-white/90 mb-8 leading-relaxed">
+        Suscríbete a nuestro newsletter y recibe promociones exclusivas, consejos profesionales y las últimas tendencias directamente en tu correo.
+      </p>
+      
+      <div class="max-w-lg mx-auto">
+        <div class="bg-white rounded-xl shadow-2xl p-6">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <input 
+              type="email" 
+              placeholder="tu@email.com"
+              class="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
+            <button class="px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl">
+              Suscribirme
+            </button>
+          </div>
+          <p class="text-gray-500 text-sm mt-3">
+            📧 Máximo 2 emails por mes. Sin spam. Cancela cuando quieras.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('[data-category]');
+    const articles = document.querySelectorAll('[data-category]');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        
+        // Update button states
+        filterButtons.forEach(btn => {
+          btn.classList.remove('border-primary-500', 'text-primary-600', 'bg-primary-50');
+          btn.classList.add('border-gray-200', 'text-gray-600');
+        });
+        
+        button.classList.remove('border-gray-200', 'text-gray-600');
+        button.classList.add('border-primary-500', 'text-primary-600', 'bg-primary-50');
+        
+        // Filter articles
+        articles.forEach(article => {
+          if (category === 'Todos' || article.getAttribute('data-category') === category) {
+            article.style.display = 'block';
+            article.classList.remove('hidden');
+          } else {
+            article.style.display = 'none';
+            article.classList.add('hidden');
+          }
+        });
+      });
+    });
+    
+    // Set default filter
+    const defaultButton = document.querySelector('[data-category="Todos"]');
+    if (defaultButton) {
+      defaultButton.click();
+    }
+  });
+</script>
+
+<style>
+  /* Keyframe Animations */
+  @keyframes blob {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes gradient-text {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes typewriter-effect {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes card-entrance {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(100%) skewX(-15deg);
+    }
+  }
+
+  /* Animation Classes */
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  .animate-gradient-text {
+    animation: gradient-text 3s ease infinite;
+  }
+
+  .typewriter-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.1em;
+    animation: typewriter-effect 3s steps(40, end);
+  }
+
+  .article-card {
+    animation: card-entrance 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+
+  /* Animation Delays */
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+
+  /* Background Patterns */
+  .bg-grid-subtle {
+    background-image: radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+    background-size: 30px 30px;
+  }
+
+  /* Responsive Grid Animation */
+  .article-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .article-grid .article-card:nth-child(1) { animation-delay: 0.1s; }
+  .article-grid .article-card:nth-child(2) { animation-delay: 0.2s; }
+  .article-grid .article-card:nth-child(3) { animation-delay: 0.3s; }
+  .article-grid .article-card:nth-child(4) { animation-delay: 0.4s; }
+  .article-grid .article-card:nth-child(5) { animation-delay: 0.5s; }
+  .article-grid .article-card:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Line Clamp Utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Enhanced Glassmorphism */
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+  }
+
+  /* Shadow Enhancements */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Hover Effects */
+  .group:hover .animate-pulse {
+    animation-duration: 0.5s;
+  }
+
+  /* Filter Button Active State */
+  .filter-active {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border-color: transparent;
+    transform: scale(1.05);
+  }
+
+  /* Counter Animation for Stats */
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .typewriter-effect {
+      white-space: normal;
+      animation: fade-in-up 1s ease-out;
+    }
+    
+    .article-grid .article-card {
+      animation-delay: 0.1s;
+    }
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blob,
+    .animate-float,
+    .animate-spin-slow,
+    .animate-gradient-text,
+    .typewriter-effect,
+    .article-card {
+      animation: none;
+    }
+    
+    .hover-lift:hover {
+      transform: none;
+    }
+  }
+
+  /* Accessibility Enhancements */
+  .focus-visible:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Enhanced Filter functionality with animations
+    const filterButtons = document.querySelectorAll('[data-category]');
+    const articles = document.querySelectorAll('.article-card[data-category]');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        
+        // Update button states with animation
+        filterButtons.forEach(btn => {
+          btn.classList.remove('filter-active', 'border-primary-500', 'text-primary-600', 'bg-primary-50');
+          btn.classList.add('border-gray-200', 'text-gray-600');
+        });
+        
+        button.classList.remove('border-gray-200', 'text-gray-600');
+        button.classList.add('filter-active');
+        
+        // Animate articles out
+        articles.forEach((article, index) => {
+          article.style.transition = 'all 0.3s ease-out';
+          article.style.transform = 'translateY(20px)';
+          article.style.opacity = '0';
+          
+          setTimeout(() => {
+            if (category === 'Todos' || article.getAttribute('data-category') === category) {
+              article.style.display = 'block';
+              article.classList.remove('hidden');
+              
+              // Animate back in with stagger
+              setTimeout(() => {
+                article.style.transform = 'translateY(0)';
+                article.style.opacity = '1';
+              }, index * 50);
+            } else {
+              article.style.display = 'none';
+              article.classList.add('hidden');
+            }
+          }, 150);
+        });
+      });
+    });
+    
+    // Set default filter
+    const defaultButton = document.querySelector('[data-category="Todos"]');
+    if (defaultButton) {
+      defaultButton.click();
+    }
+
+    // Counter Animation for stats
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter');
+      
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const count = +counter.innerText;
+        
+        const increment = target / 100;
+        
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(() => animateCounters(), 30);
+        } else {
+          counter.innerText = target;
+        }
+      });
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('counter')) {
+            setTimeout(() => animateCounters(), 500);
+          }
+          
+          if (entry.target.classList.contains('article-card')) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    const counters = document.querySelectorAll('.counter');
+    const articleCards = document.querySelectorAll('.article-card');
+    
+    counters.forEach(counter => observer.observe(counter));
+    articleCards.forEach(card => observer.observe(card));
+
+    // Newsletter subscription animation
+    const newsletterButtons = document.querySelectorAll('button[type="button"]');
+    newsletterButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Add loading state
+        const originalText = button.innerHTML;
+        button.innerHTML = '<div class="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mx-auto"></div>';
+        button.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+          button.innerHTML = '✓ ¡Suscrito!';
+          button.classList.add('bg-green-500');
+          
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.disabled = false;
+            button.classList.remove('bg-green-500');
+          }, 2000);
+        }, 1500);
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add parallax effect to floating elements
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      
+      const floatingElements = document.querySelectorAll('.animate-float');
+      floatingElements.forEach((element, index) => {
+        element.style.transform = `translateY(${rate * (index + 1) * 0.1}px)`;
+      });
+    });
+  });
+</script>
