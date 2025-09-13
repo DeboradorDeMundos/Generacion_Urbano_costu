@@ -2,8 +2,9 @@
 import type { APIRoute, MiddlewareNext } from "astro";
 
 // Configuration - Use environment-specific URLs
+// If deploying to Render, set RENDER_EXTERNAL_URL in the environment
 const SITE_URL = import.meta.env.PROD
-  ? "https://generacion-urbana.cl"
+  ? import.meta.env.RENDER_EXTERNAL_URL || "https://generacion-urbana.cl"
   : import.meta.env.DEV
   ? "http://localhost:4321"
   : "http://127.0.0.1:4321";
