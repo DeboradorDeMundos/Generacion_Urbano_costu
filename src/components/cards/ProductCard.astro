@@ -1,0 +1,53 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image: string;
+  price?: string;
+  slug: string;
+  category?: string;
+}
+
+const { title, description, image, price, slug, category } = Astro.props;
+---
+
+<div class="group relative overflow-hidden rounded-lg bg-white shadow-md transition-all hover:shadow-lg">
+  <div class="aspect-square overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      class="h-full w-full object-cover transition-transform group-hover:scale-105"
+      loading="lazy"
+    />
+  </div>
+  
+  <div class="p-4">
+    {category && (
+      <span class="inline-block rounded-full bg-primary-100 px-2 py-1 text-xs font-medium text-primary-800 mb-2">
+        {category}
+      </span>
+    )}
+    
+    <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+      <a href={`/productos/${slug}`} class="stretched-link">
+        {title}
+      </a>
+    </h3>
+    
+    <p class="text-gray-600 text-sm mb-3 line-clamp-3">
+      {description}
+    </p>
+    
+    <div class="flex items-center justify-between">
+      {price && (
+        <span class="text-lg font-bold text-primary-600">
+          {price}
+        </span>
+      )}
+      
+      <span class="text-sm font-medium text-primary-600 group-hover:text-primary-700">
+        Ver detalles →
+      </span>
+    </div>
+  </div>
+</div>

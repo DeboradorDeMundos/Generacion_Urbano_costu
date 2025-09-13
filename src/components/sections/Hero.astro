@@ -1,0 +1,82 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
+}
+
+const {
+  title = "Confección y Bordados Industriales en San Bernardo",
+  subtitle = "Generación Urbana",
+  description = "Especialistas en confección de uniformes, polerón urbano, chaquetas de trabajo y bordados empresariales. Calidad profesional para tu empresa.",
+  image = "/images/hero-bg.jpg",
+  ctaText = "Ver Productos",
+  ctaLink = "/productos",
+  secondaryCtaText = "Contactar",
+  secondaryCtaLink = "/contacto"
+} = Astro.props;
+---
+
+<section class="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src={image}
+      alt="Hero background"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gray-900/60"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-heading">
+        {title}
+      </h1>
+      
+      {subtitle && (
+        <p class="text-xl md:text-2xl text-gray-200 mb-8 font-medium">
+          {subtitle}
+        </p>
+      )}
+      
+      <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+        {description}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={ctaLink}
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+        >
+          {ctaText}
+        </a>
+        
+        {secondaryCtaText && secondaryCtaLink && (
+          <a
+            href={secondaryCtaLink}
+            class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-transparent border-2 border-white rounded-md hover:bg-white hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
+          >
+            {secondaryCtaText}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+    <div class="animate-bounce">
+      <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </div>
+</section>

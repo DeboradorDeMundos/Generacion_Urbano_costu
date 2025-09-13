@@ -1,16 +1,243 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+import ProductCard from '../components/cards/ProductCard.astro';
+import ServiceCard from '../components/cards/ServiceCard.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import CTA from '../components/sections/CTA.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 
+// Sample data - in real app this would come from content collections
+const featuredProducts = [
+  {
+    title: "Polerón Urbano Premium",
+    description: "Polerón urbano de alta calidad, perfecto para el estilo streetwear moderno.",
+    image: "/images/products/poleron-urbano-main.jpg",
+    price: "Desde $25.990",
+    slug: "poleron-urbano",
+    category: "Ropa Urbana"
+  },
+  {
+    title: "Chaqueta de Trabajo Industrial",
+    description: "Chaqueta resistente y funcional para profesionales.",
+    image: "/images/products/chaqueta-work-main.jpg",
+    price: "Desde $35.990",
+    slug: "chaqueta-work",
+    category: "Ropa de Trabajo"
+  }
+];
+
+const featuredServices = [
+  {
+    title: "Costura Industrial",
+    description: "Servicios especializados de costura industrial con maquinaria de última generación.",
+    image: "/images/services/costura-industrial.jpg",
+    slug: "costura-industrial",
+    icon: "🧵",
+    features: ["Maquinaria profesional", "Acabados premium", "Grandes volúmenes"]
+  },
+  {
+    title: "Bordados Empresariales",
+    description: "Bordados personalizados para uniformes y ropa corporativa.",
+    image: "/images/services/bordados-empresariales.jpg",
+    slug: "bordados-empresariales",
+    icon: "🎯",
+    features: ["Diseños únicos", "Hilos de calidad", "Servicio completo"]
+  },
+  {
+    title: "Costurera San Bernardo",
+    description: "Tu costurera de confianza en San Bernardo con más de 15 años de experiencia.",
+    image: "/images/services/costurera-san-bernardo.jpg",
+    slug: "costurera-san-bernardo",
+    icon: "✂️",
+    features: ["Atención personalizada", "Precios justos", "Trabajo garantizado"]
+  }
+];
+
+const features = [
+  {
+    title: "Experiencia Comprobada",
+    description: "Más de 15 años perfeccionando nuestro oficio en confección y bordados industriales.",
+    icon: "⭐"
+  },
+  {
+    title: "Maquinaria Profesional",
+    description: "Equipos de última generación para garantizar acabados perfectos y durabilidad.",
+    icon: "⚙️"
+  },
+  {
+    title: "Atención Personalizada",
+    description: "Cada proyecto es único. Te asesoramos para encontrar la mejor solución.",
+    icon: "🤝"
+  },
+  {
+    title: "Calidad Garantizada",
+    description: "Materiales premium y técnicas profesionales con garantía de satisfacción.",
+    icon: "✅"
+  },
+  {
+    title: "Entrega Oportuna",
+    description: "Cumplimos con los plazos acordados para que tengas tu pedido a tiempo.",
+    icon: "⏰"
+  },
+  {
+    title: "Precios Competitivos",
+    description: "Tarifas justas y transparentes sin sacrificar la calidad del trabajo.",
+    icon: "💰"
+  }
+];
+
+const testimonials = [
+  {
+    name: "María González",
+    role: "Gerente General",
+    company: "Constructora San Bernardo",
+    content: "Excelente trabajo en nuestros uniformes corporativos. La calidad y el servicio superaron nuestras expectativas.",
+    rating: 5
+  },
+  {
+    name: "Carlos Martínez",
+    role: "Propietario",
+    company: "Restaurant El Buen Sabor",
+    content: "Los bordados en nuestros delantales quedaron perfectos. Personal muy profesional y precios justos.",
+    rating: 5
+  },
+  {
+    name: "Ana Silva",
+    role: "Cliente Particular",
+    content: "Llevo años arreglando mi ropa aquí. Siempre quedan como nuevas y la atención es excelente.",
+    rating: 5
+  }
+];
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Generación Urbana",
+  "description": "Especialistas en confección y bordados industriales en San Bernardo",
+  "url": "https://generacionurbana.cl",
+  "logo": "https://generacionurbana.cl/images/logos/logo.svg",
+  "image": "https://generacionurbana.cl/images/og/default.jpg",
+  "telephone": "+56900000000",
+  "email": "contacto@generacionurbana.cl",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "San Bernardo",
+    "addressRegion": "Región Metropolitana",
+    "addressCountry": "CL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -33.5828,
+    "longitude": -70.7004
+  },
+  "openingHours": [
+    "Mo-Fr 09:00-18:00",
+    "Sa 09:00-14:00"
+  ],
+  "priceRange": "$$",
+  "servesCuisine": [],
+  "acceptsReservations": true,
+  "hasMap": "https://maps.google.com",
+  "sameAs": [
+    "https://www.instagram.com/generacionurbana",
+    "https://www.facebook.com/generacionurbana"
+  ]
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Generación Urbana - Confección y Bordados Industriales San Bernardo"
+  description="Especialistas en confección de uniformes, polerón urbano, bordados empresariales y costura industrial en San Bernardo. Calidad profesional y precios justos."
+  keywords="confeccion san bernardo, bordados empresariales, poleron urbano, chaqueta trabajo, costurera san bernardo, uniformes corporativos"
+  headerTransparent={true}
+>
+  <JsonLd schema={organizationSchema} />
+  
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Features Section -->
+  <FeatureGrid
+    title="¿Por Qué Elegir Generación Urbana?"
+    description="Somos tu solución integral en confección y personalización textil"
+    features={features}
+  />
+
+  <!-- Featured Products Section -->
+  <section class="py-16 lg:py-24 bg-gray-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading mb-6">
+          Productos Destacados
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          Descubre nuestros productos más populares, confeccionados con los más altos estándares de calidad
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {featuredProducts.map((product) => (
+          <ProductCard {...product} />
+        ))}
+      </div>
+
+      <div class="text-center">
+        <a
+          href="/productos"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+        >
+          Ver Todos los Productos
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Services Section -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading mb-6">
+          Nuestros Servicios
+        </h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          Ofrecemos servicios integrales de confección, desde costura industrial hasta bordados personalizados
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        {featuredServices.map((service) => (
+          <ServiceCard {...service} />
+        ))}
+      </div>
+
+      <div class="text-center">
+        <a
+          href="/servicios"
+          class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-primary-600 bg-transparent border-2 border-primary-600 rounded-md hover:bg-primary-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+        >
+          Conocer Todos los Servicios
+          <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <Testimonials testimonials={testimonials} />
+
+  <!-- CTA Section -->
+  <CTA
+    title="¿Listo para Comenzar tu Proyecto?"
+    description="Contáctanos hoy mismo para recibir asesoramiento personalizado y una cotización gratuita para tu proyecto de confección o bordado."
+    ctaText="Solicitar Cotización"
+    ctaLink="/contacto"
+    variant="primary"
+  />
+</BaseLayout>

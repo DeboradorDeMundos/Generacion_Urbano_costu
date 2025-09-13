@@ -1,0 +1,54 @@
+---
+export interface Feature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface Props {
+  title?: string;
+  description?: string;
+  features: Feature[];
+}
+
+const {
+  title = "Nuestros Servicios",
+  description = "Ofrecemos soluciones completas en confección y bordados industriales",
+  features
+} = Astro.props;
+---
+
+<section class="py-16 lg:py-24 bg-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading mb-6">
+        {title}
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+        {description}
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <div class="group text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
+          <!-- Icon -->
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-lg mb-6 group-hover:bg-primary-200 transition-colors">
+            <span class="text-2xl text-primary-600" set:html={feature.icon} />
+          </div>
+          
+          <!-- Content -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            {feature.title}
+          </h3>
+          
+          <p class="text-gray-600 leading-relaxed">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
