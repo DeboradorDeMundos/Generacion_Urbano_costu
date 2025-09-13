@@ -11,6 +11,6 @@ export default defineConfig({
   site: "https://generacionurbana.cl",
   compressHTML: true,
   build: {
-    inlineStylesheets: "auto"
-  }
+    inlineStylesheets: "auto",
+  },
 });
