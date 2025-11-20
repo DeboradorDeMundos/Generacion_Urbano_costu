@@ -4426,6 +4426,7 @@ import Header from "../components/common/Header.astro";
       width: number;
       height: number;
       rotation: number;
+      zIndex: number;
     }
 
     interface TextoOverlay {
@@ -4437,6 +4438,8 @@ import Header from "../components/common/Header.astro";
       x: number;
       y: number;
       rotation: number;
+      zIndex: number;
+      orientacion?: "horizontal" | "vertical";
     }
 
     interface EstadoDiseno {
@@ -4813,6 +4816,7 @@ import Header from "../components/common/Header.astro";
           width: 100,
           height: 100,
           rotation: 0,
+          zIndex: Date.now(),
         };
         estadoDiseño.imagenes.push(nuevaImagen);
         actualizarOverlays();
@@ -4887,6 +4891,23 @@ import Header from "../components/common/Header.astro";
         alert("Por favor escribe un texto");
         return;
       }
+
+      // Si hay un texto seleccionado, actualizarlo
+      if (elementoSeleccionado?.tipo === "texto") {
+        const textoExistente = estadoDiseño.textos.find(
+          (t) => t.id === elementoSeleccionado!.id,
+        );
+        if (textoExistente) {
+          textoExistente.texto = texto;
+          textoExistente.fuente = fuenteSelect.value;
+          textoExistente.color = textoColor.value;
+          textoExistente.size = parseInt(textoSize.value, 10);
+          actualizarOverlays();
+          return;
+        }
+      }
+
+      // Si no, crear uno nuevo
       const nuevoTexto: TextoOverlay = {
         id: generarId(),
         texto,
@@ -4896,10 +4917,65 @@ import Header from "../components/common/Header.astro";
         x: 50,
         y: 80,
         rotation: 0,
+        zIndex: Date.now(), // Usar timestamp como z-index inicial simple
       };
       estadoDiseño.textos.push(nuevoTexto);
-      textoInput.value = "";
+      // No limpiar el input para facilitar agregar múltiples líneas o variaciones
+      // textoInput.value = "";
       actualizarOverlays();
+    });
+
+    // Listeners para vista previa en tiempo real
+    const updateTextoSeleccionado = () => {
+      if (elementoSeleccionado?.tipo === "texto") {
+        const texto = estadoDiseño.textos.find(
+          (t) => t.id === elementoSeleccionado!.id,
+        );
+        if (texto) {
+          texto.texto = textoInput.value || texto.texto;
+          texto.fuente = fuenteSelect.value;
+          texto.color = textoColor.value;
+          texto.size = parseInt(textoSize.value, 10);
+          actualizarOverlays();
+        }
+      }
+    };
+
+    textoInput?.addEventListener("input", updateTextoSeleccionado);
+    fuenteSelect?.addEventListener("change", updateTextoSeleccionado);
+    textoColor?.addEventListener("input", updateTextoSeleccionado);
+    textoSize?.addEventListener("input", updateTextoSeleccionado);
+
+    // Listeners para orientación
+    const btnOrientacionHorizontal = document.getElementById(
+      "btnOrientacionHorizontal",
+    );
+    const btnOrientacionVertical = document.getElementById(
+      "btnOrientacionVertical",
+    );
+
+    btnOrientacionHorizontal?.addEventListener("click", () => {
+      if (elementoSeleccionado?.tipo === "texto") {
+        const texto = estadoDiseño.textos.find(
+          (t) => t.id === elementoSeleccionado!.id,
+        );
+        if (texto) {
+          texto.rotation = 0;
+          actualizarOverlays();
+        }
+      }
+    });
+
+    btnOrientacionVertical?.addEventListener("click", () => {
+      if (elementoSeleccionado?.tipo === "texto") {
+        const texto = estadoDiseño.textos.find(
+          (t) => t.id === elementoSeleccionado!.id,
+        );
+        if (texto) {
+          texto.rotation = 90;
+          actualizarOverlays();
+        }
+      }
     });
 
     // Función principal para actualizar todos los overlays
@@ -4915,15 +4991,24 @@ import Header from "../components/common/Header.astro";
       const frenteSvg = document.getElementById(cfg.frenteId);
       if (!frenteSvg) return;
 
-      // Renderizar todas las imágenes
-      estadoDiseño.imagenes.forEach((img) => {
-        crearImagenOverlay(img, frenteSvg);
+      // Combinar y ordenar todos los elementos por zIndex
+      const allElements = [
+        ...estadoDiseño.imagenes.map((i) => ({
+          ...i,
+          tipo: "imagen" as const,
+        })),
+        ...estadoDiseño.textos.map((t) => ({ ...t, tipo: "texto" as const })),
+      ].sort((a, b) => a.zIndex - b.zIndex); // Menor primero = atrás
+
+      // Renderizar en orden de zIndex
+      allElements.forEach((el) => {
+        if (el.tipo === "imagen") {
+          crearImagenOverlay(el as ImagenOverlay, frenteSvg);
+        } else {
+          crearTextoOverlay(el as TextoOverlay, frenteSvg);
+        }
       });
 
-      // Renderizar todos los textos
-      estadoDiseño.textos.forEach((txt) => {
-        crearTextoOverlay(txt, frenteSvg);
-      });
       // Renderizar lista de capas
       renderizarCapas();
     }
@@ -4941,7 +5026,7 @@ import Header from "../components/common/Header.astro";
           tipo: "imagen" as const,
         })),
         ...estadoDiseño.textos.map((t) => ({ ...t, tipo: "texto" as const })),
-      ]; // Aquí podrías ordenar por z-index si tuvieras esa propiedad
+      ];
 
       if (todosElementos.length === 0) {
         contenedor.innerHTML =
@@ -4949,14 +5034,75 @@ import Header from "../components/common/Header.astro";
         return;
       }
 
-      // Renderizar en orden inverso (último agregado arriba)
-      todosElementos.reverse().forEach((el) => {
+      // Ordenar por zIndex de mayor a menor (arriba = mayor z-index)
+      // Para la lista visual, queremos el mayor z-index arriba
+      todosElementos.sort((a, b) => b.zIndex - a.zIndex);
+
+      let draggedElement: any = null;
+
+      todosElementos.forEach((el) => {
         const div = document.createElement("div");
-        div.className = `flex items-center justify-between p-2 rounded border ${
+        div.className = `flex items-center justify-between p-2 rounded border cursor-move ${
           elementoSeleccionado?.id === el.id
             ? "border-red-500 bg-red-50"
             : "border-gray-200 hover:bg-gray-50"
         }`;
+        div.draggable = true;
+        div.setAttribute("data-elemento-id", el.id);
+
+        // Drag & Drop eventos
+        div.addEventListener("dragstart", (e) => {
+          draggedElement = el;
+          div.style.opacity = "0.5";
+          if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = "move";
+          }
+        });
+
+        div.addEventListener("dragend", (e) => {
+          div.style.opacity = "1";
+          draggedElement = null;
+        });
+
+        div.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          if (e.dataTransfer) {
+            e.dataTransfer.dropEffect = "move";
+          }
+        });
+
+        div.addEventListener("drop", (e) => {
+          e.preventDefault();
+          if (draggedElement && draggedElement.id !== el.id) {
+            // Intercambiar z-index
+            const tempZ = draggedElement.zIndex;
+            draggedElement.zIndex = el.zIndex;
+            el.zIndex = tempZ;
+
+            // Actualizar el objeto original en el array correspondiente
+            if (draggedElement.tipo === "imagen") {
+              const img = estadoDiseño.imagenes.find(
+                (i) => i.id === draggedElement.id,
+              );
+              if (img) img.zIndex = draggedElement.zIndex;
+            } else {
+              const txt = estadoDiseño.textos.find(
+                (t) => t.id === draggedElement.id,
+              );
+              if (txt) txt.zIndex = draggedElement.zIndex;
+            }
+
+            if (el.tipo === "imagen") {
+              const img = estadoDiseño.imagenes.find((i) => i.id === el.id);
+              if (img) img.zIndex = el.zIndex;
+            } else {
+              const txt = estadoDiseño.textos.find((t) => t.id === el.id);
+              if (txt) txt.zIndex = el.zIndex;
+            }
+
+            actualizarOverlays();
+          }
+        });
 
         const info = document.createElement("div");
         info.className = "flex items-center gap-2 cursor-pointer flex-1";
@@ -5113,7 +5259,10 @@ import Header from "../components/common/Header.astro";
         elementoSeleccionado?.id === img.id &&
         elementoSeleccionado?.tipo === "imagen"
       ) {
-        rect.style.display = "block";
+        // Let actualizarSeleccionVisual handle this
+        rect.style.display = "none";
+      } else {
+        rect.style.display = "none";
       }
 
       // Handle de redimensionamiento
@@ -5129,13 +5278,7 @@ import Header from "../components/common/Header.astro";
       handle.setAttribute("stroke-width", "2");
       handle.style.cursor = "nwse-resize";
       handle.classList.add("handle-resize");
-
-      if (
-        elementoSeleccionado?.id === img.id &&
-        elementoSeleccionado?.tipo === "imagen"
-      ) {
-        handle.style.display = "block";
-      }
+      handle.style.display = "none"; // Initially hidden
 
       // Handle de rotación
       const rotateHandle = document.createElementNS(
@@ -5150,13 +5293,7 @@ import Header from "../components/common/Header.astro";
       rotateHandle.setAttribute("stroke-width", "2");
       rotateHandle.style.cursor = "grab";
       rotateHandle.classList.add("handle-rotate");
-
-      if (
-        elementoSeleccionado?.id === img.id &&
-        elementoSeleccionado?.tipo === "imagen"
-      ) {
-        rotateHandle.style.display = "block";
-      }
+      rotateHandle.style.display = "none"; // Initially hidden
 
       // Línea del handle de rotación
       const rotateLine = document.createElementNS(
@@ -5170,13 +5307,7 @@ import Header from "../components/common/Header.astro";
       rotateLine.setAttribute("stroke", "#10b981");
       rotateLine.setAttribute("stroke-width", "2");
       rotateLine.classList.add("line-rotate");
-
-      if (
-        elementoSeleccionado?.id === img.id &&
-        elementoSeleccionado?.tipo === "imagen"
-      ) {
-        rotateLine.style.display = "block";
-      }
+      rotateLine.style.display = "none"; // Initially hidden
 
       // Botón de eliminar
       const deleteBtn = document.createElementNS(
@@ -5384,7 +5515,10 @@ import Header from "../components/common/Header.astro";
         elementoSeleccionado?.id === txt.id &&
         elementoSeleccionado?.tipo === "texto"
       ) {
-        controls.style.display = "block";
+        // Let actualizarSeleccionVisual handle this
+        controls.style.display = "none";
+      } else {
+        controls.style.display = "none";
       }
 
       const deleteBtn = document.createElement("button");
@@ -5402,13 +5536,7 @@ import Header from "../components/common/Header.astro";
       deleteBtn.style.fontSize = "16px";
       deleteBtn.style.lineHeight = "1";
       deleteBtn.style.pointerEvents = "all";
-      deleteBtn.style.display = "none";
-      if (
-        elementoSeleccionado?.id === txt.id &&
-        elementoSeleccionado?.tipo === "texto"
-      ) {
-        deleteBtn.style.display = "block";
-      }
+      deleteBtn.style.display = "none"; // Initially hidden
       deleteBtn.classList.add("boton-eliminar-texto");
 
       const rotateBtn = document.createElement("button");
@@ -5427,13 +5555,8 @@ import Header from "../components/common/Header.astro";
       rotateBtn.style.fontSize = "14px";
       rotateBtn.style.lineHeight = "1";
       rotateBtn.style.pointerEvents = "all";
-      rotateBtn.style.display = "none";
-      if (
-        elementoSeleccionado?.id === txt.id &&
-        elementoSeleccionado?.tipo === "texto"
-      ) {
-        rotateBtn.style.display = "block";
-      }
+      rotateBtn.style.display = "none"; // Initially hidden
+      rotateBtn.classList.add("boton-rotar-texto");
       rotateBtn.classList.add("boton-rotar-texto");
 
       container.appendChild(controls);
