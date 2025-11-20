@@ -13,4 +13,14 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
+  vite: {
+    optimizeDeps: {
+      include: ["emoji-mart", "@emoji-mart/data"],
+    },
+    resolve: {
+      alias: {
+        "emoji-mart": "emoji-mart/dist/browser.js",
+      },
+    },
+  },
 });
