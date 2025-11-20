@@ -21,66 +21,94 @@ import Header from "../components/common/Header.astro";
         </p>
       </div>
 
-      <!-- Layout Principal: Panel Izquierdo + Canvas Derecho (Sticky) -->
-      <div class="grid lg:grid-cols-3 gap-8">
-        <!-- Panel de Control Izquierdo -->
-        <div class="lg:col-span-1 space-y-6">
+      <!-- Layout Principal: 3 Columnas -->
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Columna Izquierda: Controles (Modelos, Color, Imagen) -->
+        <div class="lg:col-span-3 space-y-6">
           <!-- Selector de Modelo -->
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-lg mb-4 text-gray-800">
-              Modelo de Polerón
-            </h3>
-            <div class="grid grid-cols-3 gap-3">
-              <button class="modelo-btn active" data-modelo="modelo-1">
-                <img
-                  src="/images/services/modelo_1/frente/sombra-y-borde.png"
-                  alt="Modelo 1"
-                  class="w-full h-20 object-contain"
-                />
-                <div class="text-xs font-semibold text-center mt-1">
-                  Modelo 1
-                </div>
-              </button>
-              <button class="modelo-btn" data-modelo="modelo-2">
-                <img
-                  src="/images/services/modelo_2/frente/sombra-y-borde.png"
-                  alt="Modelo 2"
-                  class="w-full h-20 object-contain"
-                />
-                <div class="text-xs font-semibold text-center mt-1">
-                  Modelo 2
-                </div>
-              </button>
-              <button class="modelo-btn" data-modelo="modelo-3">
-                <img
-                  src="/images/services/modelo_3/frente/sombra-y-borde.png"
-                  alt="Modelo 3"
-                  class="w-full h-20 object-contain"
-                />
-                <div class="text-xs font-semibold text-center mt-1">
-                  Modelo 3
-                </div>
-              </button>
-              <button class="modelo-btn" data-modelo="modelo-4">
-                <img
-                  src="/images/services/modelo_4/frente/sombra-y-borde.png"
-                  alt="Modelo 4"
-                  class="w-full h-20 object-contain"
-                />
-                <div class="text-xs font-semibold text-center mt-1">
-                  Modelo 4
-                </div>
-              </button>
-              <button class="modelo-btn" data-modelo="modelo-5">
-                <img
-                  src="/images/services/modelo_5/frente/sombra-y-borde.png"
-                  alt="Modelo 5"
-                  class="w-full h-20 object-contain"
-                />
-                <div class="text-xs font-semibold text-center mt-1">
-                  Modelo 5
-                </div>
-              </button>
+            <div
+              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+            >
+              <h3 class="font-bold text-lg text-gray-800">Modelo de Polerón</h3>
+              <span class="transform transition-transform duration-200">▽</span>
+            </div>
+            <div class="panel-content">
+              <div
+                class="flex overflow-x-auto gap-3 pb-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                style="scrollbar-width: thin;"
+              >
+                <button
+                  class="modelo-btn active flex-shrink-0 snap-center"
+                  data-modelo="modelo-1"
+                  style="min-width: 120px;"
+                >
+                  <img
+                    src="/images/services/modelo_1/frente/sombra-y-borde.png"
+                    alt="Modelo 1"
+                    class="w-full h-24 object-contain"
+                  />
+                  <div class="text-xs font-semibold text-center mt-1">
+                    Modelo 1
+                  </div>
+                </button>
+                <button
+                  class="modelo-btn flex-shrink-0 snap-center"
+                  data-modelo="modelo-2"
+                  style="min-width: 120px;"
+                >
+                  <img
+                    src="/images/services/modelo_2/frente/sombra-y-borde.png"
+                    alt="Modelo 2"
+                    class="w-full h-24 object-contain"
+                  />
+                  <div class="text-xs font-semibold text-center mt-1">
+                    Modelo 2
+                  </div>
+                </button>
+                <button
+                  class="modelo-btn flex-shrink-0 snap-center"
+                  data-modelo="modelo-3"
+                  style="min-width: 120px;"
+                >
+                  <img
+                    src="/images/services/modelo_3/frente/sombra-y-borde.png"
+                    alt="Modelo 3"
+                    class="w-full h-24 object-contain"
+                  />
+                  <div class="text-xs font-semibold text-center mt-1">
+                    Modelo 3
+                  </div>
+                </button>
+                <button
+                  class="modelo-btn flex-shrink-0 snap-center"
+                  data-modelo="modelo-4"
+                  style="min-width: 120px;"
+                >
+                  <img
+                    src="/images/services/modelo_4/frente/sombra-y-borde.png"
+                    alt="Modelo 4"
+                    class="w-full h-24 object-contain"
+                  />
+                  <div class="text-xs font-semibold text-center mt-1">
+                    Modelo 4
+                  </div>
+                </button>
+                <button
+                  class="modelo-btn flex-shrink-0 snap-center"
+                  data-modelo="modelo-5"
+                  style="min-width: 120px;"
+                >
+                  <img
+                    src="/images/services/modelo_5/frente/sombra-y-borde.png"
+                    alt="Modelo 5"
+                    class="w-full h-24 object-contain"
+                  />
+                  <div class="text-xs font-semibold text-center mt-1">
+                    Modelo 5
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -147,179 +175,220 @@ import Header from "../components/common/Header.astro";
             </div>
           </div>
 
-          <!-- Selector de Parte a Pintar -->
+          <!-- Personalizar Color (Fusionado) -->
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-lg mb-4 text-gray-800">
-              Parte a Personalizar
-            </h3>
-            <select
-              id="parteSelect"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none font-semibold"
+            <div
+              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
             >
-              <option value="cuerpo">Cuerpo</option>
-              <option value="mangas">Mangas</option>
-              <option value="cuello">Cuello/Gorro</option>
-              <option value="puños">Puños</option>
-              <option value="cintura">Cintura</option>
-              <option value="bolsillos">Bolsillos</option>
-              <option value="forro">Forro Gorro</option>
-            </select>
-          </div>
-
-          <!-- Selector de Color -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-lg mb-4 text-gray-800">Color</h3>
-
-            <!-- Paleta Predefinida -->
-            <div class="mb-4">
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Paleta de Colores</label
-              >
-              <div class="grid grid-cols-6 gap-2">
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#FFFFFF"
-                  style="background-color: #FFFFFF;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#000000"
-                  style="background-color: #000000;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#CC0000"
-                  style="background-color: #CC0000;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#0066CC"
-                  style="background-color: #0066CC;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#00AA00"
-                  style="background-color: #00AA00;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#FFD700"
-                  style="background-color: #FFD700;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#FF6600"
-                  style="background-color: #FF6600;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#9933CC"
-                  style="background-color: #9933CC;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#FF1493"
-                  style="background-color: #FF1493;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#00CED1"
-                  style="background-color: #00CED1;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#8B4513"
-                  style="background-color: #8B4513;"></button>
-                <button
-                  class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
-                  data-color="#808080"
-                  style="background-color: #808080;"></button>
-              </div>
+              <h3 class="font-bold text-lg text-gray-800">
+                Personalizar Color
+              </h3>
+              <span class="transform transition-transform duration-200">▽</span>
             </div>
+            <div class="panel-content space-y-6 hidden">
+              <!-- Parte a Pintar -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Parte a Personalizar</label
+                >
+                <select
+                  id="parteSelect"
+                  class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none font-semibold"
+                >
+                  <option value="cuerpo">Cuerpo</option>
+                  <option value="mangas">Mangas</option>
+                  <option value="cuello">Cuello/Gorro</option>
+                  <option value="puños">Puños</option>
+                  <option value="cintura">Cintura</option>
+                  <option value="bolsillos">Bolsillos</option>
+                  <option value="forro">Forro Gorro</option>
+                </select>
+              </div>
 
-            <!-- Color Personalizado -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Color Personalizado</label
-              >
-              <input
-                type="color"
-                id="colorCustom"
-                class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300"
-              />
+              <!-- Selector de Color -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Seleccionar Color</label
+                >
+                <div class="grid grid-cols-6 gap-2">
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#FFFFFF"
+                    style="background-color: #FFFFFF;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#000000"
+                    style="background-color: #000000;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#CC0000"
+                    style="background-color: #CC0000;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#0066CC"
+                    style="background-color: #0066CC;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#00AA00"
+                    style="background-color: #00AA00;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#FFD700"
+                    style="background-color: #FFD700;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#FF6600"
+                    style="background-color: #FF6600;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#9933CC"
+                    style="background-color: #9933CC;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#FF1493"
+                    style="background-color: #FF1493;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#00CED1"
+                    style="background-color: #00CED1;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#8B4513"
+                    style="background-color: #8B4513;"></button>
+                  <button
+                    class="color-preset w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-red-600 transition-colors"
+                    data-color="#808080"
+                    style="background-color: #808080;"></button>
+                </div>
+                <!-- Color Personalizado deshabilitado -->
+                <div style="display: none;" class="mt-2">
+                  <label class="block text-sm font-semibold text-gray-700 mb-2"
+                    >Color Personalizado</label
+                  >
+                  <input
+                    type="color"
+                    id="colorCustom"
+                    class="w-full h-12 rounded-lg cursor-pointer border-2 border-gray-300"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Agregar Imagen/Logo -->
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-lg mb-4 text-gray-800">
-              Agregar Logo/Imagen
-            </h3>
-            <div class="space-y-3">
-              <button
-                id="btnAgregarImagen"
-                class="w-full px-4 py-3 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors"
-              >
-                Subir Imagen
-              </button>
-              <input
-                type="file"
-                id="inputImagen"
-                accept="image/*"
-                class="hidden"
-              />
-              <p class="text-xs text-gray-500 text-center">
-                JPG, PNG, SVG (máx 5MB)
-              </p>
-            </div>
-            <div class="mt-6 border-t pt-4">
-              <h3 class="font-bold text-lg mb-4 text-gray-800">
-                Agregar Texto
+            <div
+              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+            >
+              <h3 class="font-bold text-lg text-gray-800">
+                Agregar Imagen/Texto
               </h3>
+              <span class="transform transition-transform duration-200">▽</span>
+            </div>
+            <div class="panel-content hidden">
               <div class="space-y-3">
-                <input
-                  id="textoInput"
-                  type="text"
-                  placeholder="Tu texto"
-                  class="w-full px-3 py-2 border rounded-lg text-sm"
-                />
-                <div class="grid grid-cols-2 gap-3">
-                  <div>
-                    <label class="text-xs font-semibold">Fuente</label>
-                    <select
-                      id="fuenteSelect"
-                      class="w-full px-2 py-2 border rounded-lg text-sm"
-                    >
-                      <option value="Inter, sans-serif">Inter</option>
-                      <option value="Arial, sans-serif">Arial</option>
-                      <option value="'Times New Roman', serif">Times</option>
-                      <option value="'Courier New', monospace">Courier</option>
-                      <option value="Impact, sans-serif">Impact</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="text-xs font-semibold">Color</label>
-                    <input
-                      id="textoColor"
-                      type="color"
-                      value="#000000"
-                      class="w-full h-10 border rounded"
-                    />
-                  </div>
-                  <div class="col-span-2">
-                    <label class="text-xs font-semibold">Tamaño</label>
-                    <input
-                      id="textoSize"
-                      type="range"
-                      min="12"
-                      max="72"
-                      value="32"
-                      class="w-full"
-                    />
-                  </div>
-                </div>
                 <button
-                  id="btnAgregarTexto"
-                  class="w-full px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
-                  >Agregar / Actualizar Texto</button
+                  id="btnAgregarImagen"
+                  class="w-full px-4 py-3 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors"
                 >
+                  Subir Imagen
+                </button>
+                <input
+                  type="file"
+                  id="inputImagen"
+                  accept="image/*"
+                  class="hidden"
+                />
+                <p class="text-xs text-gray-500 text-center">
+                  JPG, PNG, SVG (máx 5MB)
+                </p>
+              </div>
+              <div class="mt-6 border-t pt-4">
+                <h3 class="font-bold text-lg mb-4 text-gray-800">
+                  Agregar Texto
+                </h3>
+                <div class="space-y-3">
+                  <div class="relative flex gap-2">
+                    <input
+                      id="textoInput"
+                      type="text"
+                      placeholder="Tu texto"
+                      class="w-full px-3 py-2 border rounded-lg text-sm"
+                    />
+                    <button
+                      id="btnEmoji"
+                      class="px-3 py-2 border rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                      title="Agregar Emoji"
+                    >
+                      😊
+                    </button>
+                    <div
+                      id="emojiPickerContainer"
+                      class="absolute top-full right-0 mt-2 z-50 hidden shadow-xl rounded-lg overflow-hidden bg-white"
+                    >
+                      <div class="p-2 border-b bg-gray-50 flex justify-end">
+                        <select
+                          id="emojiSetSelect"
+                          class="text-xs border rounded px-2 py-1"
+                        >
+                          <option value="apple">Apple (iPhone)</option>
+                          <option value="google">Google (Android)</option>
+                          <option value="twitter">Twitter</option>
+                          <option value="native">Nativo</option>
+                        </select>
+                      </div>
+                      <div id="pickerRoot"></div>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="text-xs font-semibold">Fuente</label>
+                      <select
+                        id="fuenteSelect"
+                        class="w-full px-2 py-2 border rounded-lg text-sm"
+                      >
+                        <option value="Inter, sans-serif">Inter</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="'Times New Roman', serif">Times</option>
+                        <option value="'Courier New', monospace">Courier</option
+                        >
+                        <option value="Impact, sans-serif">Impact</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="text-xs font-semibold">Color</label>
+                      <input
+                        id="textoColor"
+                        type="color"
+                        value="#000000"
+                        class="w-full h-10 border rounded"
+                      />
+                    </div>
+                    <div class="col-span-2">
+                      <label class="text-xs font-semibold">Tamaño</label>
+                      <input
+                        id="textoSize"
+                        type="range"
+                        min="12"
+                        max="72"
+                        value="32"
+                        class="w-full"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    id="btnAgregarTexto"
+                    class="w-full px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
+                    >Agregar / Actualizar Texto</button
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Canvas de Diseño Derecho (Sticky) -->
-        <div class="lg:col-span-2">
+        <!-- Columna Central: Canvas de Diseño (Sticky) -->
+        <div class="lg:col-span-6">
           <div class="sticky top-8 bg-white rounded-xl shadow-lg p-6">
             <div class="grid md:grid-cols-2 gap-6">
               <!-- Vista Frontal -->
@@ -4271,6 +4340,24 @@ import Header from "../components/common/Header.astro";
             </div>
           </div>
         </div>
+
+        <!-- columna derecha -->
+        <div class="lg:col-span-3 space-y-6">
+          <!-- Panel de Capas -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="font-bold text-lg text-gray-800 mb-4">Capas</h3>
+            <div
+              id="listaCapas"
+              class="space-y-2 overflow-y-auto"
+              style="max-height: 400px;"
+            >
+              <!-- Las capas se renderizarán aquí -->
+              <div class="text-center text-gray-500 text-sm py-4">
+                No hay elementos agregados
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Información Adicional -->
@@ -4328,6 +4415,8 @@ import Header from "../components/common/Header.astro";
   </style>
 
   <script>
+    import { Picker } from "emoji-mart";
+    import data from "@emoji-mart/data";
     // Estado global
     interface ImagenOverlay {
       id: string;
@@ -4435,7 +4524,7 @@ import Header from "../components/common/Header.astro";
     // En mobile movemos el canvas debajo del selector de modelo
     const panelControl = document.getElementById("panelControl");
     const selectorModeloBloque = document.getElementById(
-      "selectorModeloBloque"
+      "selectorModeloBloque",
     );
     const canvasDiseno = document.getElementById("canvasDiseno");
     const canvasPadreOriginal = canvasDiseno?.parentElement ?? null;
@@ -4460,10 +4549,6 @@ import Header from "../components/common/Header.astro";
         canvasPadreOriginal.insertBefore(canvasDiseno, canvasHermano);
       }
     };
-
-    acomodarCanvas();
-    vistaMobile.addEventListener("change", acomodarCanvas);
-
     // Modelos
     const modelosConfig: Record<
       string,
@@ -4540,28 +4625,28 @@ import Header from "../components/common/Header.astro";
 
     // Elementos
     const parteSelect = document.getElementById(
-      "parteSelect"
+      "parteSelect",
     ) as HTMLSelectElement;
     const colorCustomInput = document.getElementById(
-      "colorCustom"
+      "colorCustom",
     ) as HTMLInputElement;
     const btnGuardar = document.getElementById("btnGuardar");
     const btnWhatsApp = document.getElementById("btnWhatsApp");
     const btnReset = document.getElementById("btnReset");
     const btnAgregarImagen = document.getElementById("btnAgregarImagen");
     const inputImagen = document.getElementById(
-      "inputImagen"
+      "inputImagen",
     ) as HTMLInputElement;
     const infoModelo = document.getElementById("infoModelo");
     const infoParte = document.getElementById("infoParte");
     const textoInput = document.getElementById(
-      "textoInput"
+      "textoInput",
     ) as HTMLInputElement;
     const fuenteSelect = document.getElementById(
-      "fuenteSelect"
+      "fuenteSelect",
     ) as HTMLSelectElement;
     const textoColor = document.getElementById(
-      "textoColor"
+      "textoColor",
     ) as HTMLInputElement;
     const textoSize = document.getElementById("textoSize") as HTMLInputElement;
     const btnAgregarTexto = document.getElementById("btnAgregarTexto");
@@ -4612,8 +4697,8 @@ import Header from "../components/common/Header.astro";
         .forEach((b) =>
           b.classList.toggle(
             "active",
-            (b as HTMLElement).dataset.modelo === modelo
-          )
+            (b as HTMLElement).dataset.modelo === modelo,
+          ),
         );
       Object.values(modelosConfig).forEach((cfg) => {
         document.getElementById(cfg.frenteId)?.classList.add("hidden");
@@ -4623,10 +4708,10 @@ import Header from "../components/common/Header.astro";
       document.getElementById(cfg.frenteId)?.classList.remove("hidden");
       document.getElementById(cfg.espaldaId)?.classList.remove("hidden");
       const gorroPartes = document.querySelectorAll(
-        '[data-parte="gorro-externo"],[data-parte="gorro-interno"]'
+        '[data-parte="gorro-externo"],[data-parte="gorro-interno"]',
       );
       gorroPartes.forEach((el) =>
-        el.classList.toggle("hidden", !cfg.tieneGorro)
+        el.classList.toggle("hidden", !cfg.tieneGorro),
       );
 
       // Actualizar selector de partes dinámicamente
@@ -4670,7 +4755,7 @@ import Header from "../components/common/Header.astro";
     });
 
     colorCustomInput?.addEventListener("input", (e) =>
-      aplicarColor((e.target as HTMLInputElement).value)
+      aplicarColor((e.target as HTMLInputElement).value),
     );
 
     document.querySelectorAll(".color-preset").forEach((btn) => {
@@ -4686,7 +4771,7 @@ import Header from "../components/common/Header.astro";
     document.querySelectorAll(".parte-poleron").forEach((parte) => {
       parte.addEventListener("click", (e) => {
         const nombre = (e.currentTarget as SVGElement).getAttribute(
-          "data-parte"
+          "data-parte",
         );
         if (nombre) {
           estadoDiseño.parteActual = nombre;
@@ -4736,6 +4821,65 @@ import Header from "../components/common/Header.astro";
       (e.target as HTMLInputElement).value = "";
     });
 
+    // Emoji Picker Logic
+    // Emoji Picker Logic
+    const btnEmoji = document.getElementById("btnEmoji");
+    const emojiPickerContainer = document.getElementById(
+      "emojiPickerContainer",
+    );
+    const emojiSetSelect = document.getElementById(
+      "emojiSetSelect",
+    ) as HTMLSelectElement;
+    const pickerRoot = document.getElementById("pickerRoot");
+    let pickerInstance: any = null;
+
+    async function initPicker(set: string) {
+      if (pickerInstance) {
+        if (pickerRoot) pickerRoot.innerHTML = ""; // Limpiar anterior
+        pickerInstance = null;
+      }
+
+      if (pickerRoot) {
+        pickerInstance = new Picker({
+          data,
+          onEmojiSelect: (emoji: any) => {
+            if (textoInput) {
+              textoInput.value += emoji.native;
+              textoInput.focus();
+            }
+          },
+          set: set,
+          locale: "es",
+        });
+        pickerRoot.appendChild(pickerInstance);
+      }
+    }
+
+    btnEmoji?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      emojiPickerContainer?.classList.toggle("hidden");
+
+      if (!pickerInstance) {
+        initPicker(emojiSetSelect?.value || "apple");
+      }
+    });
+
+    emojiSetSelect?.addEventListener("change", (e) => {
+      const set = (e.target as HTMLSelectElement).value;
+      initPicker(set);
+    });
+
+    // Cerrar picker al hacer click fuera
+    document.addEventListener("click", (e) => {
+      if (
+        emojiPickerContainer &&
+        !emojiPickerContainer.contains(e.target as Node) &&
+        e.target !== btnEmoji
+      ) {
+        emojiPickerContainer.classList.add("hidden");
+      }
+    });
+
     // Función para agregar nuevo texto
     btnAgregarTexto?.addEventListener("click", () => {
       const texto = textoInput.value.trim();
@@ -4780,6 +4924,97 @@ import Header from "../components/common/Header.astro";
       estadoDiseño.textos.forEach((txt) => {
         crearTextoOverlay(txt, frenteSvg);
       });
+      // Renderizar lista de capas
+      renderizarCapas();
+    }
+
+    function renderizarCapas() {
+      const contenedor = document.getElementById("listaCapas");
+      if (!contenedor) return;
+      contenedor.innerHTML = "";
+
+      const todosElementos: Array<
+        (ImagenOverlay | TextoOverlay) & { tipo: "imagen" | "texto" }
+      > = [
+        ...estadoDiseño.imagenes.map((i) => ({
+          ...i,
+          tipo: "imagen" as const,
+        })),
+        ...estadoDiseño.textos.map((t) => ({ ...t, tipo: "texto" as const })),
+      ]; // Aquí podrías ordenar por z-index si tuvieras esa propiedad
+
+      if (todosElementos.length === 0) {
+        contenedor.innerHTML =
+          '<div class="text-center text-gray-500 text-sm py-4">No hay elementos agregados</div>';
+        return;
+      }
+
+      // Renderizar en orden inverso (último agregado arriba)
+      todosElementos.reverse().forEach((el) => {
+        const div = document.createElement("div");
+        div.className = `flex items-center justify-between p-2 rounded border ${
+          elementoSeleccionado?.id === el.id
+            ? "border-red-500 bg-red-50"
+            : "border-gray-200 hover:bg-gray-50"
+        }`;
+
+        const info = document.createElement("div");
+        info.className = "flex items-center gap-2 cursor-pointer flex-1";
+        info.onclick = () => seleccionarElemento(el.id, el.tipo);
+
+        const icon = document.createElement("span");
+        icon.textContent = el.tipo === "imagen" ? "🖼️" : "T";
+
+        const text = document.createElement("span");
+        text.className = "text-sm font-medium truncate max-w-[120px]";
+        if (el.tipo === "imagen") {
+          const index = estadoDiseño.imagenes.findIndex((i) => i.id === el.id);
+          text.textContent = `Imagen ${index + 1}`;
+        } else {
+          text.textContent = (el as any).texto;
+        }
+
+        info.appendChild(icon);
+        info.appendChild(text);
+
+        const actions = document.createElement("div");
+        actions.className = "flex gap-1";
+
+        const btnDelete = document.createElement("button");
+        btnDelete.className =
+          "p-1 text-red-500 hover:bg-red-100 rounded transition-colors";
+        btnDelete.innerHTML = "×";
+        btnDelete.title = "Eliminar";
+        btnDelete.onclick = (e) => {
+          e.stopPropagation();
+          eliminarElemento(el.id, el.tipo);
+        };
+
+        actions.appendChild(btnDelete);
+        div.appendChild(info);
+        div.appendChild(actions);
+        contenedor.appendChild(div);
+      });
+    }
+
+    function seleccionarElemento(id: string, tipo: "imagen" | "texto") {
+      elementoSeleccionado = { id, tipo };
+      modoInteraccion = null; // Resetear modo
+      actualizarOverlays();
+    }
+
+    function eliminarElemento(id: string, tipo: "imagen" | "texto") {
+      if (tipo === "imagen") {
+        estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
+          (i) => i.id !== id,
+        );
+      } else {
+        estadoDiseño.textos = estadoDiseño.textos.filter((t) => t.id !== id);
+      }
+      if (elementoSeleccionado?.id === id) {
+        elementoSeleccionado = null;
+      }
+      actualizarOverlays();
     }
 
     // Crear imagen overlay con controles
@@ -4794,13 +5029,13 @@ import Header from "../components/common/Header.astro";
       const centerY = img.y + img.height / 2;
       g.setAttribute(
         "transform",
-        `rotate(${img.rotation} ${centerX} ${centerY})`
+        `rotate(${img.rotation} ${centerX} ${centerY})`,
       );
 
       // Imagen
       const image = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "image"
+        "image",
       );
       image.setAttribute("href", img.src);
       image.setAttribute("x", img.x.toString());
@@ -4813,7 +5048,7 @@ import Header from "../components/common/Header.astro";
       // Borde de selección (inicialmente oculto)
       const rect = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "rect"
+        "rect",
       );
       rect.setAttribute("x", img.x.toString());
       rect.setAttribute("y", img.y.toString());
@@ -4823,13 +5058,20 @@ import Header from "../components/common/Header.astro";
       rect.setAttribute("stroke", "#3b82f6");
       rect.setAttribute("stroke-width", "2");
       rect.setAttribute("stroke-dasharray", "5,5");
-      rect.style.display = "none";
       rect.classList.add("borde-seleccion");
+
+      // Mostrar controles si está seleccionado
+      if (
+        elementoSeleccionado?.id === img.id &&
+        elementoSeleccionado?.tipo === "imagen"
+      ) {
+        rect.style.display = "block";
+      }
 
       // Handle de redimensionamiento
       const handle = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "circle"
+        "circle",
       );
       handle.setAttribute("cx", (img.x + img.width).toString());
       handle.setAttribute("cy", (img.y + img.height).toString());
@@ -4838,13 +5080,19 @@ import Header from "../components/common/Header.astro";
       handle.setAttribute("stroke", "white");
       handle.setAttribute("stroke-width", "2");
       handle.style.cursor = "nwse-resize";
-      handle.style.display = "none";
       handle.classList.add("handle-resize");
+
+      if (
+        elementoSeleccionado?.id === img.id &&
+        elementoSeleccionado?.tipo === "imagen"
+      ) {
+        handle.style.display = "block";
+      }
 
       // Handle de rotación
       const rotateHandle = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "circle"
+        "circle",
       );
       rotateHandle.setAttribute("cx", (img.x + img.width / 2).toString());
       rotateHandle.setAttribute("cy", (img.y - 15).toString());
@@ -4853,13 +5101,19 @@ import Header from "../components/common/Header.astro";
       rotateHandle.setAttribute("stroke", "white");
       rotateHandle.setAttribute("stroke-width", "2");
       rotateHandle.style.cursor = "grab";
-      rotateHandle.style.display = "none";
       rotateHandle.classList.add("handle-rotate");
+
+      if (
+        elementoSeleccionado?.id === img.id &&
+        elementoSeleccionado?.tipo === "imagen"
+      ) {
+        rotateHandle.style.display = "block";
+      }
 
       // Línea del handle de rotación
       const rotateLine = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "line"
+        "line",
       );
       rotateLine.setAttribute("x1", (img.x + img.width / 2).toString());
       rotateLine.setAttribute("y1", img.y.toString());
@@ -4867,21 +5121,34 @@ import Header from "../components/common/Header.astro";
       rotateLine.setAttribute("y2", (img.y - 15).toString());
       rotateLine.setAttribute("stroke", "#10b981");
       rotateLine.setAttribute("stroke-width", "2");
-      rotateLine.style.display = "none";
       rotateLine.classList.add("line-rotate");
+
+      if (
+        elementoSeleccionado?.id === img.id &&
+        elementoSeleccionado?.tipo === "imagen"
+      ) {
+        rotateLine.style.display = "block";
+      }
 
       // Botón de eliminar
       const deleteBtn = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "g"
+        "g",
       );
       deleteBtn.classList.add("boton-eliminar");
       deleteBtn.style.cursor = "pointer";
       deleteBtn.style.display = "none";
 
+      if (
+        elementoSeleccionado?.id === img.id &&
+        elementoSeleccionado?.tipo === "imagen"
+      ) {
+        deleteBtn.style.display = "block";
+      }
+
       const deleteCircle = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "circle"
+        "circle",
       );
       deleteCircle.setAttribute("cx", (img.x + img.width).toString());
       deleteCircle.setAttribute("cy", img.y.toString());
@@ -4890,7 +5157,7 @@ import Header from "../components/common/Header.astro";
 
       const deleteX = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "text"
+        "text",
       );
       deleteX.setAttribute("x", (img.x + img.width).toString());
       deleteX.setAttribute("y", img.y.toString());
@@ -4927,7 +5194,10 @@ import Header from "../components/common/Header.astro";
         startElementX = img.x;
         startElementY = img.y;
 
-        mostrarControles(g);
+        startElementX = img.x;
+        startElementY = img.y;
+
+        actualizarSeleccionVisual();
       });
 
       handle.addEventListener("mousedown", (e) => {
@@ -4958,7 +5228,7 @@ import Header from "../components/common/Header.astro";
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
-          (i) => i.id !== img.id
+          (i) => i.id !== img.id,
         );
         actualizarOverlays();
       });
@@ -4980,7 +5250,7 @@ import Header from "../components/common/Header.astro";
       const centerY = img.y + img.height / 2;
       g.setAttribute(
         "transform",
-        `rotate(${img.rotation} ${centerX} ${centerY})`
+        `rotate(${img.rotation} ${centerX} ${centerY})`,
       );
 
       if (image) {
@@ -5023,7 +5293,7 @@ import Header from "../components/common/Header.astro";
     function crearTextoOverlay(txt: TextoOverlay, svgParent: Element) {
       const foreign = document.createElementNS(
         "http://www.w3.org/2000/svg",
-        "foreignObject"
+        "foreignObject",
       );
       foreign.setAttribute("x", "0");
       foreign.setAttribute("y", "0");
@@ -5032,6 +5302,7 @@ import Header from "../components/common/Header.astro";
       foreign.classList.add("overlay-elemento");
       foreign.setAttribute("data-id", txt.id);
       foreign.setAttribute("data-tipo", "texto");
+      foreign.style.pointerEvents = "none"; // Permitir clicks a través del contenedor
 
       const container = document.createElement("div");
       container.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
@@ -5046,6 +5317,7 @@ import Header from "../components/common/Header.astro";
       container.style.userSelect = "none";
       container.style.padding = "4px";
       container.style.display = "inline-block";
+      container.style.pointerEvents = "auto"; // Reactivar eventos para el texto
       container.style.transform = `rotate(${txt.rotation}deg)`;
       container.style.transformOrigin = "center center";
       container.textContent = txt.texto;
@@ -5058,9 +5330,14 @@ import Header from "../components/common/Header.astro";
       controls.style.right = "-2px";
       controls.style.bottom = "-2px";
       controls.style.border = "2px dashed #3b82f6";
-      controls.style.display = "none";
-      controls.style.pointerEvents = "none";
       controls.classList.add("controles-texto");
+
+      if (
+        elementoSeleccionado?.id === txt.id &&
+        elementoSeleccionado?.tipo === "texto"
+      ) {
+        controls.style.display = "block";
+      }
 
       const deleteBtn = document.createElement("button");
       deleteBtn.innerHTML = "×";
@@ -5078,6 +5355,12 @@ import Header from "../components/common/Header.astro";
       deleteBtn.style.lineHeight = "1";
       deleteBtn.style.pointerEvents = "all";
       deleteBtn.style.display = "none";
+      if (
+        elementoSeleccionado?.id === txt.id &&
+        elementoSeleccionado?.tipo === "texto"
+      ) {
+        deleteBtn.style.display = "block";
+      }
       deleteBtn.classList.add("boton-eliminar-texto");
 
       const rotateBtn = document.createElement("button");
@@ -5097,6 +5380,12 @@ import Header from "../components/common/Header.astro";
       rotateBtn.style.lineHeight = "1";
       rotateBtn.style.pointerEvents = "all";
       rotateBtn.style.display = "none";
+      if (
+        elementoSeleccionado?.id === txt.id &&
+        elementoSeleccionado?.tipo === "texto"
+      ) {
+        rotateBtn.style.display = "block";
+      }
       rotateBtn.classList.add("boton-rotar-texto");
 
       container.appendChild(controls);
@@ -5119,15 +5408,16 @@ import Header from "../components/common/Header.astro";
         startElementX = txt.x;
         startElementY = txt.y;
 
-        controls.style.display = "block";
-        deleteBtn.style.display = "block";
-        rotateBtn.style.display = "block";
+        startElementX = txt.x;
+        startElementY = txt.y;
+
+        actualizarSeleccionVisual();
       });
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         estadoDiseño.textos = estadoDiseño.textos.filter(
-          (t) => t.id !== txt.id
+          (t) => t.id !== txt.id,
         );
         actualizarOverlays();
       });
@@ -5146,35 +5436,69 @@ import Header from "../components/common/Header.astro";
       svgParent.appendChild(foreign);
     }
 
-    function mostrarControles(g: SVGGElement) {
-      // Ocultar todos los controles
+    function actualizarSeleccionVisual() {
+      // 1. Ocultar controles de IMÁGENES
       document
         .querySelectorAll(
-          ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar"
+          ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar",
         )
         .forEach((el) => {
           (el as SVGElement).style.display = "none";
         });
+
+      // 2. Ocultar controles de TEXTOS
       document
         .querySelectorAll(
-          ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto"
+          ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
         )
         .forEach((el) => {
           (el as HTMLElement).style.display = "none";
         });
 
-      // Mostrar controles del elemento seleccionado
-      const rect = g.querySelector(".borde-seleccion") as SVGElement;
-      const handle = g.querySelector(".handle-resize") as SVGElement;
-      const rotateHandle = g.querySelector(".handle-rotate") as SVGElement;
-      const rotateLine = g.querySelector(".line-rotate") as SVGElement;
-      const deleteBtn = g.querySelector(".boton-eliminar") as SVGElement;
+      // 3. Mostrar controles del elemento seleccionado
+      if (elementoSeleccionado) {
+        if (elementoSeleccionado.tipo === "imagen") {
+          const g = elementosImagenDOM.get(elementoSeleccionado.id);
+          if (g) {
+            const rect = g.querySelector(".borde-seleccion") as SVGElement;
+            const handle = g.querySelector(".handle-resize") as SVGElement;
+            const rotateHandle = g.querySelector(
+              ".handle-rotate",
+            ) as SVGElement;
+            const rotateLine = g.querySelector(".line-rotate") as SVGElement;
+            const deleteBtn = g.querySelector(".boton-eliminar") as SVGElement;
 
-      if (rect) rect.style.display = "block";
-      if (handle) handle.style.display = "block";
-      if (rotateHandle) rotateHandle.style.display = "block";
-      if (rotateLine) rotateLine.style.display = "block";
-      if (deleteBtn) deleteBtn.style.display = "block";
+            if (rect) rect.style.display = "block";
+            if (handle) handle.style.display = "block";
+            if (rotateHandle) rotateHandle.style.display = "block";
+            if (rotateLine) rotateLine.style.display = "block";
+            if (deleteBtn) deleteBtn.style.display = "block";
+          }
+        } else if (elementoSeleccionado.tipo === "texto") {
+          const refs = elementosTextoDOM.get(elementoSeleccionado.id);
+          if (refs) {
+            const controls = refs.container.querySelector(
+              ".controles-texto",
+            ) as HTMLElement;
+            const deleteBtn = refs.container.querySelector(
+              ".boton-eliminar-texto",
+            ) as HTMLElement;
+            const rotateBtn = refs.container.querySelector(
+              ".boton-rotar-texto",
+            ) as HTMLElement;
+
+            if (controls) controls.style.display = "block";
+            if (deleteBtn) deleteBtn.style.display = "block";
+            if (rotateBtn) rotateBtn.style.display = "block";
+          }
+        }
+        renderizarCapas(); // Actualizar highlight en panel
+      }
+    }
+
+    function mostrarControles(g: SVGGElement) {
+      // Deprecated in favor of actualizarSeleccionVisual, but kept if needed or redirected
+      actualizarSeleccionVisual();
     }
 
     // Handlers globales de mouse para todas las interacciones
@@ -5183,7 +5507,7 @@ import Header from "../components/common/Header.astro";
 
       if (elementoSeleccionado.tipo === "imagen") {
         const img = estadoDiseño.imagenes.find(
-          (i) => i.id === elementoSeleccionado!.id
+          (i) => i.id === elementoSeleccionado!.id,
         );
         if (!img) return;
 
@@ -5209,11 +5533,11 @@ import Header from "../components/common/Header.astro";
         } else if (modoInteraccion === "resize") {
           const newWidth = Math.max(
             30,
-            startElementWidth + (currentX - startMouseX)
+            startElementWidth + (currentX - startMouseX),
           );
           const newHeight = Math.max(
             30,
-            startElementHeight + (currentY - startMouseY)
+            startElementHeight + (currentY - startMouseY),
           );
           img.width = Math.min(newWidth, 300 - img.x);
           img.height = Math.min(newHeight, 400 - img.y);
@@ -5228,7 +5552,7 @@ import Header from "../components/common/Header.astro";
         }
       } else if (elementoSeleccionado.tipo === "texto") {
         const txt = estadoDiseño.textos.find(
-          (t) => t.id === elementoSeleccionado!.id
+          (t) => t.id === elementoSeleccionado!.id,
         );
         if (!txt) return;
 
@@ -5285,14 +5609,14 @@ import Header from "../components/common/Header.astro";
       ) {
         document
           .querySelectorAll(
-            ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar"
+            ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar",
           )
           .forEach((el) => {
             (el as SVGElement).style.display = "none";
           });
         document
           .querySelectorAll(
-            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto"
+            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
           )
           .forEach((el) => {
             (el as HTMLElement).style.display = "none";
@@ -5307,14 +5631,14 @@ import Header from "../components/common/Header.astro";
         // Ocultar todos los controles antes de guardar
         document
           .querySelectorAll(
-            ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar"
+            ".borde-seleccion, .handle-resize, .handle-rotate, .line-rotate, .boton-eliminar",
           )
           .forEach((el) => {
             (el as SVGElement).style.display = "none";
           });
         document
           .querySelectorAll(
-            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto"
+            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
           )
           .forEach((el) => {
             (el as HTMLElement).style.display = "none";
@@ -5338,9 +5662,43 @@ import Header from "../components/common/Header.astro";
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // Serializar SVGs con overlays incluidos
-        const dataFr = new XMLSerializer().serializeToString(svgFrontal);
-        const dataBk = new XMLSerializer().serializeToString(svgTrasero);
+        // Función auxiliar para convertir imágenes externas a Base64 dentro del SVG
+        async function embedImages(svgElement: HTMLElement) {
+          const clone = svgElement.cloneNode(true) as HTMLElement;
+          const images = clone.querySelectorAll("image");
+
+          await Promise.all(
+            Array.from(images).map(async (img) => {
+              const href = img.getAttribute("href");
+              if (href && !href.startsWith("data:")) {
+                try {
+                  const response = await fetch(href);
+                  const blob = await response.blob();
+                  return new Promise<void>((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      img.setAttribute("href", reader.result as string);
+                      resolve();
+                    };
+                    reader.readAsDataURL(blob);
+                  });
+                } catch (e) {
+                  console.warn("No se pudo cargar la imagen:", href, e);
+                }
+              }
+            }),
+          );
+          return clone;
+        }
+
+        const [cloneFr, cloneBk] = await Promise.all([
+          embedImages(svgFrontal),
+          embedImages(svgTrasero),
+        ]);
+
+        // Serializar SVGs con overlays incluidos e imágenes incrustadas
+        const dataFr = new XMLSerializer().serializeToString(cloneFr);
+        const dataBk = new XMLSerializer().serializeToString(cloneBk);
 
         const imgFr = new Image();
         const imgBk = new Image();
@@ -5378,7 +5736,7 @@ import Header from "../components/common/Header.astro";
       const mensaje = `¡Hola! Diseñé mi polerón en Generación Urbana:\n\nModelo: ${cfg.nombre}\nColores:\n- Cuerpo: ${estadoDiseño.colores.cuerpo}\n- Mangas: ${estadoDiseño.colores.mangas}\n- Cintura: ${estadoDiseño.colores.cintura}`;
       window.open(
         `https://wa.me/56990659619?text=${encodeURIComponent(mensaje)}`,
-        "_blank"
+        "_blank",
       );
     });
 
@@ -5426,11 +5784,11 @@ import Header from "../components/common/Header.astro";
         e.preventDefault();
         if (elementoSeleccionado.tipo === "imagen") {
           estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
-            (i) => i.id !== elementoSeleccionado!.id
+            (i) => i.id !== elementoSeleccionado!.id,
           );
         } else if (elementoSeleccionado.tipo === "texto") {
           estadoDiseño.textos = estadoDiseño.textos.filter(
-            (t) => t.id !== elementoSeleccionado!.id
+            (t) => t.id !== elementoSeleccionado!.id,
           );
         }
         elementoSeleccionado = null;
@@ -5440,5 +5798,29 @@ import Header from "../components/common/Header.astro";
 
     actualizarModelo(estadoDiseño.modelo);
     actualizarColores();
+
+    // Lógica para colapsar paneles
+    document.querySelectorAll(".panel-header").forEach((header) => {
+      const content = header.nextElementSibling as HTMLElement;
+      const icon = header.querySelector("span");
+
+      // Inicializar el icono según el estado inicial
+      if (content && icon) {
+        icon.style.transform = content.classList.contains("hidden")
+          ? "rotate(-90deg)"
+          : "rotate(0deg)";
+      }
+
+      header.addEventListener("click", () => {
+        if (content) {
+          content.classList.toggle("hidden");
+          if (icon) {
+            icon.style.transform = content.classList.contains("hidden")
+              ? "rotate(-90deg)"
+              : "rotate(0deg)";
+          }
+        }
+      });
+    });
   </script>
 </BaseLayout>
