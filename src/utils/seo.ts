@@ -1,7 +1,7 @@
 // SEO utility functions
 export function buildTitle(
   pageTitle: string,
-  siteName: string = "Generación Urbana"
+  siteName: string = "Generación Urbano"
 ): string {
   if (pageTitle.includes(siteName)) {
     return pageTitle;

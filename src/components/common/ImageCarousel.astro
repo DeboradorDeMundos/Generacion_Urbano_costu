@@ -1,0 +1,184 @@
+---
+/**
+ * Carrusel de imágenes reutilizable
+ * Muestra imágenes con navegación automática y manual
+ * @param images - Array de objetos con src y alt de las imágenes
+ * @param autoplay - Booleano para activar/desactivar reproducción automática
+ * @param interval - Tiempo en ms entre transiciones automáticas
+ */
+
+interface Image {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: Image[];
+  autoplay?: boolean;
+  interval?: number;
+}
+
+const { images, autoplay = true, interval = 5000 } = Astro.props;
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  class="relative w-full h-full overflow-hidden rounded-xl group"
+  id={carouselId}
+>
+  <!-- Contenedor de imágenes -->
+  <div class="relative w-full h-full">
+    {
+      images.map((image, index) => (
+        <div
+          class={`carousel-item absolute inset-0 w-full h-full transition-opacity duration-700 ${
+            index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+          data-index={index}
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="w-full h-full object-cover"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Botones de navegación -->
+  <button
+    class="carousel-prev absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 z-20"
+    aria-label="Anterior"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+
+  <button
+    class="carousel-next absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 z-20"
+    aria-label="Siguiente"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Indicadores -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+    {
+      images.map((_, index) => (
+        <button
+          class={`carousel-indicator w-2 h-2 rounded-full transition-all duration-300 ${
+            index === 0 ? "bg-red-600 w-8" : "bg-white/50 hover:bg-white/80"
+          }`}
+          data-index={index}
+          aria-label={`Ir a imagen ${index + 1}`}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script define:vars={{ carouselId, autoplay, interval }}>
+  // Sistema de carrusel con navegación y autoplay
+  const carousel = document.getElementById(carouselId);
+  if (!carousel) return;
+
+  const items = carousel.querySelectorAll(".carousel-item");
+  const indicators = carousel.querySelectorAll(".carousel-indicator");
+  const prevBtn = carousel.querySelector(".carousel-prev");
+  const nextBtn = carousel.querySelector(".carousel-next");
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+
+  // Función para mostrar imagen específica
+  function showImage(index) {
+    items.forEach((item, i) => {
+      if (i === index) {
+        item.classList.remove("opacity-0", "z-0");
+        item.classList.add("opacity-100", "z-10");
+      } else {
+        item.classList.remove("opacity-100", "z-10");
+        item.classList.add("opacity-0", "z-0");
+      }
+    });
+
+    indicators.forEach((indicator, i) => {
+      if (i === index) {
+        indicator.classList.remove("bg-white/50", "w-2");
+        indicator.classList.add("bg-red-600", "w-8");
+      } else {
+        indicator.classList.remove("bg-red-600", "w-8");
+        indicator.classList.add("bg-white/50", "w-2");
+      }
+    });
+
+    currentIndex = index;
+  }
+
+  // Navegación anterior/siguiente
+  function nextImage() {
+    const next = (currentIndex + 1) % items.length;
+    showImage(next);
+  }
+
+  function prevImage() {
+    const prev = (currentIndex - 1 + items.length) % items.length;
+    showImage(prev);
+  }
+
+  // Configurar autoplay
+  function startAutoplay() {
+    if (autoplay && items.length > 1) {
+      autoplayTimer = setInterval(nextImage, interval);
+    }
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  // Event listeners
+  prevBtn?.addEventListener("click", () => {
+    prevImage();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    nextImage();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => {
+      showImage(index);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+
+  // Pausar en hover
+  carousel.addEventListener("mouseenter", stopAutoplay);
+  carousel.addEventListener("mouseleave", startAutoplay);
+
+  // Iniciar autoplay
+  startAutoplay();
+</script>

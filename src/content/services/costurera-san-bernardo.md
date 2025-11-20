@@ -37,12 +37,12 @@ location:
   city: "San Bernardo"
   region: "Región Metropolitana"
 seo:
-  title: "Costurera San Bernardo - Generación Urbana | Confección y Arreglos"
+  title: "Costurera San Bernardo - Generación Urbano | Confección y Arreglos"
   description: "Costurera profesional en San Bernardo. Arreglos, confección a medida, bordados. 15+ años de experiencia. Atención personalizada y precios justos."
   keywords: "costurera san bernardo, arreglos ropa, confeccion medida, bordados personalizados, costurera cerca"
 ---
 
-¿Buscas una **costurera profesional en San Bernardo** que combine experiencia, calidad y precios justos? En **Generación Urbana** somos tu solución integral para todo tipo de trabajos de confección y personalización textil.
+¿Buscas una **costurera profesional en San Bernardo** que combine experiencia, calidad y precios justos? En **Generación Urbano** somos tu solución integral para todo tipo de trabajos de confección y personalización textil.
 
 ## Servicios de Costurera en San Bernardo
 
@@ -220,9 +220,12 @@ Como empresa local, nos enorgullecemos de ser parte de la comunidad de San Berna
 
 ### Formas de Contacto
 
-- **Teléfono/WhatsApp:** +56 9 XXXX XXXX
-- **Email:** costurera@generacionurbana.cl
-- **Visita directa:** [Dirección en San Bernardo]
+- **Teléfono/WhatsApp:** +56 9 9065 9619
+- **Email:** bordados.urbano@gmail.com
+- **Facebook:** [generacion.urbano](https://www.facebook.com/generacion.urbano)
+- **Instagram:** [@generacion.urbano](https://www.instagram.com/generacion.urbano/)
+- **TikTok:** [@generacion.urbano](https://www.tiktok.com/@generacion.urbano)
+- **Visita directa:** San Bernardo, Región Metropolitana
 
 ### Facilidades de Pago
 
@@ -258,6 +261,6 @@ Aceptamos múltiples formas de pago para tu comodidad:
 
 ---
 
-**¿Necesitas los servicios de una costurera profesional en San Bernardo?** No busques más. En Generación Urbana combinamos la tradición artesanal con técnicas modernas para ofrecerte el mejor servicio de confección y personalización textil de la zona.
+**¿Necesitas los servicios de una costurera profesional en San Bernardo?** No busques más. En Generación Urbano combinamos la tradición artesanal con técnicas modernas para ofrecerte el mejor servicio de confección y personalización textil de la zona.
 
 **Ven a visitarnos** o contáctanos para recibir asesoramiento personalizado. ¡Estamos aquí para hacer realidad tus proyectos textiles!

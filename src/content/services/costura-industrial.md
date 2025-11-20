@@ -35,12 +35,12 @@ location:
   city: "San Bernardo"
   region: "Región Metropolitana"
 seo:
-  title: "Costura Industrial San Bernardo - Generación Urbana"
+  title: "Costura Industrial San Bernardo - Generación Urbano"
   description: "Servicios de costura industrial profesional en San Bernardo. Maquinaria avanzada, acabados premium. Especialistas en confección empresarial."
   keywords: "costura industrial, confeccion profesional, san bernardo, maquila textil, servicios costura"
 ---
 
-En **Generación Urbana** ofrecemos servicios especializados de **costura industrial** con los más altos estándares de calidad y profesionalismo. Nuestro taller en San Bernardo cuenta con maquinaria de última generación y un equipo técnico altamente capacitado.
+En **Generación Urbano** ofrecemos servicios especializados de **costura industrial** con los más altos estándares de calidad y profesionalismo. Nuestro taller en San Bernardo cuenta con maquinaria de última generación y un equipo técnico altamente capacitado.
 
 ## Nuestros Servicios de Costura
 
