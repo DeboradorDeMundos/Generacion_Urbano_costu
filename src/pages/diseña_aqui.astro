@@ -379,7 +379,7 @@ import Header from "../components/common/Header.astro";
                   <button
                     id="btnAgregarTexto"
                     class="w-full px-4 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors"
-                    >Agregar / Actualizar Texto</button
+                    >Agregar Texto</button
                   >
                 </div>
               </div>
@@ -4298,25 +4298,6 @@ import Header from "../components/common/Header.astro";
               </div>
             </div>
 
-            <!-- Info del Diseño Actual -->
-            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h4 class="font-bold text-sm text-gray-700 mb-2">
-                Diseño Actual:
-              </h4>
-              <div id="infoDiseno" class="text-xs text-gray-600 space-y-1">
-                <div>
-                  Modelo: <span id="infoModelo" class="font-semibold"
-                    >Modelo 1</span
-                  >
-                </div>
-                <div>
-                  Parte seleccionada: <span id="infoParte" class="font-semibold"
-                    >Cuerpo</span
-                  >
-                </div>
-              </div>
-            </div>
-
             <!-- Botones de Acción -->
             <div class="mt-4 space-y-3">
               <button
@@ -4349,11 +4330,69 @@ import Header from "../components/common/Header.astro";
             <div
               id="listaCapas"
               class="space-y-2 overflow-y-auto"
-              style="max-height: 400px;"
+              style="max-height: 210px;"
             >
               <!-- Las capas se renderizarán aquí -->
               <div class="text-center text-gray-500 text-sm py-4">
                 No hay elementos agregados
+              </div>
+            </div>
+          </div>
+
+          <!-- Info del diseño actual -->
+          <div class="bg-white rounded-xl shadow-lg p-6 space-y-4">
+            <h3 class="font-bold text-lg text-gray-800">Info del diseño actual</h3>
+            <div id="infoDiseno" class="text-sm text-gray-700 space-y-3">
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="text-gray-600">Modelo</div>
+                <div id="infoModelo" class="font-semibold text-right">
+                  Modelo 1
+                </div>
+                <div class="text-gray-600">Parte seleccionada</div>
+                <div id="infoParte" class="font-semibold text-right">
+                  Cuerpo
+                </div>
+              </div>
+
+              <div>
+                <div class="font-semibold text-gray-800 mb-1">Colores</div>
+                <ul
+                  id="infoColores"
+                  class="text-xs text-gray-600 space-y-1 bg-gray-50 rounded-lg p-3 border border-gray-100"
+                >
+                  <li class="text-gray-500">Sin datos</li>
+                </ul>
+              </div>
+
+              <div>
+                <div class="font-semibold text-gray-800 mb-1">Textos</div>
+                <ul
+                  id="infoTextos"
+                  class="text-xs text-gray-600 divide-y divide-gray-100 bg-gray-50 rounded-lg border border-gray-100"
+                >
+                  <li class="py-2 px-3 text-gray-500">Sin textos</li>
+                </ul>
+              </div>
+
+              <div>
+                <div class="font-semibold text-gray-800 mb-1">Imágenes</div>
+                <div
+                  id="infoImagenes"
+                  class="text-xs text-gray-600 space-y-1 bg-gray-50 rounded-lg p-3 border border-gray-100"
+                >
+                  <div class="text-gray-500">Sin imágenes</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-gray-800"
+                  >¿Texto con emojis?</span
+                >
+                <span
+                  id="infoTieneEmoji"
+                  class="px-2 py-1 rounded-full bg-gray-100 text-gray-700 font-semibold"
+                  >No</span
+                >
               </div>
             </div>
           </div>
@@ -4439,7 +4478,6 @@ import Header from "../components/common/Header.astro";
       y: number;
       rotation: number;
       zIndex: number;
-      orientacion?: "horizontal" | "vertical";
     }
 
     interface EstadoDiseno {
@@ -4497,13 +4535,18 @@ import Header from "../components/common/Header.astro";
     function obtenerColoresModelo(modelo: string): Record<string, string> {
       return coloresPorModelo[modelo] ? { ...coloresPorModelo[modelo] } : {};
     }
-    const estadoDiseño: EstadoDiseno = {
+    const estadoDiseno: EstadoDiseno = {
       modelo: "modelo-1",
       parteActual: "cuerpo",
       colores: obtenerColoresModelo("modelo-1"),
       imagenes: [],
       textos: [],
     };
+
+    const emojiRegex = /[\p{Extended_Pictographic}]/u;
+    function contieneEmoji(texto: string) {
+      return emojiRegex.test(texto);
+    }
 
     // Variables para el elemento seleccionado actualmente
     let elementoSeleccionado: { tipo: "imagen" | "texto"; id: string } | null =
@@ -4516,6 +4559,7 @@ import Header from "../components/common/Header.astro";
     let startElementWidth = 0;
     let startElementHeight = 0;
     let startElementRotation = 0;
+    let textoEnEdicionId: string | null = null;
 
     // Mapas para referencias DOM
     const elementosImagenDOM = new Map<string, SVGGElement>();
@@ -4523,6 +4567,118 @@ import Header from "../components/common/Header.astro";
       string,
       { foreign: SVGForeignObjectElement; container: HTMLElement }
     >();
+
+    function actualizarInfoDiseno() {
+      const cfg = modelosConfig[estadoDiseno.modelo];
+      if (infoModelo) infoModelo.textContent = cfg?.nombre || estadoDiseno.modelo;
+      if (infoParte)
+        infoParte.textContent =
+          nombresPartes[estadoDiseno.parteActual] || estadoDiseno.parteActual;
+
+      if (infoColoresList) {
+        infoColoresList.innerHTML = "";
+        if (cfg?.partes?.length) {
+          cfg.partes.forEach((parte) => {
+            const li = document.createElement("li");
+            li.className = "flex items-center justify-between gap-2";
+            const nombre = document.createElement("span");
+            nombre.textContent = nombresPartes[parte] || parte;
+            const detalle = document.createElement("span");
+            detalle.className = "flex items-center gap-2";
+            const swatch = document.createElement("span");
+            swatch.className = "w-4 h-4 rounded border border-gray-200";
+            swatch.style.backgroundColor = estadoDiseno.colores[parte] || "#fff";
+            const valor = document.createElement("span");
+            valor.className = "font-semibold";
+            valor.textContent = estadoDiseno.colores[parte] || "-";
+            detalle.appendChild(swatch);
+            detalle.appendChild(valor);
+            li.appendChild(nombre);
+            li.appendChild(detalle);
+            infoColoresList.appendChild(li);
+          });
+        } else {
+          const li = document.createElement("li");
+          li.className = "text-gray-500";
+          li.textContent = "Sin datos";
+          infoColoresList.appendChild(li);
+        }
+      }
+
+      if (infoTextosList) {
+        infoTextosList.innerHTML = "";
+        if (estadoDiseno.textos.length === 0) {
+          const li = document.createElement("li");
+          li.className = "py-2 px-3 text-gray-500";
+          li.textContent = "Sin textos";
+          infoTextosList.appendChild(li);
+        } else {
+          estadoDiseno.textos.forEach((txt, idx) => {
+            const li = document.createElement("li");
+            li.className = "py-2 px-3 space-y-1";
+            const titulo = document.createElement("div");
+            titulo.className = "font-semibold text-gray-800 truncate";
+            titulo.textContent = `${idx + 1}. "${txt.texto}"`;
+            const meta = document.createElement("div");
+            meta.className = "text-[11px] text-gray-600";
+            meta.textContent = `Posición: (${Math.round(txt.x)}, ${Math.round(
+              txt.y,
+            )}) • Tamaño: ${txt.size}px`;
+            const meta2 = document.createElement("div");
+            meta2.className = "text-[11px] text-gray-600";
+            meta2.textContent = `Rotación: ${Math.round(txt.rotation)}°`;
+            li.appendChild(titulo);
+            li.appendChild(meta);
+            li.appendChild(meta2);
+            infoTextosList.appendChild(li);
+          });
+        }
+      }
+
+      if (infoImagenesInfo) {
+        infoImagenesInfo.innerHTML = "";
+        const total = document.createElement("div");
+        total.className = "font-semibold text-gray-800";
+        total.textContent = `Cantidad: ${estadoDiseno.imagenes.length}`;
+        infoImagenesInfo.appendChild(total);
+
+        if (estadoDiseno.imagenes.length === 0) {
+          const vacio = document.createElement("div");
+          vacio.className = "text-gray-500";
+          vacio.textContent = "Sin imágenes";
+          infoImagenesInfo.appendChild(vacio);
+        } else {
+          estadoDiseno.imagenes.forEach((img, idx) => {
+            const item = document.createElement("div");
+            item.className =
+              "p-2 rounded border border-gray-100 bg-white text-gray-700";
+            const titulo = document.createElement("div");
+            titulo.className = "font-semibold text-xs";
+            titulo.textContent = `Imagen ${idx + 1}`;
+            const detalle = document.createElement("div");
+            detalle.className = "text-[11px] text-gray-600";
+            detalle.textContent = `Posición: (${Math.round(
+              img.x,
+            )}, ${Math.round(img.y)}) • Tamaño: ${Math.round(
+              img.width,
+            )}x${Math.round(img.height)} px • Rotación: ${Math.round(
+              img.rotation,
+            )}°`;
+            item.appendChild(titulo);
+            item.appendChild(detalle);
+            infoImagenesInfo.appendChild(item);
+          });
+        }
+      }
+
+      if (infoTieneEmoji) {
+        const hayEmoji = estadoDiseno.textos.some((t) => contieneEmoji(t.texto));
+        infoTieneEmoji.textContent = hayEmoji ? "Verdadero" : "Falso";
+        infoTieneEmoji.className = `px-2 py-1 rounded-full font-semibold ${
+          hayEmoji ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"
+        }`;
+      }
+    }
 
     // En mobile movemos el canvas debajo del selector de modelo
     const panelControl = document.getElementById("panelControl");
@@ -4642,6 +4798,10 @@ import Header from "../components/common/Header.astro";
     ) as HTMLInputElement;
     const infoModelo = document.getElementById("infoModelo");
     const infoParte = document.getElementById("infoParte");
+    const infoColoresList = document.getElementById("infoColores");
+    const infoTextosList = document.getElementById("infoTextos");
+    const infoImagenesInfo = document.getElementById("infoImagenes");
+    const infoTieneEmoji = document.getElementById("infoTieneEmoji");
     const textoInput = document.getElementById(
       "textoInput",
     ) as HTMLInputElement;
@@ -4682,7 +4842,7 @@ import Header from "../components/common/Header.astro";
 
       // Seleccionar la primera parte disponible
       if (cfg.partes.length > 0) {
-        estadoDiseño.parteActual = cfg.partes[0];
+        estadoDiseno.parteActual = cfg.partes[0];
         parteSelect.value = cfg.partes[0];
         if (infoParte)
           infoParte.textContent = nombresPartes[cfg.partes[0]] || cfg.partes[0];
@@ -4690,10 +4850,10 @@ import Header from "../components/common/Header.astro";
     }
 
     function actualizarModelo(modelo: string) {
-      estadoDiseño.modelo = modelo;
+      estadoDiseno.modelo = modelo;
 
       // Reiniciar colores según el modelo seleccionado
-      estadoDiseño.colores = obtenerColoresModelo(modelo);
+      estadoDiseno.colores = obtenerColoresModelo(modelo);
 
       document
         .querySelectorAll(".modelo-btn")
@@ -4723,10 +4883,11 @@ import Header from "../components/common/Header.astro";
       actualizarColores();
       actualizarOverlays();
       if (infoModelo) infoModelo.textContent = cfg.nombre;
+      actualizarInfoDiseno();
     }
 
     function actualizarColores() {
-      const cfg = modelosConfig[estadoDiseño.modelo];
+      const cfg = modelosConfig[estadoDiseno.modelo];
       const frenteSvg = document.getElementById(cfg.frenteId);
       const espaldaSvg = document.getElementById(cfg.espaldaId);
 
@@ -4734,27 +4895,30 @@ import Header from "../components/common/Header.astro";
       [frenteSvg, espaldaSvg].forEach((svg) => {
         svg?.querySelectorAll(".parte-poleron").forEach((el) => {
           const parte = el.getAttribute("data-parte");
-          if (parte && estadoDiseño.colores[parte] !== undefined) {
-            el.setAttribute("fill", estadoDiseño.colores[parte]);
+          if (parte && estadoDiseno.colores[parte] !== undefined) {
+            el.setAttribute("fill", estadoDiseno.colores[parte]);
           }
         });
       });
+      actualizarInfoDiseno();
     }
 
     function aplicarColor(color: string) {
-      const parte = estadoDiseño.parteActual;
-      estadoDiseño.colores[parte] = color;
+      const parte = estadoDiseno.parteActual;
+      estadoDiseno.colores[parte] = color;
       document
         .querySelectorAll(`[data-parte="${parte}"]`)
         .forEach((el) => el.setAttribute("fill", color));
+      actualizarInfoDiseno();
     }
 
     parteSelect?.addEventListener("change", (e) => {
       const parteSeleccionada = (e.target as HTMLSelectElement).value;
-      estadoDiseño.parteActual = parteSeleccionada;
+      estadoDiseno.parteActual = parteSeleccionada;
       if (infoParte)
         infoParte.textContent =
           nombresPartes[parteSeleccionada] || parteSeleccionada;
+      actualizarInfoDiseno();
     });
 
     colorCustomInput?.addEventListener("input", (e) =>
@@ -4777,10 +4941,11 @@ import Header from "../components/common/Header.astro";
           "data-parte",
         );
         if (nombre) {
-          estadoDiseño.parteActual = nombre;
+          estadoDiseno.parteActual = nombre;
           parteSelect.value = nombre;
           if (infoParte)
             infoParte.textContent = nombresPartes[nombre] || nombre;
+          actualizarInfoDiseno();
         }
       });
     });
@@ -4818,7 +4983,7 @@ import Header from "../components/common/Header.astro";
           rotation: 0,
           zIndex: Date.now(),
         };
-        estadoDiseño.imagenes.push(nuevaImagen);
+        estadoDiseno.imagenes.push(nuevaImagen);
         actualizarOverlays();
       };
       reader.readAsDataURL(file);
@@ -4884,7 +5049,7 @@ import Header from "../components/common/Header.astro";
       }
     });
 
-    // Función para agregar nuevo texto
+    // Función para agregar o guardar edición de texto
     btnAgregarTexto?.addEventListener("click", () => {
       const texto = textoInput.value.trim();
       if (!texto) {
@@ -4892,22 +5057,23 @@ import Header from "../components/common/Header.astro";
         return;
       }
 
-      // Si hay un texto seleccionado, actualizarlo
-      if (elementoSeleccionado?.tipo === "texto") {
-        const textoExistente = estadoDiseño.textos.find(
-          (t) => t.id === elementoSeleccionado!.id,
+      if (textoEnEdicionId) {
+        const textoExistente = estadoDiseno.textos.find(
+          (t) => t.id === textoEnEdicionId,
         );
         if (textoExistente) {
           textoExistente.texto = texto;
           textoExistente.fuente = fuenteSelect.value;
           textoExistente.color = textoColor.value;
           textoExistente.size = parseInt(textoSize.value, 10);
-          actualizarOverlays();
-          return;
         }
+        textoEnEdicionId = null;
+        elementoSeleccionado = null;
+        limpiarEditorTexto();
+        actualizarOverlays();
+        return;
       }
 
-      // Si no, crear uno nuevo
       const nuevoTexto: TextoOverlay = {
         id: generarId(),
         texto,
@@ -4919,17 +5085,16 @@ import Header from "../components/common/Header.astro";
         rotation: 0,
         zIndex: Date.now(), // Usar timestamp como z-index inicial simple
       };
-      estadoDiseño.textos.push(nuevoTexto);
-      // No limpiar el input para facilitar agregar múltiples líneas o variaciones
-      // textoInput.value = "";
+      estadoDiseno.textos.push(nuevoTexto);
+      limpiarEditorTexto();
       actualizarOverlays();
     });
 
-    // Listeners para vista previa en tiempo real
+    // Listeners para vista previa en tiempo real durante edición
     const updateTextoSeleccionado = () => {
-      if (elementoSeleccionado?.tipo === "texto") {
-        const texto = estadoDiseño.textos.find(
-          (t) => t.id === elementoSeleccionado!.id,
+      if (textoEnEdicionId) {
+        const texto = estadoDiseno.textos.find(
+          (t) => t.id === textoEnEdicionId,
         );
         if (texto) {
           texto.texto = textoInput.value || texto.texto;
@@ -4946,38 +5111,6 @@ import Header from "../components/common/Header.astro";
     textoColor?.addEventListener("input", updateTextoSeleccionado);
     textoSize?.addEventListener("input", updateTextoSeleccionado);
 
-    // Listeners para orientación
-    const btnOrientacionHorizontal = document.getElementById(
-      "btnOrientacionHorizontal",
-    );
-    const btnOrientacionVertical = document.getElementById(
-      "btnOrientacionVertical",
-    );
-
-    btnOrientacionHorizontal?.addEventListener("click", () => {
-      if (elementoSeleccionado?.tipo === "texto") {
-        const texto = estadoDiseño.textos.find(
-          (t) => t.id === elementoSeleccionado!.id,
-        );
-        if (texto) {
-          texto.rotation = 0;
-          actualizarOverlays();
-        }
-      }
-    });
-
-    btnOrientacionVertical?.addEventListener("click", () => {
-      if (elementoSeleccionado?.tipo === "texto") {
-        const texto = estadoDiseño.textos.find(
-          (t) => t.id === elementoSeleccionado!.id,
-        );
-        if (texto) {
-          texto.rotation = 90;
-          actualizarOverlays();
-        }
-      }
-    });
-
     // Función principal para actualizar todos los overlays
     function actualizarOverlays() {
       // Limpiar overlays existentes y mapas
@@ -4987,17 +5120,20 @@ import Header from "../components/common/Header.astro";
       elementosImagenDOM.clear();
       elementosTextoDOM.clear();
 
-      const cfg = modelosConfig[estadoDiseño.modelo];
+      const cfg = modelosConfig[estadoDiseno.modelo];
       const frenteSvg = document.getElementById(cfg.frenteId);
       if (!frenteSvg) return;
 
       // Combinar y ordenar todos los elementos por zIndex
       const allElements = [
-        ...estadoDiseño.imagenes.map((i) => ({
+        ...estadoDiseno.imagenes.map((i) => ({
           ...i,
           tipo: "imagen" as const,
         })),
-        ...estadoDiseño.textos.map((t) => ({ ...t, tipo: "texto" as const })),
+        ...estadoDiseno.textos.map((t) => ({
+          ...t,
+          tipo: "texto" as const,
+        })),
       ].sort((a, b) => a.zIndex - b.zIndex); // Menor primero = atrás
 
       // Renderizar en orden de zIndex
@@ -5011,6 +5147,7 @@ import Header from "../components/common/Header.astro";
 
       // Renderizar lista de capas
       renderizarCapas();
+      actualizarInfoDiseno();
     }
 
     function renderizarCapas() {
@@ -5021,11 +5158,14 @@ import Header from "../components/common/Header.astro";
       const todosElementos: Array<
         (ImagenOverlay | TextoOverlay) & { tipo: "imagen" | "texto" }
       > = [
-        ...estadoDiseño.imagenes.map((i) => ({
+        ...estadoDiseno.imagenes.map((i) => ({
           ...i,
           tipo: "imagen" as const,
         })),
-        ...estadoDiseño.textos.map((t) => ({ ...t, tipo: "texto" as const })),
+        ...estadoDiseno.textos.map((t) => ({
+          ...t,
+          tipo: "texto" as const,
+        })),
       ];
 
       if (todosElementos.length === 0) {
@@ -5081,22 +5221,22 @@ import Header from "../components/common/Header.astro";
 
             // Actualizar el objeto original en el array correspondiente
             if (draggedElement.tipo === "imagen") {
-              const img = estadoDiseño.imagenes.find(
+              const img = estadoDiseno.imagenes.find(
                 (i) => i.id === draggedElement.id,
               );
               if (img) img.zIndex = draggedElement.zIndex;
             } else {
-              const txt = estadoDiseño.textos.find(
+              const txt = estadoDiseno.textos.find(
                 (t) => t.id === draggedElement.id,
               );
               if (txt) txt.zIndex = draggedElement.zIndex;
             }
 
             if (el.tipo === "imagen") {
-              const img = estadoDiseño.imagenes.find((i) => i.id === el.id);
+              const img = estadoDiseno.imagenes.find((i) => i.id === el.id);
               if (img) img.zIndex = el.zIndex;
             } else {
-              const txt = estadoDiseño.textos.find((t) => t.id === el.id);
+              const txt = estadoDiseno.textos.find((t) => t.id === el.id);
               if (txt) txt.zIndex = el.zIndex;
             }
 
@@ -5114,7 +5254,7 @@ import Header from "../components/common/Header.astro";
         const text = document.createElement("span");
         text.className = "text-sm font-medium truncate max-w-[120px]";
         if (el.tipo === "imagen") {
-          const index = estadoDiseño.imagenes.findIndex((i) => i.id === el.id);
+          const index = estadoDiseno.imagenes.findIndex((i) => i.id === el.id);
           text.textContent = `Imagen ${index + 1}`;
         } else {
           text.textContent = (el as any).texto;
@@ -5147,17 +5287,14 @@ import Header from "../components/common/Header.astro";
       elementoSeleccionado = { id, tipo };
       modoInteraccion = null; // Resetear modo
 
-      // Solo cargar editor para textos
-      if (tipo === "texto") {
-        cargarTextoEnEditor(id);
-      }
-
       actualizarOverlays();
     }
 
     function cargarTextoEnEditor(id: string) {
-      const texto = estadoDiseño.textos.find((t) => t.id === id);
+      const texto = estadoDiseno.textos.find((t) => t.id === id);
       if (!texto) return;
+      textoEnEdicionId = id;
+      elementoSeleccionado = { tipo: "texto", id };
       // Cargar propiedades en los controles
       if (textoInput) textoInput.value = texto.texto;
       if (fuenteSelect) fuenteSelect.value = texto.fuente;
@@ -5177,7 +5314,7 @@ import Header from "../components/common/Header.astro";
       }
       // Cambiar texto del botón
       if (btnAgregarTexto) {
-        btnAgregarTexto.textContent = "Actualizar Texto";
+        btnAgregarTexto.textContent = "Guardar edición";
       }
     }
 
@@ -5187,19 +5324,23 @@ import Header from "../components/common/Header.astro";
       if (fuenteSelect) fuenteSelect.value = "Inter, sans-serif";
       if (textoColor) textoColor.value = "#000000";
       if (textoSize) textoSize.value = "32";
+      textoEnEdicionId = null;
       // Cambiar botón de vuelta
       if (btnAgregarTexto) {
-        btnAgregarTexto.textContent = "Agregar / Actualizar Texto";
+        btnAgregarTexto.textContent = "Agregar Texto";
       }
     }
 
     function eliminarElemento(id: string, tipo: "imagen" | "texto") {
       if (tipo === "imagen") {
-        estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
+        estadoDiseno.imagenes = estadoDiseno.imagenes.filter(
           (i) => i.id !== id,
         );
       } else {
-        estadoDiseño.textos = estadoDiseño.textos.filter((t) => t.id !== id);
+        estadoDiseno.textos = estadoDiseno.textos.filter((t) => t.id !== id);
+        if (textoEnEdicionId === id) {
+          limpiarEditorTexto();
+        }
       }
       if (elementoSeleccionado?.id === id) {
         elementoSeleccionado = null;
@@ -5406,7 +5547,7 @@ import Header from "../components/common/Header.astro";
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
+        estadoDiseno.imagenes = estadoDiseno.imagenes.filter(
           (i) => i.id !== img.id,
         );
         actualizarOverlays();
@@ -5499,7 +5640,11 @@ import Header from "../components/common/Header.astro";
       container.style.pointerEvents = "auto"; // Reactivar eventos para el texto
       container.style.transform = `rotate(${txt.rotation}deg)`;
       container.style.transformOrigin = "center center";
-      container.textContent = txt.texto;
+      container.textContent = "";
+      const textSpan = document.createElement("span");
+      textSpan.textContent = txt.texto;
+      textSpan.style.display = "inline-block";
+      container.appendChild(textSpan);
 
       // Borde y botón de eliminar
       const controls = document.createElement("div");
@@ -5539,6 +5684,24 @@ import Header from "../components/common/Header.astro";
       deleteBtn.style.display = "none"; // Initially hidden
       deleteBtn.classList.add("boton-eliminar-texto");
 
+      const editBtn = document.createElement("button");
+      editBtn.innerHTML = "E";
+      editBtn.style.position = "absolute";
+      editBtn.style.top = "-10px";
+      editBtn.style.left = "-10px";
+      editBtn.style.width = "20px";
+      editBtn.style.height = "20px";
+      editBtn.style.borderRadius = "50%";
+      editBtn.style.border = "none";
+      editBtn.style.background = "#3b82f6";
+      editBtn.style.color = "white";
+      editBtn.style.cursor = "pointer";
+      editBtn.style.fontSize = "14px";
+      editBtn.style.lineHeight = "1";
+      editBtn.style.pointerEvents = "all";
+      editBtn.style.display = "none"; // Initially hidden
+      editBtn.classList.add("boton-editar-texto");
+
       const rotateBtn = document.createElement("button");
       rotateBtn.innerHTML = "↻";
       rotateBtn.style.position = "absolute";
@@ -5561,6 +5724,7 @@ import Header from "../components/common/Header.astro";
 
       container.appendChild(controls);
       container.appendChild(deleteBtn);
+      container.appendChild(editBtn);
       container.appendChild(rotateBtn);
 
       container.addEventListener("mousedown", (e) => {
@@ -5587,10 +5751,22 @@ import Header from "../components/common/Header.astro";
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        estadoDiseño.textos = estadoDiseño.textos.filter(
+        estadoDiseno.textos = estadoDiseno.textos.filter(
           (t) => t.id !== txt.id,
         );
+        if (textoEnEdicionId === txt.id) {
+          limpiarEditorTexto();
+        }
+        if (elementoSeleccionado?.id === txt.id) {
+          elementoSeleccionado = null;
+        }
         actualizarOverlays();
+      });
+
+      editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        cargarTextoEnEditor(txt.id);
+        actualizarSeleccionVisual();
       });
 
       rotateBtn.addEventListener("mousedown", (e) => {
@@ -5620,7 +5796,7 @@ import Header from "../components/common/Header.astro";
       // 2. Ocultar controles de TEXTOS
       document
         .querySelectorAll(
-          ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
+          ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto, .boton-editar-texto",
         )
         .forEach((el) => {
           (el as HTMLElement).style.display = "none";
@@ -5654,12 +5830,16 @@ import Header from "../components/common/Header.astro";
             const deleteBtn = refs.container.querySelector(
               ".boton-eliminar-texto",
             ) as HTMLElement;
+            const editBtn = refs.container.querySelector(
+              ".boton-editar-texto",
+            ) as HTMLElement;
             const rotateBtn = refs.container.querySelector(
               ".boton-rotar-texto",
             ) as HTMLElement;
 
             if (controls) controls.style.display = "block";
             if (deleteBtn) deleteBtn.style.display = "block";
+            if (editBtn) editBtn.style.display = "block";
             if (rotateBtn) rotateBtn.style.display = "block";
           }
         }
@@ -5677,12 +5857,12 @@ import Header from "../components/common/Header.astro";
       if (!elementoSeleccionado || !modoInteraccion) return;
 
       if (elementoSeleccionado.tipo === "imagen") {
-        const img = estadoDiseño.imagenes.find(
+        const img = estadoDiseno.imagenes.find(
           (i) => i.id === elementoSeleccionado!.id,
         );
         if (!img) return;
 
-        const cfg = modelosConfig[estadoDiseño.modelo];
+        const cfg = modelosConfig[estadoDiseno.modelo];
         const svgParent = document.getElementById(cfg.frenteId);
         if (!svgParent) return;
 
@@ -5722,12 +5902,12 @@ import Header from "../components/common/Header.astro";
           actualizarPosicionImagen(g, img);
         }
       } else if (elementoSeleccionado.tipo === "texto") {
-        const txt = estadoDiseño.textos.find(
+        const txt = estadoDiseno.textos.find(
           (t) => t.id === elementoSeleccionado!.id,
         );
         if (!txt) return;
 
-        const cfg = modelosConfig[estadoDiseño.modelo];
+        const cfg = modelosConfig[estadoDiseno.modelo];
         const svgParent = document.getElementById(cfg.frenteId);
         if (!svgParent) return;
 
@@ -5787,7 +5967,7 @@ import Header from "../components/common/Header.astro";
           });
         document
           .querySelectorAll(
-            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
+            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto, .boton-editar-texto",
           )
           .forEach((el) => {
             (el as HTMLElement).style.display = "none";
@@ -5809,7 +5989,7 @@ import Header from "../components/common/Header.astro";
           });
         document
           .querySelectorAll(
-            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto",
+            ".controles-texto, .boton-eliminar-texto, .boton-rotar-texto, .boton-editar-texto",
           )
           .forEach((el) => {
             (el as HTMLElement).style.display = "none";
@@ -5818,7 +5998,7 @@ import Header from "../components/common/Header.astro";
         // Esperar un momento para que se oculten los controles
         await new Promise((resolve) => setTimeout(resolve, 100));
 
-        const cfg = modelosConfig[estadoDiseño.modelo];
+        const cfg = modelosConfig[estadoDiseno.modelo];
         const svgFrontal = document.getElementById(cfg.frenteId);
         const svgTrasero = document.getElementById(cfg.espaldaId);
 
@@ -5903,8 +6083,8 @@ import Header from "../components/common/Header.astro";
     });
 
     btnWhatsApp?.addEventListener("click", () => {
-      const cfg = modelosConfig[estadoDiseño.modelo];
-      const mensaje = `¡Hola! Diseñé mi polerón en Generación Urbana:\n\nModelo: ${cfg.nombre}\nColores:\n- Cuerpo: ${estadoDiseño.colores.cuerpo}\n- Mangas: ${estadoDiseño.colores.mangas}\n- Cintura: ${estadoDiseño.colores.cintura}`;
+      const cfg = modelosConfig[estadoDiseno.modelo];
+      const mensaje = `¡Hola! Diseñé mi polerón en Generación Urbana:\n\nModelo: ${cfg.nombre}\nColores:\n- Cuerpo: ${estadoDiseno.colores.cuerpo}\n- Mangas: ${estadoDiseno.colores.mangas}\n- Cintura: ${estadoDiseno.colores.cintura}`;
       window.open(
         `https://wa.me/56990659619?text=${encodeURIComponent(mensaje)}`,
         "_blank",
@@ -5913,7 +6093,7 @@ import Header from "../components/common/Header.astro";
 
     btnReset?.addEventListener("click", () => {
       if (!confirm("¿Reiniciar diseño?")) return;
-      estadoDiseño.colores = {
+      estadoDiseno.colores = {
         cuerpo: "#FFFFFF",
         mangas: "#FFFFFF",
         cintura: "#000000",
@@ -5922,11 +6102,13 @@ import Header from "../components/common/Header.astro";
         "gorro-interno": "#FFFFFF",
         bolsillo: "#FFFFFF",
       };
-      estadoDiseño.parteActual = "cuerpo";
-      estadoDiseño.modelo = "modelo-1";
-      estadoDiseño.imagenes = [];
-      estadoDiseño.textos = [];
+      estadoDiseno.parteActual = "cuerpo";
+      estadoDiseno.modelo = "modelo-1";
+      estadoDiseno.imagenes = [];
+      estadoDiseno.textos = [];
       elementoSeleccionado = null;
+      textoEnEdicionId = null;
+      limpiarEditorTexto();
       parteSelect.value = "cuerpo";
       colorCustomInput.value = "#FFFFFF";
       document
@@ -5954,11 +6136,11 @@ import Header from "../components/common/Header.astro";
       ) {
         e.preventDefault();
         if (elementoSeleccionado.tipo === "imagen") {
-          estadoDiseño.imagenes = estadoDiseño.imagenes.filter(
+          estadoDiseno.imagenes = estadoDiseno.imagenes.filter(
             (i) => i.id !== elementoSeleccionado!.id,
           );
         } else if (elementoSeleccionado.tipo === "texto") {
-          estadoDiseño.textos = estadoDiseño.textos.filter(
+          estadoDiseno.textos = estadoDiseno.textos.filter(
             (t) => t.id !== elementoSeleccionado!.id,
           );
         }
@@ -5967,7 +6149,7 @@ import Header from "../components/common/Header.astro";
       }
     });
 
-    actualizarModelo(estadoDiseño.modelo);
+    actualizarModelo(estadoDiseno.modelo);
     actualizarColores();
 
     // Lógica para colapsar paneles
@@ -5995,3 +6177,4 @@ import Header from "../components/common/Header.astro";
     });
   </script>
 </BaseLayout>
+
