@@ -5000,7 +5000,51 @@ import Header from "../components/common/Header.astro";
     function seleccionarElemento(id: string, tipo: "imagen" | "texto") {
       elementoSeleccionado = { id, tipo };
       modoInteraccion = null; // Resetear modo
+
+      // Solo cargar editor para textos
+      if (tipo === "texto") {
+        cargarTextoEnEditor(id);
+      }
+
       actualizarOverlays();
+    }
+
+    function cargarTextoEnEditor(id: string) {
+      const texto = estadoDiseño.textos.find((t) => t.id === id);
+      if (!texto) return;
+      // Cargar propiedades en los controles
+      if (textoInput) textoInput.value = texto.texto;
+      if (fuenteSelect) fuenteSelect.value = texto.fuente;
+      if (textoColor) textoColor.value = texto.color;
+      if (textoSize) textoSize.value = texto.size.toString();
+      // Expandir el panel "Agregar Imagen/Texto"
+      const panelImagenTexto = document.querySelectorAll(".panel-header")[2]; // Tercer panel
+      if (panelImagenTexto) {
+        const content = panelImagenTexto.nextElementSibling as HTMLElement;
+        const icon = panelImagenTexto.querySelector("span");
+        if (content && content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+          if (icon) {
+            icon.style.transform = "rotate(0deg)";
+          }
+        }
+      }
+      // Cambiar texto del botón
+      if (btnAgregarTexto) {
+        btnAgregarTexto.textContent = "Actualizar Texto";
+      }
+    }
+
+    function limpiarEditorTexto() {
+      // Limpiar campos
+      if (textoInput) textoInput.value = "";
+      if (fuenteSelect) fuenteSelect.value = "Inter, sans-serif";
+      if (textoColor) textoColor.value = "#000000";
+      if (textoSize) textoSize.value = "32";
+      // Cambiar botón de vuelta
+      if (btnAgregarTexto) {
+        btnAgregarTexto.textContent = "Agregar / Actualizar Texto";
+      }
     }
 
     function eliminarElemento(id: string, tipo: "imagen" | "texto") {
@@ -5013,6 +5057,10 @@ import Header from "../components/common/Header.astro";
       }
       if (elementoSeleccionado?.id === id) {
         elementoSeleccionado = null;
+        // Limpiar editor si era un texto
+        if (tipo === "texto") {
+          limpiarEditorTexto();
+        }
       }
       actualizarOverlays();
     }
