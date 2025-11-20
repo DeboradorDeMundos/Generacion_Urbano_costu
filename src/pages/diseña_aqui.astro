@@ -4454,7 +4454,8 @@ import Header from "../components/common/Header.astro";
   </style>
 
   <script>
-    import { Picker } from "emoji-mart";
+    // Use the ESM build explicitly so Vercel doesn't resolve the UMD “browser” bundle
+    import { Picker } from "emoji-mart/dist/module.js";
     import data from "@emoji-mart/data";
     // Estado global
     interface ImagenOverlay {
