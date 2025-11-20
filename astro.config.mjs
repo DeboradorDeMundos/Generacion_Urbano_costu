@@ -17,5 +17,13 @@ export default defineConfig({
     optimizeDeps: {
       include: ["emoji-mart/dist/module.js", "@emoji-mart/data"],
     },
+    resolve: {
+      alias: {
+        "emoji-mart": "emoji-mart/dist/module.js",
+      },
+    },
+    ssr: {
+      noExternal: ["emoji-mart", "@emoji-mart/data"],
+    },
   },
 });
