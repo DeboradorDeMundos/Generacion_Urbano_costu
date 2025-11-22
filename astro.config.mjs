@@ -20,5 +20,10 @@ export default defineConfig({
     ssr: {
       noExternal: ["emoji-mart", "@emoji-mart/data"],
     },
+    build: {
+      rollupOptions: {
+        external: ["emoji-mart", "@emoji-mart/data"],
+      },
+    },
   },
 });

@@ -1,43 +1,71 @@
-# Astro Starter Kit: Minimal
+# 🎨 Generación Urbano - Bordados Premium
 
-```sh
-npm create astro@latest -- --template minimal
+Sitio web oficial de Generación Urbano, especialistas en bordados de alta calidad para polerones generacionales.
+
+## 🚀 Tecnologías
+
+- **Framework:** Astro 5.13.7
+- **Styling:** Tailwind CSS
+- **Hosting:** Vercel
+- **Dominio:** generacionurbana.cl
+
+## 📦 Instalación
+
+```bash
+# Instalar dependencias
+npm install
+
+# Desarrollo local
+npm run dev
+
+# Build para producción
+npm run build
+
+# Preview del build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🛠️ Estructura del Proyecto
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
+```
 /
-├── public/
+├── public/          # Archivos estáticos (imágenes, logos, etc.)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/  # Componentes reutilizables
+│   ├── layouts/     # Layouts de página
+│   ├── pages/       # Páginas del sitio
+│   ├── styles/      # Estilos globales
+│   └── utils/       # Utilidades y helpers
+├── astro.config.mjs # Configuración de Astro
+└── vercel.json      # Configuración de Vercel
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🌐 Páginas
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `/` - Página principal
+- `/contacto` - Formulario de contacto
+- `/diseña_aqui` - Diseñador interactivo de polerones
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 📝 Comandos Disponibles
 
-## 🧞 Commands
+| Comando           | Acción                                     |
+| :---------------- | :----------------------------------------- |
+| `npm install`     | Instalar dependencias                      |
+| `npm run dev`     | Servidor de desarrollo en `localhost:4321` |
+| `npm run build`   | Build de producción en `./dist/`           |
+| `npm run preview` | Preview local del build                    |
+| `npm run astro`   | Ejecutar comandos CLI de Astro             |
 
-All commands are run from the root of the project, from a terminal:
+## 🚀 Deploy en Vercel
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+El proyecto está configurado y listo para deploy en Vercel:
 
-## 👀 Want to learn more?
+1. Conecta tu repositorio con Vercel
+2. Vercel detectará automáticamente la configuración de Astro
+3. Click en "Deploy"
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Ver `FINAL_SUMMARY.md` para instrucciones detalladas.
+
+## 📄 Licencia
+
+© 2025 Generación Urbano. Todos los derechos reservados.
