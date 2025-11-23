@@ -326,35 +326,10 @@ import Header from "../components/common/Header.astro";
                       id="emojiPickerContainer"
                       class="absolute top-full right-0 mt-2 z-50 hidden shadow-xl rounded-lg overflow-hidden bg-white"
                     >
-                      <div class="p-2 border-b bg-gray-50 flex justify-end">
-                        <select
-                          id="emojiSetSelect"
-                          class="text-xs border rounded px-2 py-1"
-                        >
-                          <option value="apple">Apple (iPhone)</option>
-                          <option value="google">Google (Android)</option>
-                          <option value="twitter">Twitter</option>
-                          <option value="native">Nativo</option>
-                        </select>
-                      </div>
                       <div id="pickerRoot"></div>
                     </div>
                   </div>
                   <div class="grid grid-cols-2 gap-3">
-                    <div>
-                      <label class="text-xs font-semibold">Fuente</label>
-                      <select
-                        id="fuenteSelect"
-                        class="w-full px-2 py-2 border rounded-lg text-sm"
-                      >
-                        <option value="Inter, sans-serif">Inter</option>
-                        <option value="Arial, sans-serif">Arial</option>
-                        <option value="'Times New Roman', serif">Times</option>
-                        <option value="'Courier New', monospace">Courier</option
-                        >
-                        <option value="Impact, sans-serif">Impact</option>
-                      </select>
-                    </div>
                     <div>
                       <label class="text-xs font-semibold">Color</label>
                       <input
@@ -364,7 +339,7 @@ import Header from "../components/common/Header.astro";
                         class="w-full h-10 border rounded"
                       />
                     </div>
-                    <div class="col-span-2">
+                    <div>
                       <label class="text-xs font-semibold">Tamaño</label>
                       <input
                         id="textoSize"
@@ -390,12 +365,24 @@ import Header from "../components/common/Header.astro";
         <!-- Columna Central: Canvas de Diseño (Sticky) -->
         <div class="lg:col-span-6">
           <div class="sticky top-8 bg-white rounded-xl shadow-lg p-6">
+            <!-- Botones para cambiar entre vistas -->
+            <!-- Indicador de vista activa (sin botones) -->
+            <div class="text-center mb-4">
+              <p class="text-sm text-gray-600">
+                <span class="font-semibold">Tip:</span> Haz click en el poleron (frente
+                o espalda) para seleccionar donde agregar elementos
+              </p>
+            </div>
+
             <div class="grid md:grid-cols-2 gap-6">
               <!-- Vista Frontal -->
-              <div>
+              <div
+                data-vista-container="frontal"
+                class="transition-all duration-300"
+              >
                 <h3 class="text-center font-bold text-gray-700 mb-4">Frente</h3>
                 <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center"
+                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors"
                 >
                   <svg
                     id="svgFrontal"
@@ -2271,6 +2258,16 @@ import Header from "../components/common/Header.astro";
                           preserveAspectRatio="none"
                         /></mask
                       >
+                      <mask id="mk-fr-borde-bolsillo"
+                        ><image
+                          href="/images/services/modelo_1/frente/borde-bolsillo.png"
+                          x="0"
+                          y="0"
+                          width="300"
+                          height="400"
+                          preserveAspectRatio="none"
+                        /></mask
+                      >
                     </defs>
 
                     <!-- Capas colorizables -->
@@ -2294,7 +2291,7 @@ import Header from "../components/common/Header.astro";
                       mask="url(#mk-fr-pecho)"></rect>
                     <g id="gorroFrontal">
                       <rect
-                        data-parte="cuello"
+                        data-parte="gorro-externo"
                         class="parte-poleron"
                         x="0"
                         y="0"
@@ -2303,7 +2300,7 @@ import Header from "../components/common/Header.astro";
                         fill="#666666"
                         mask="url(#mk-fr-gorro-fuera)"></rect>
                       <rect
-                        data-parte="forro"
+                        data-parte="gorro-interno"
                         class="parte-poleron"
                         x="0"
                         y="0"
@@ -2333,7 +2330,7 @@ import Header from "../components/common/Header.astro";
                     <!-- Bolsillo y borde (grupo para mostrar/ocultar) -->
                     <g id="grupoBolsilloFrente">
                       <rect
-                        data-parte="bolsillos"
+                        data-parte="bolsillo"
                         class="parte-poleron"
                         x="0"
                         y="0"
@@ -2341,15 +2338,15 @@ import Header from "../components/common/Header.astro";
                         height="400"
                         fill="#FFFFFF"
                         mask="url(#mk-fr-bolsillo)"></rect>
-                      <image
-                        href="/images/services/modelo_1/frente/borde-bolsillo.png"
+                      <rect
+                        data-parte="borde-bolsillo"
+                        class="parte-poleron"
                         x="0"
                         y="0"
                         width="300"
                         height="400"
-                        preserveAspectRatio="none"
-                        style="pointer-events:none"
-                      />
+                        fill="#000000"
+                        mask="url(#mk-fr-borde-bolsillo)"></rect>
                     </g>
 
                     <!-- Bordes y sombras generales por encima -->
@@ -2634,6 +2631,16 @@ import Header from "../components/common/Header.astro";
                           preserveAspectRatio="none"
                         />
                       </mask>
+                      <mask id="mk-m4-fr-borde-bolsillo">
+                        <image
+                          href="/images/services/modelo_4/frente/borde-bolsillo.png"
+                          x="0"
+                          y="0"
+                          width="300"
+                          height="400"
+                          preserveAspectRatio="none"
+                        />
+                      </mask>
                     </defs>
                     <rect
                       data-parte="mangas"
@@ -2707,15 +2714,15 @@ import Header from "../components/common/Header.astro";
                       height="400"
                       fill="#000000"
                       mask="url(#mk-m4-fr-rayas-pretina)"></rect>
-                    <image
-                      href="/images/services/modelo_4/frente/borde-bolsillo.png"
+                    <rect
+                      data-parte="borde-bolsillo"
+                      class="parte-poleron"
                       x="0"
                       y="0"
                       width="300"
                       height="400"
-                      preserveAspectRatio="none"
-                      style="pointer-events:none"
-                    />
+                      fill="#000000"
+                      mask="url(#mk-m4-fr-borde-bolsillo)"></rect>
                     <image
                       href="/images/services/modelo_4/frente/sombra-y-borde.png"
                       x="0"
@@ -2907,12 +2914,15 @@ import Header from "../components/common/Header.astro";
               </div>
 
               <!-- Vista Trasera -->
-              <div>
+              <div
+                data-vista-container="trasera"
+                class="transition-all duration-300"
+              >
                 <h3 class="text-center font-bold text-gray-700 mb-4">
                   Espalda
                 </h3>
                 <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center"
+                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors"
                 >
                   <svg
                     id="svgTrasero"
@@ -3836,7 +3846,7 @@ import Header from "../components/common/Header.astro";
                       mask="url(#mk-bk-espalda)"></rect>
                     <g id="gorroTrasero">
                       <rect
-                        data-parte="cuello"
+                        data-parte="gorro-externo"
                         class="parte-poleron"
                         x="0"
                         y="0"
@@ -4434,6 +4444,17 @@ import Header from "../components/common/Header.astro";
       @apply text-current;
     }
 
+    /* Estilos para botones de vista (frontal/trasera) */
+    .vista-btn {
+      @apply border-2 border-gray-300 bg-white hover:border-red-600 hover:bg-red-50 transition-all cursor-pointer text-gray-700;
+    }
+    .vista-btn.active {
+      @apply border-red-600 bg-red-600 text-white shadow-lg;
+    }
+    .vista-btn:hover {
+      @apply transform scale-105;
+    }
+
     /* Estilos para botones de bolsillo y cierre */
     .bolsillo-btn,
     .cierre-btn {
@@ -4444,14 +4465,9 @@ import Header from "../components/common/Header.astro";
       @apply border-red-600 bg-red-100 text-red-700 font-bold;
     }
 
-    /* Efecto hover en partes del polerón */
+    /* Las partes del polerón ya no tienen efectos hover porque no son clickeables */
     .parte-poleron {
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .parte-poleron:hover {
-      opacity: 0.8;
-      stroke-width: 3;
+      transition: all 0.2s ease;
     }
   </style>
 
@@ -4483,6 +4499,7 @@ import Header from "../components/common/Header.astro";
       height: number;
       rotation: number;
       zIndex: number;
+      vista: "frontal" | "trasera"; // Nueva propiedad para vista
     }
 
     interface TextoOverlay {
@@ -4495,6 +4512,7 @@ import Header from "../components/common/Header.astro";
       y: number;
       rotation: number;
       zIndex: number;
+      vista: "frontal" | "trasera"; // Nueva propiedad para vista
     }
 
     interface EstadoDiseno {
@@ -4503,6 +4521,7 @@ import Header from "../components/common/Header.astro";
       colores: Record<string, string>;
       imagenes: ImagenOverlay[];
       textos: TextoOverlay[];
+      vistaActual: "frontal" | "trasera"; // Controla qué vista está activa
     }
     // Colores por defecto para cada modelo
     const coloresPorModelo: Record<string, Record<string, string>> = {
@@ -4558,6 +4577,7 @@ import Header from "../components/common/Header.astro";
       colores: obtenerColoresModelo("modelo-1"),
       imagenes: [],
       textos: [],
+      vistaActual: "frontal", // Vista inicial
     };
 
     const emojiRegex = /[\p{Extended_Pictographic}]/u;
@@ -4753,6 +4773,7 @@ import Header from "../components/common/Header.astro";
           "gorro-externo",
           "gorro-interno",
           "bolsillo",
+          "borde-bolsillo",
         ],
       },
       "modelo-2": {
@@ -4783,6 +4804,7 @@ import Header from "../components/common/Header.astro";
           "gorro-interno",
           "pretina",
           "rayas-pretina",
+          "borde-bolsillo",
         ],
       },
       "modelo-5": {
@@ -4826,9 +4848,6 @@ import Header from "../components/common/Header.astro";
     const textoInput = document.getElementById(
       "textoInput"
     ) as HTMLInputElement;
-    const fuenteSelect = document.getElementById(
-      "fuenteSelect"
-    ) as HTMLSelectElement;
     const textoColor = document.getElementById(
       "textoColor"
     ) as HTMLInputElement;
@@ -4903,6 +4922,7 @@ import Header from "../components/common/Header.astro";
 
       actualizarColores();
       actualizarOverlays();
+      inicializarClicksVista(); // Reinicializar clicks en vistas
       if (infoModelo) infoModelo.textContent = cfg.nombre;
       actualizarInfoDiseno();
     }
@@ -4956,21 +4976,6 @@ import Header from "../components/common/Header.astro";
       });
     });
 
-    document.querySelectorAll(".parte-poleron").forEach((parte) => {
-      parte.addEventListener("click", (e) => {
-        const nombre = (e.currentTarget as SVGElement).getAttribute(
-          "data-parte"
-        );
-        if (nombre) {
-          estadoDiseno.parteActual = nombre;
-          parteSelect.value = nombre;
-          if (infoParte)
-            infoParte.textContent = nombresPartes[nombre] || nombre;
-          actualizarInfoDiseno();
-        }
-      });
-    });
-
     document.querySelectorAll(".modelo-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const modelo =
@@ -4978,6 +4983,64 @@ import Header from "../components/common/Header.astro";
         actualizarModelo(modelo);
       });
     });
+
+    // Event listeners para clicks directamente en los SVGs (frente/espalda)
+    // Esto permite cambiar de vista al hacer clic en el poleron
+    function inicializarClicksVista() {
+      const cfg = modelosConfig[estadoDiseno.modelo];
+      const frenteSvg = document.getElementById(cfg.frenteId);
+      const espaldaSvg = document.getElementById(cfg.espaldaId);
+
+      const svgs = [frenteSvg, espaldaSvg];
+
+      svgs.forEach((svg) => {
+        if (!svg) return;
+
+        svg.addEventListener("click", (e) => {
+          const target = e.target as SVGElement;
+
+          // No hacer nada si se clickea un elemento overlay
+          if (
+            target.closest(".overlay-elemento") ||
+            target.classList.contains("overlay-elemento")
+          ) {
+            return;
+          }
+
+          // Cambiar la vista cuando se hace clic en el SVG
+          const vista = svg.getAttribute("data-vista") as "frente" | "espalda";
+          const vistaActual = vista === "frente" ? "frontal" : "trasera";
+
+          // Actualizar estado
+          estadoDiseno.vistaActual = vistaActual;
+
+          // Resaltar visualmente el contenedor activo
+          const contenedorFrente = document.querySelector(
+            '[data-vista-container="frontal"]'
+          );
+          const contenedorEspalda = document.querySelector(
+            '[data-vista-container="trasera"]'
+          );
+
+          contenedorFrente?.classList.remove("ring-4", "ring-blue-500");
+          contenedorEspalda?.classList.remove("ring-4", "ring-blue-500");
+
+          if (vistaActual === "frontal") {
+            contenedorFrente?.classList.add("ring-4", "ring-blue-500");
+          } else {
+            contenedorEspalda?.classList.add("ring-4", "ring-blue-500");
+          }
+        });
+      });
+    }
+
+    // Inicializar clicks en vistas
+    inicializarClicksVista();
+
+    // Inicializar con frente seleccionado
+    document
+      .querySelector('[data-vista-container="frontal"]')
+      ?.classList.add("ring-4", "ring-blue-500");
 
     // Funciones para manejar múltiples imágenes
     function generarId(): string {
@@ -5003,6 +5066,7 @@ import Header from "../components/common/Header.astro";
           height: 100,
           rotation: 0,
           zIndex: Date.now(),
+          vista: estadoDiseno.vistaActual, // Asignar vista actual
         };
         estadoDiseno.imagenes.push(nuevaImagen);
         actualizarOverlays();
@@ -5016,13 +5080,10 @@ import Header from "../components/common/Header.astro";
     const emojiPickerContainer = document.getElementById(
       "emojiPickerContainer"
     );
-    const emojiSetSelect = document.getElementById(
-      "emojiSetSelect"
-    ) as HTMLSelectElement;
     const pickerRoot = document.getElementById("pickerRoot");
     let pickerInstance: any = null;
 
-    async function initPicker(set: string) {
+    async function initPicker() {
       // Wait for Picker and data to be loaded
       if (!Picker || !data) {
         console.warn("Emoji picker not ready yet");
@@ -5043,7 +5104,7 @@ import Header from "../components/common/Header.astro";
               textoInput.focus();
             }
           },
-          set: set,
+          set: "apple",
           locale: "es",
         });
         pickerRoot.appendChild(pickerInstance);
@@ -5055,13 +5116,8 @@ import Header from "../components/common/Header.astro";
       emojiPickerContainer?.classList.toggle("hidden");
 
       if (!pickerInstance) {
-        initPicker(emojiSetSelect?.value || "apple");
+        initPicker();
       }
-    });
-
-    emojiSetSelect?.addEventListener("change", (e) => {
-      const set = (e.target as HTMLSelectElement).value;
-      initPicker(set);
     });
 
     // Cerrar picker al hacer click fuera
@@ -5089,7 +5145,7 @@ import Header from "../components/common/Header.astro";
         );
         if (textoExistente) {
           textoExistente.texto = texto;
-          textoExistente.fuente = fuenteSelect.value;
+          textoExistente.fuente = "Arial, sans-serif";
           textoExistente.color = textoColor.value;
           textoExistente.size = parseInt(textoSize.value, 10);
         }
@@ -5103,13 +5159,14 @@ import Header from "../components/common/Header.astro";
       const nuevoTexto: TextoOverlay = {
         id: generarId(),
         texto,
-        fuente: fuenteSelect.value,
+        fuente: "Arial, sans-serif",
         color: textoColor.value,
         size: parseInt(textoSize.value, 10),
         x: 50,
         y: 80,
         rotation: 0,
         zIndex: Date.now(), // Usar timestamp como z-index inicial simple
+        vista: estadoDiseno.vistaActual, // Asignar vista actual
       };
       estadoDiseno.textos.push(nuevoTexto);
       limpiarEditorTexto();
@@ -5124,7 +5181,7 @@ import Header from "../components/common/Header.astro";
         );
         if (texto) {
           texto.texto = textoInput.value || texto.texto;
-          texto.fuente = fuenteSelect.value;
+          texto.fuente = "Arial, sans-serif";
           texto.color = textoColor.value;
           texto.size = parseInt(textoSize.value, 10);
           actualizarOverlays();
@@ -5133,7 +5190,6 @@ import Header from "../components/common/Header.astro";
     };
 
     textoInput?.addEventListener("input", updateTextoSeleccionado);
-    fuenteSelect?.addEventListener("change", updateTextoSeleccionado);
     textoColor?.addEventListener("input", updateTextoSeleccionado);
     textoSize?.addEventListener("input", updateTextoSeleccionado);
 
@@ -5148,26 +5204,58 @@ import Header from "../components/common/Header.astro";
 
       const cfg = modelosConfig[estadoDiseno.modelo];
       const frenteSvg = document.getElementById(cfg.frenteId);
-      if (!frenteSvg) return;
+      const espaldaSvg = document.getElementById(cfg.espaldaId);
+      if (!frenteSvg || !espaldaSvg) return;
 
-      // Combinar y ordenar todos los elementos por zIndex
-      const allElements = [
-        ...estadoDiseno.imagenes.map((i) => ({
-          ...i,
-          tipo: "imagen" as const,
-        })),
-        ...estadoDiseno.textos.map((t) => ({
-          ...t,
-          tipo: "texto" as const,
-        })),
-      ].sort((a, b) => a.zIndex - b.zIndex); // Menor primero = atrás
+      // Migrar elementos existentes sin propiedad vista (asignarles vista frontal)
+      estadoDiseno.imagenes.forEach((img) => {
+        if (!img.vista) img.vista = "frontal";
+      });
+      estadoDiseno.textos.forEach((txt) => {
+        if (!txt.vista) txt.vista = "frontal";
+      });
 
-      // Renderizar en orden de zIndex
-      allElements.forEach((el) => {
+      // Renderizar TODOS los elementos (frente y espalda) en sus respectivos SVGs
+      const imagenesFrente = estadoDiseno.imagenes.filter(
+        (i) => (i.vista || "frontal") === "frontal"
+      );
+      const textosFrente = estadoDiseno.textos.filter(
+        (t) => (t.vista || "frontal") === "frontal"
+      );
+      const imagenesEspalda = estadoDiseno.imagenes.filter(
+        (i) => i.vista === "trasera"
+      );
+      const textosEspalda = estadoDiseno.textos.filter(
+        (t) => t.vista === "trasera"
+      );
+
+      // Elementos del frente
+      const elementosFrente = [
+        ...imagenesFrente.map((i) => ({ ...i, tipo: "imagen" as const })),
+        ...textosFrente.map((t) => ({ ...t, tipo: "texto" as const })),
+      ].sort((a, b) => a.zIndex - b.zIndex);
+
+      // Elementos de la espalda
+      const elementosEspalda = [
+        ...imagenesEspalda.map((i) => ({ ...i, tipo: "imagen" as const })),
+        ...textosEspalda.map((t) => ({ ...t, tipo: "texto" as const })),
+      ].sort((a, b) => a.zIndex - b.zIndex);
+
+      // Renderizar elementos del frente en su SVG
+      elementosFrente.forEach((el) => {
         if (el.tipo === "imagen") {
           crearImagenOverlay(el as ImagenOverlay, frenteSvg);
         } else {
           crearTextoOverlay(el as TextoOverlay, frenteSvg);
+        }
+      });
+
+      // Renderizar elementos de la espalda en su SVG
+      elementosEspalda.forEach((el) => {
+        if (el.tipo === "imagen") {
+          crearImagenOverlay(el as ImagenOverlay, espaldaSvg);
+        } else {
+          crearTextoOverlay(el as TextoOverlay, espaldaSvg);
         }
       });
 
@@ -5286,11 +5374,44 @@ import Header from "../components/common/Header.astro";
           text.textContent = (el as any).texto;
         }
 
+        // Badge de vista (Frente/Espalda)
+        const vistaBadge = document.createElement("span");
+        vistaBadge.className = `text-xs px-2 py-0.5 rounded ${
+          el.vista === "frontal"
+            ? "bg-blue-100 text-blue-700"
+            : "bg-purple-100 text-purple-700"
+        }`;
+        vistaBadge.textContent = el.vista === "frontal" ? "Frente" : "Espalda";
+
         info.appendChild(icon);
         info.appendChild(text);
+        info.appendChild(vistaBadge);
 
         const actions = document.createElement("div");
         actions.className = "flex gap-1";
+
+        // Botón para transferir entre vistas
+        const btnTransferir = document.createElement("button");
+        btnTransferir.className =
+          "p-1 text-blue-500 hover:bg-blue-100 rounded transition-colors text-xs";
+        btnTransferir.innerHTML = "⇄";
+        btnTransferir.title = `Mover a ${el.vista === "frontal" ? "Espalda" : "Frente"}`;
+        btnTransferir.onclick = (e) => {
+          e.stopPropagation();
+          // Cambiar la vista del elemento
+          if (el.tipo === "imagen") {
+            const img = estadoDiseno.imagenes.find((i) => i.id === el.id);
+            if (img) {
+              img.vista = img.vista === "frontal" ? "trasera" : "frontal";
+            }
+          } else {
+            const txt = estadoDiseno.textos.find((t) => t.id === el.id);
+            if (txt) {
+              txt.vista = txt.vista === "frontal" ? "trasera" : "frontal";
+            }
+          }
+          actualizarOverlays();
+        };
 
         const btnDelete = document.createElement("button");
         btnDelete.className =
@@ -5302,6 +5423,7 @@ import Header from "../components/common/Header.astro";
           eliminarElemento(el.id, el.tipo);
         };
 
+        actions.appendChild(btnTransferir);
         actions.appendChild(btnDelete);
         div.appendChild(info);
         div.appendChild(actions);
@@ -5323,7 +5445,6 @@ import Header from "../components/common/Header.astro";
       elementoSeleccionado = { tipo: "texto", id };
       // Cargar propiedades en los controles
       if (textoInput) textoInput.value = texto.texto;
-      if (fuenteSelect) fuenteSelect.value = texto.fuente;
       if (textoColor) textoColor.value = texto.color;
       if (textoSize) textoSize.value = texto.size.toString();
       // Expandir el panel "Agregar Imagen/Texto"
@@ -5347,7 +5468,6 @@ import Header from "../components/common/Header.astro";
     function limpiarEditorTexto() {
       // Limpiar campos
       if (textoInput) textoInput.value = "";
-      if (fuenteSelect) fuenteSelect.value = "Inter, sans-serif";
       if (textoColor) textoColor.value = "#000000";
       if (textoSize) textoSize.value = "32";
       textoEnEdicionId = null;
@@ -5535,11 +5655,13 @@ import Header from "../components/common/Header.astro";
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
 
-        startMouseX = (e.clientX - rect.left) * scaleX;
-        startMouseY = (e.clientY - rect.top) * scaleY;
-        startElementX = img.x;
-        startElementY = img.y;
+        // Calcular posición del mouse en coordenadas del SVG
+        const mouseX = (e.clientX - rect.left) * scaleX;
+        const mouseY = (e.clientY - rect.top) * scaleY;
 
+        // Guardar el offset entre el click y la posición de la imagen
+        startMouseX = mouseX;
+        startMouseY = mouseY;
         startElementX = img.x;
         startElementY = img.y;
 
@@ -5764,11 +5886,13 @@ import Header from "../components/common/Header.astro";
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
 
-        startMouseX = (e.clientX - rect.left) * scaleX;
-        startMouseY = (e.clientY - rect.top) * scaleY;
-        startElementX = txt.x;
-        startElementY = txt.y;
+        // Calcular posición del mouse en coordenadas del SVG
+        const mouseX = (e.clientX - rect.left) * scaleX;
+        const mouseY = (e.clientY - rect.top) * scaleY;
 
+        // Guardar posición inicial
+        startMouseX = mouseX;
+        startMouseY = mouseY;
         startElementX = txt.x;
         startElementY = txt.y;
 
@@ -5889,7 +6013,9 @@ import Header from "../components/common/Header.astro";
         if (!img) return;
 
         const cfg = modelosConfig[estadoDiseno.modelo];
-        const svgParent = document.getElementById(cfg.frenteId);
+        // Usar el SVG correcto según la vista del elemento
+        const svgId = img.vista === "trasera" ? cfg.espaldaId : cfg.frenteId;
+        const svgParent = document.getElementById(svgId);
         if (!svgParent) return;
 
         const rect = svgParent.getBoundingClientRect();
@@ -5934,7 +6060,9 @@ import Header from "../components/common/Header.astro";
         if (!txt) return;
 
         const cfg = modelosConfig[estadoDiseno.modelo];
-        const svgParent = document.getElementById(cfg.frenteId);
+        // Usar el SVG correcto según la vista del elemento
+        const svgId = txt.vista === "trasera" ? cfg.espaldaId : cfg.frenteId;
+        const svgParent = document.getElementById(svgId);
         if (!svgParent) return;
 
         const refs = elementosTextoDOM.get(txt.id);
@@ -6110,7 +6238,51 @@ import Header from "../components/common/Header.astro";
 
     btnWhatsApp?.addEventListener("click", () => {
       const cfg = modelosConfig[estadoDiseno.modelo];
-      const mensaje = `¡Hola! Diseñé mi polerón en Generación Urbana:\n\nModelo: ${cfg.nombre}\nColores:\n- Cuerpo: ${estadoDiseno.colores.cuerpo}\n- Mangas: ${estadoDiseno.colores.mangas}\n- Cintura: ${estadoDiseno.colores.cintura}`;
+
+      // Construir mensaje detallado con toda la información del diseño
+      let mensaje = `*HOLA! DISEÑE MI POLERON EN GENERACION URBANA*\n\n`;
+      mensaje += `*MODELO:* ${cfg.nombre}\n\n`;
+
+      // Colores por parte
+      mensaje += `*COLORES POR PARTE:*\n`;
+      cfg.partes.forEach((parte) => {
+        const nombreParte = nombresPartes[parte] || parte;
+        const color = estadoDiseno.colores[parte] || "Sin definir";
+        mensaje += `- ${nombreParte}: ${color}\n`;
+      });
+
+      // Textos
+      mensaje += `\n*TEXTOS:* ${estadoDiseno.textos.length}\n`;
+      if (estadoDiseno.textos.length > 0) {
+        estadoDiseno.textos.forEach((txt, idx) => {
+          mensaje += `${idx + 1}. "${txt.texto}"\n`;
+          mensaje += `   - Color: ${txt.color}\n`;
+          mensaje += `   - Tamaño: ${txt.size}px\n`;
+          mensaje += `   - Posicion: (${Math.round(txt.x)}, ${Math.round(txt.y)})\n`;
+          mensaje += `   - Rotacion: ${Math.round(txt.rotation)} grados\n`;
+          mensaje += `   - Vista: ${txt.vista === "frontal" ? "Frente" : "Espalda"}\n`;
+        });
+      }
+
+      // Imágenes
+      mensaje += `\n*IMAGENES:* ${estadoDiseno.imagenes.length}\n`;
+      if (estadoDiseno.imagenes.length > 0) {
+        estadoDiseno.imagenes.forEach((img, idx) => {
+          mensaje += `${idx + 1}. Imagen ${idx + 1}\n`;
+          mensaje += `   - Tamaño: ${Math.round(img.width)}x${Math.round(img.height)}px\n`;
+          mensaje += `   - Posicion: (${Math.round(img.x)}, ${Math.round(img.y)})\n`;
+          mensaje += `   - Rotacion: ${Math.round(img.rotation)} grados\n`;
+          mensaje += `   - Vista: ${img.vista === "frontal" ? "Frente" : "Espalda"}\n`;
+        });
+      }
+
+      // Emojis
+      const hayEmoji = estadoDiseno.textos.some((t) => contieneEmoji(t.texto));
+      mensaje += `\n*CONTIENE EMOJIS:* ${hayEmoji ? "Si" : "No"}\n`;
+
+      mensaje += `\n*Me pueden ayudar con este diseño?*\n`;
+      mensaje += `Diseñado en: ${window.location.href}`;
+
       window.open(
         `https://wa.me/56990659619?text=${encodeURIComponent(mensaje)}`,
         "_blank"

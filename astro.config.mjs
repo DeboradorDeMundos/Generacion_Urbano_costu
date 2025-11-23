@@ -14,12 +14,6 @@ export default defineConfig({
     inlineStylesheets: "auto",
   },
   vite: {
-    optimizeDeps: {
-      include: ["emoji-mart", "@emoji-mart/data"],
-    },
-    ssr: {
-      noExternal: ["emoji-mart", "@emoji-mart/data"],
-    },
     build: {
       rollupOptions: {
         external: ["emoji-mart", "@emoji-mart/data"],
