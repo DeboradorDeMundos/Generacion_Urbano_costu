@@ -4583,6 +4583,8 @@ import Header from "../components/common/Header.astro";
     let startElementWidth = 0;
     let startElementHeight = 0;
     let startElementRotation = 0;
+    let lastClientX = 0;
+    let lastClientY = 0;
     let textoEnEdicionId: string | null = null;
 
     // Mapas para referencias DOM
@@ -5637,6 +5639,7 @@ import Header from "../components/common/Header.astro";
         e.stopPropagation();
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
+        actualizarSeleccionVisual();
 
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
@@ -5652,7 +5655,8 @@ import Header from "../components/common/Header.astro";
         startElementX = img.x;
         startElementY = img.y;
 
-        actualizarSeleccionVisual();
+        lastClientX = e.clientX;
+        lastClientY = e.clientY;
       });
 
       handle.addEventListener("mousedown", (e) => {
@@ -5868,6 +5872,7 @@ import Header from "../components/common/Header.astro";
         e.stopPropagation();
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
+        actualizarSeleccionVisual();
 
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
@@ -5883,7 +5888,8 @@ import Header from "../components/common/Header.astro";
         startElementX = txt.x;
         startElementY = txt.y;
 
-        actualizarSeleccionVisual();
+        lastClientX = e.clientX;
+        lastClientY = e.clientY;
       });
 
       deleteBtn.addEventListener("click", (e) => {
@@ -6015,10 +6021,15 @@ import Header from "../components/common/Header.astro";
         if (!g) return;
 
         if (modoInteraccion === "drag") {
-          const dx = currentX - startMouseX;
-          const dy = currentY - startMouseY;
-          img.x = Math.max(0, Math.min(300 - img.width, startElementX + dx));
-          img.y = Math.max(0, Math.min(400 - img.height, startElementY + dy));
+          const deltaX = (e.clientX - lastClientX) * scaleX;
+          const deltaY = (e.clientY - lastClientY) * scaleY;
+
+          img.x = Math.max(0, Math.min(300 - img.width, img.x + deltaX));
+          img.y = Math.max(0, Math.min(400 - img.height, img.y + deltaY));
+
+          lastClientX = e.clientX;
+          lastClientY = e.clientY;
+
           actualizarPosicionImagen(g, img);
         } else if (modoInteraccion === "resize") {
           const newWidth = Math.max(
@@ -6060,13 +6071,15 @@ import Header from "../components/common/Header.astro";
           const rect = svgParent.getBoundingClientRect();
           const scaleX = 300 / rect.width;
           const scaleY = 400 / rect.height;
-          const currentX = (e.clientX - rect.left) * scaleX;
-          const currentY = (e.clientY - rect.top) * scaleY;
 
-          const dx = currentX - startMouseX;
-          const dy = currentY - startMouseY;
-          txt.x = Math.max(0, Math.min(280, startElementX + dx));
-          txt.y = Math.max(0, Math.min(380, startElementY + dy));
+          const deltaX = (e.clientX - lastClientX) * scaleX;
+          const deltaY = (e.clientY - lastClientY) * scaleY;
+
+          txt.x = Math.max(0, Math.min(280, txt.x + deltaX));
+          txt.y = Math.max(0, Math.min(380, txt.y + deltaY));
+
+          lastClientX = e.clientX;
+          lastClientY = e.clientY;
 
           container.style.left = txt.x + "px";
           container.style.top = txt.y + "px";
