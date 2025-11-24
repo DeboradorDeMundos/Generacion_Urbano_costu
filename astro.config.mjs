@@ -13,11 +13,5 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
-  vite: {
-    build: {
-      rollupOptions: {
-        external: ["emoji-mart", "@emoji-mart/data"],
-      },
-    },
-  },
+
 });
