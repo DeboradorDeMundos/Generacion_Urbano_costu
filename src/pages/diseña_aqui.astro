@@ -373,9 +373,9 @@ import Header from "../components/common/Header.astro";
 
             <div class="grid md:grid-cols-2 gap-6" id="canvasUnificado">
               <!-- Vista Frontal -->
-              <div data-vista-container="frontal" class="transition-all duration-300">
+              <div data-vista-container="frontal" class="transition-all duration-300 cursor-pointer" id="contenedorFrontal">
                 <h3 class="text-center font-bold text-gray-700 mb-4">Frente</h3>
-                <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center transition-colors"
+                <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-4 border-blue-500"
                 >
                   <svg
                     id="svgFrontal"
@@ -2909,13 +2909,14 @@ import Header from "../components/common/Header.astro";
               <!-- Vista Trasera -->
               <div
                 data-vista-container="trasera"
-                class="transition-all duration-300"
+                class="transition-all duration-300 cursor-pointer"
+                id="contenedorTrasero"
               >
                 <h3 class="text-center font-bold text-gray-700 mb-4">
                   Espalda
                 </h3>
                 <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-4 border-transparent"
                 >
                   <svg
                     id="svgTrasero"
@@ -4497,6 +4498,51 @@ import Header from "../components/common/Header.astro";
       opacity: 1;
       background: radial-gradient(circle at center, transparent 40%, rgba(59, 130, 246, 0.05) 100%);
     }
+
+    /* Mejoras para dispositivos táctiles */
+    @media (hover: none) and (pointer: coarse) {
+      /* Aumentar área táctil de los controles SVG */
+      .handle-resize,
+      .handle-rotate {
+        r: 10 !important; /* Aumentar radio en móvil */
+      }
+
+      /* Hacer los botones de texto más grandes en móvil */
+      .boton-eliminar-texto,
+      .boton-editar-texto,
+      .boton-rotar-texto {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 18px !important;
+      }
+
+      /* Aumentar tamaño del botón de eliminar en SVG */
+      .boton-eliminar circle {
+        r: 12 !important;
+      }
+
+      /* Mejorar feedback visual al tocar */
+      .overlay-elemento {
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      /* Prevenir zoom al hacer doble tap */
+      svg, foreignObject {
+        touch-action: none;
+      }
+    }
+
+    /* Prevenir comportamiento de arrastre del navegador */
+    svg image,
+    .overlay-elemento {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
   </style>
 
   <script>
@@ -5001,7 +5047,27 @@ import Header from "../components/common/Header.astro";
     });
 
     // Event listeners para clicks directamente en los SVGs (frente/espalda)
-    // Función para detectar sobre qué vista (frente/espalda) está el mouse
+    // Funciones auxiliares para unificar eventos mouse y touch
+    function obtenerPosicionEvento(e: MouseEvent | TouchEvent): { clientX: number; clientY: number } {
+      if ('touches' in e && e.touches.length > 0) {
+        return {
+          clientX: e.touches[0].clientX,
+          clientY: e.touches[0].clientY
+        };
+      } else if ('changedTouches' in e && e.changedTouches.length > 0) {
+        return {
+          clientX: e.changedTouches[0].clientX,
+          clientY: e.changedTouches[0].clientY
+        };
+      } else {
+        return {
+          clientX: (e as MouseEvent).clientX,
+          clientY: (e as MouseEvent).clientY
+        };
+      }
+    }
+
+    // Función para detectar sobre qué vista (frente/espalda) está el mouse/touch
     function detectarVistaEnPosicion(clientX: number, clientY: number): "frontal" | "trasera" | null {
       const cfg = modelosConfig[estadoDiseno.modelo];
       const frenteSvg = document.getElementById(cfg.frenteId);
@@ -5613,21 +5679,22 @@ import Header from "../components/common/Header.astro";
       g.appendChild(handle);
       g.appendChild(deleteBtn);
 
-      // Event listeners
-      image.addEventListener("mousedown", (e) => {
+      // Event listeners para imagen (mouse y touch)
+      const handleImageStart = (e: MouseEvent | TouchEvent) => {
         e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
         actualizarSeleccionVisual();
 
+        const pos = obtenerPosicionEvento(e);
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
 
-        // Calcular posición del mouse en coordenadas del SVG
-        const mouseX = (e.clientX - rect.left) * scaleX;
-        const mouseY = (e.clientY - rect.top) * scaleY;
+        // Calcular posición del mouse/touch en coordenadas del SVG
+        const mouseX = (pos.clientX - rect.left) * scaleX;
+        const mouseY = (pos.clientY - rect.top) * scaleY;
 
         // Guardar el offset entre el click y la posición de la imagen
         startMouseX = mouseX;
@@ -5635,34 +5702,46 @@ import Header from "../components/common/Header.astro";
         startElementX = img.x;
         startElementY = img.y;
 
-        lastClientX = e.clientX;
-        lastClientY = e.clientY;
-      });
+        lastClientX = pos.clientX;
+        lastClientY = pos.clientY;
+      };
 
-      handle.addEventListener("mousedown", (e) => {
+      image.addEventListener("mousedown", handleImageStart);
+      image.addEventListener("touchstart", handleImageStart, { passive: false });
+
+      // Event listeners para handle de resize (mouse y touch)
+      const handleResizeStart = (e: MouseEvent | TouchEvent) => {
         e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "resize";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
 
+        const pos = obtenerPosicionEvento(e);
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
 
-        startMouseX = (e.clientX - rect.left) * scaleX;
-        startMouseY = (e.clientY - rect.top) * scaleY;
+        startMouseX = (pos.clientX - rect.left) * scaleX;
+        startMouseY = (pos.clientY - rect.top) * scaleY;
         startElementWidth = img.width;
         startElementHeight = img.height;
-      });
+      };
 
-      rotateHandle.addEventListener("mousedown", (e) => {
+      handle.addEventListener("mousedown", handleResizeStart);
+      handle.addEventListener("touchstart", handleResizeStart, { passive: false });
+
+      // Event listeners para handle de rotación (mouse y touch)
+      const handleRotateStart = (e: MouseEvent | TouchEvent) => {
         e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
         startElementRotation = img.rotation;
         rotateHandle.style.cursor = "grabbing";
-      });
+      };
+
+      rotateHandle.addEventListener("mousedown", handleRotateStart);
+      rotateHandle.addEventListener("touchstart", handleRotateStart, { passive: false });
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -5846,7 +5925,8 @@ import Header from "../components/common/Header.astro";
       container.appendChild(editBtn);
       container.appendChild(rotateBtn);
 
-      container.addEventListener("mousedown", (e) => {
+      // Event listener para arrastrar texto (mouse y touch)
+      const handleTextStart = (e: MouseEvent | TouchEvent) => {
         if ((e.target as HTMLElement).tagName === "BUTTON") return;
         e.preventDefault();
         e.stopPropagation();
@@ -5854,13 +5934,14 @@ import Header from "../components/common/Header.astro";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
         actualizarSeleccionVisual();
 
+        const pos = obtenerPosicionEvento(e);
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
 
-        // Calcular posición del mouse en coordenadas del SVG
-        const mouseX = (e.clientX - rect.left) * scaleX;
-        const mouseY = (e.clientY - rect.top) * scaleY;
+        // Calcular posición del mouse/touch en coordenadas del SVG
+        const mouseX = (pos.clientX - rect.left) * scaleX;
+        const mouseY = (pos.clientY - rect.top) * scaleY;
 
         // Guardar posición inicial
         startMouseX = mouseX;
@@ -5868,12 +5949,31 @@ import Header from "../components/common/Header.astro";
         startElementX = txt.x;
         startElementY = txt.y;
 
-        lastClientX = e.clientX;
-        lastClientY = e.clientY;
-      });
+        lastClientX = pos.clientX;
+        lastClientY = pos.clientY;
+      };
+
+      container.addEventListener("mousedown", handleTextStart);
+      container.addEventListener("touchstart", handleTextStart, { passive: false });
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
+        estadoDiseno.textos = estadoDiseno.textos.filter(
+          (t) => t.id !== txt.id,
+        );
+        if (textoEnEdicionId === txt.id) {
+          limpiarEditorTexto();
+        }
+        if (elementoSeleccionado?.id === txt.id) {
+          elementoSeleccionado = null;
+        }
+        actualizarOverlays();
+      });
+
+      // Soporte touch para deleteBtn
+      deleteBtn.addEventListener("touchend", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         estadoDiseno.textos = estadoDiseno.textos.filter(
           (t) => t.id !== txt.id,
         );
@@ -5892,14 +5992,26 @@ import Header from "../components/common/Header.astro";
         actualizarSeleccionVisual();
       });
 
-      rotateBtn.addEventListener("mousedown", (e) => {
+      // Soporte touch para editBtn
+      editBtn.addEventListener("touchend", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        cargarTextoEnEditor(txt.id);
+        actualizarSeleccionVisual();
+      });
+
+      // Event listener para rotar texto (mouse y touch)
+      const handleTextRotateStart = (e: MouseEvent | TouchEvent) => {
         e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
         startElementRotation = txt.rotation;
         rotateBtn.style.cursor = "grabbing";
-      });
+      };
+
+      rotateBtn.addEventListener("mousedown", handleTextRotateStart);
+      rotateBtn.addEventListener("touchstart", handleTextRotateStart, { passive: false });
 
       foreign.appendChild(container);
       elementosTextoDOM.set(txt.id, { foreign, container });
@@ -5975,13 +6087,15 @@ import Header from "../components/common/Header.astro";
       actualizarSeleccionVisual();
     }
 
-    // Handlers globales de mouse para todas las interacciones
-    document.addEventListener("mousemove", (e) => {
+    // Handlers globales de mouse/touch para todas las interacciones
+    const handleGlobalMove = (e: MouseEvent | TouchEvent) => {
       if (!elementoSeleccionado || !modoInteraccion) return;
 
-      // Mostrar indicador visual de la vista sobre la que está el mouse durante drag
+      const pos = obtenerPosicionEvento(e);
+
+      // Mostrar indicador visual de la vista sobre la que está el mouse/touch durante drag
       if (modoInteraccion === "drag") {
-        const vistaDetectada = detectarVistaEnPosicion(e.clientX, e.clientY);
+        const vistaDetectada = detectarVistaEnPosicion(pos.clientX, pos.clientY);
         const contenedorFrente = document.querySelector('[data-vista-container="frontal"]') as HTMLElement;
         const contenedorEspalda = document.querySelector('[data-vista-container="trasera"]') as HTMLElement;
 
@@ -6012,21 +6126,21 @@ import Header from "../components/common/Header.astro";
         const rect = svgParent.getBoundingClientRect();
         const scaleX = 300 / rect.width;
         const scaleY = 400 / rect.height;
-        const currentX = (e.clientX - rect.left) * scaleX;
-        const currentY = (e.clientY - rect.top) * scaleY;
+        const currentX = (pos.clientX - rect.left) * scaleX;
+        const currentY = (pos.clientY - rect.top) * scaleY;
 
         const g = elementosImagenDOM.get(img.id);
         if (!g) return;
 
         if (modoInteraccion === "drag") {
-          const deltaX = (e.clientX - lastClientX) * scaleX;
-          const deltaY = (e.clientY - lastClientY) * scaleY;
+          const deltaX = (pos.clientX - lastClientX) * scaleX;
+          const deltaY = (pos.clientY - lastClientY) * scaleY;
 
           img.x = Math.max(0, Math.min(300 - img.width, img.x + deltaX));
           img.y = Math.max(0, Math.min(400 - img.height, img.y + deltaY));
 
-          lastClientX = e.clientX;
-          lastClientY = e.clientY;
+          lastClientX = pos.clientX;
+          lastClientY = pos.clientY;
 
           actualizarPosicionImagen(g, img);
         } else if (modoInteraccion === "resize") {
@@ -6070,14 +6184,14 @@ import Header from "../components/common/Header.astro";
           const scaleX = 300 / rect.width;
           const scaleY = 400 / rect.height;
 
-          const deltaX = (e.clientX - lastClientX) * scaleX;
-          const deltaY = (e.clientY - lastClientY) * scaleY;
+          const deltaX = (pos.clientX - lastClientX) * scaleX;
+          const deltaY = (pos.clientY - lastClientY) * scaleY;
 
           txt.x = Math.max(0, Math.min(280, txt.x + deltaX));
           txt.y = Math.max(0, Math.min(380, txt.y + deltaY));
 
-          lastClientX = e.clientX;
-          lastClientY = e.clientY;
+          lastClientX = pos.clientX;
+          lastClientY = pos.clientY;
 
           container.style.left = txt.x + "px";
           container.style.top = txt.y + "px";
@@ -6085,15 +6199,18 @@ import Header from "../components/common/Header.astro";
           const containerRect = container.getBoundingClientRect();
           const centerX = containerRect.left + containerRect.width / 2;
           const centerY = containerRect.top + containerRect.height / 2;
-          const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+          const angle = Math.atan2(pos.clientY - centerY, pos.clientX - centerX);
           const degrees = angle * (180 / Math.PI) + 90;
           txt.rotation = Math.round(degrees);
           container.style.transform = `rotate(${txt.rotation}deg)`;
         }
       }
-    });
+    };
 
-    document.addEventListener("mouseup", (e) => {
+    document.addEventListener("mousemove", handleGlobalMove);
+    document.addEventListener("touchmove", handleGlobalMove, { passive: false });
+
+    const handleGlobalEnd = (e: MouseEvent | TouchEvent) => {
       // Limpiar highlights visuales
       const contenedorFrente = document.querySelector('[data-vista-container="frontal"]') as HTMLElement;
       const contenedorEspalda = document.querySelector('[data-vista-container="trasera"]') as HTMLElement;
@@ -6101,8 +6218,9 @@ import Header from "../components/common/Header.astro";
       contenedorEspalda?.classList.remove("ring-2", "ring-purple-400");
 
       if (modoInteraccion === "drag" && elementoSeleccionado) {
+        const pos = obtenerPosicionEvento(e);
         // Detectar sobre qué vista se soltó el elemento
-        const vistaDetectada = detectarVistaEnPosicion(e.clientX, e.clientY);
+        const vistaDetectada = detectarVistaEnPosicion(pos.clientX, pos.clientY);
         
         if (vistaDetectada) {
           // Cambiar la vista del elemento si es necesario
@@ -6110,6 +6228,9 @@ import Header from "../components/common/Header.astro";
             const img = estadoDiseno.imagenes.find(i => i.id === elementoSeleccionado!.id);
             if (img && img.vista !== vistaDetectada) {
               img.vista = vistaDetectada;
+              // Actualizar vista activa
+              estadoDiseno.vistaActual = vistaDetectada;
+              actualizarIndicadorVista();
               // Ajustar posición si está fuera de límites
               img.x = Math.max(0, Math.min(300 - img.width, img.x));
               img.y = Math.max(0, Math.min(400 - img.height, img.y));
@@ -6119,6 +6240,9 @@ import Header from "../components/common/Header.astro";
             const txt = estadoDiseno.textos.find(t => t.id === elementoSeleccionado!.id);
             if (txt && txt.vista !== vistaDetectada) {
               txt.vista = vistaDetectada;
+              // Actualizar vista activa
+              estadoDiseno.vistaActual = vistaDetectada;
+              actualizarIndicadorVista();
               // Ajustar posición si está fuera de límites
               txt.x = Math.max(0, Math.min(280, txt.x));
               txt.y = Math.max(0, Math.min(380, txt.y));
@@ -6135,7 +6259,10 @@ import Header from "../components/common/Header.astro";
         rotateBtns.forEach((b) => ((b as HTMLElement).style.cursor = "grab"));
       }
       modoInteraccion = null;
-    });
+    };
+
+    document.addEventListener("mouseup", handleGlobalEnd);
+    document.addEventListener("touchend", handleGlobalEnd, { passive: false });
 
     // Click fuera para deseleccionar
     document.addEventListener("click", (e) => {
@@ -6381,6 +6508,55 @@ import Header from "../components/common/Header.astro";
 
     actualizarModelo(estadoDiseno.modelo);
     actualizarColores();
+
+    // Función para actualizar el indicador visual de vista activa
+    function actualizarIndicadorVista() {
+      const contenedorFrontal = document.getElementById('contenedorFrontal');
+      const contenedorTrasero = document.getElementById('contenedorTrasero');
+      
+      if (!contenedorFrontal || !contenedorTrasero) return;
+
+      // Obtener los divs internos (bg-gray-100)
+      const divFrontal = contenedorFrontal.querySelector('.bg-gray-100');
+      const divTrasero = contenedorTrasero.querySelector('.bg-gray-100');
+
+      if (!divFrontal || !divTrasero) return;
+
+      if (estadoDiseno.vistaActual === 'frontal') {
+        divFrontal.classList.remove('border-transparent');
+        divFrontal.classList.add('border-blue-500');
+        divTrasero.classList.remove('border-blue-500');
+        divTrasero.classList.add('border-transparent');
+      } else {
+        divTrasero.classList.remove('border-transparent');
+        divTrasero.classList.add('border-blue-500');
+        divFrontal.classList.remove('border-blue-500');
+        divFrontal.classList.add('border-transparent');
+      }
+    }
+
+    // Event listeners para cambiar de vista al hacer clic
+    const contenedorFrontal = document.getElementById('contenedorFrontal');
+    const contenedorTrasero = document.getElementById('contenedorTrasero');
+
+    if (contenedorFrontal) {
+      contenedorFrontal.addEventListener('click', () => {
+        estadoDiseno.vistaActual = 'frontal';
+        actualizarIndicadorVista();
+        actualizarInfoDiseno();
+      });
+    }
+
+    if (contenedorTrasero) {
+      contenedorTrasero.addEventListener('click', () => {
+        estadoDiseno.vistaActual = 'trasera';
+        actualizarIndicadorVista();
+        actualizarInfoDiseno();
+      });
+    }
+
+    // Inicializar el indicador visual
+    actualizarIndicadorVista();
 
     // Lógica para colapsar paneles
     document.querySelectorAll(".panel-header").forEach((header) => {
