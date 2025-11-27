@@ -365,24 +365,17 @@ import Header from "../components/common/Header.astro";
         <!-- Columna Central: Canvas de Diseño (Sticky) -->
         <div class="lg:col-span-6">
           <div class="sticky top-8 bg-white rounded-xl shadow-lg p-6">
-            <!-- Botones para cambiar entre vistas -->
-            <!-- Indicador de vista activa (sin botones) -->
             <div class="text-center mb-4">
               <p class="text-sm text-gray-600">
-                <span class="font-semibold">Tip:</span> Haz click en el poleron (frente
-                o espalda) para seleccionar donde agregar elementos
+                <span class="font-semibold">Tip:</span> Arrastra elementos entre frente y espalda libremente
               </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-6" id="canvasUnificado">
               <!-- Vista Frontal -->
-              <div
-                data-vista-container="frontal"
-                class="transition-all duration-300"
-              >
+              <div data-vista-container="frontal" class="transition-all duration-300">
                 <h3 class="text-center font-bold text-gray-700 mb-4">Frente</h3>
-                <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors"
+                <div class="bg-gray-100 rounded-lg p-4 flex items-center justify-center transition-colors"
                 >
                   <svg
                     id="svgFrontal"
@@ -4469,6 +4462,41 @@ import Header from "../components/common/Header.astro";
     .parte-poleron {
       transition: all 0.2s ease;
     }
+
+    /* Estilos para el canvas unificado con drag entre vistas */
+    [data-vista-container] {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Efecto de highlight cuando se arrastra sobre una vista */
+    [data-vista-container].ring-2 {
+      box-shadow: 0 0 0 2px currentColor, 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animación suave para cambio de vista */
+    .overlay-elemento {
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    /* Mejora visual del canvas al arrastrar */
+    #canvasUnificado > div {
+      position: relative;
+    }
+
+    #canvasUnificado > div::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 0.5rem;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    [data-vista-container].ring-2::after {
+      opacity: 1;
+      background: radial-gradient(circle at center, transparent 40%, rgba(59, 130, 246, 0.05) 100%);
+    }
   </style>
 
   <script>
@@ -4911,7 +4939,6 @@ import Header from "../components/common/Header.astro";
 
       actualizarColores();
       actualizarOverlays();
-      inicializarClicksVista(); // Reinicializar clicks en vistas
       if (infoModelo) infoModelo.textContent = cfg.nombre;
       actualizarInfoDiseno();
     }
@@ -4974,62 +5001,39 @@ import Header from "../components/common/Header.astro";
     });
 
     // Event listeners para clicks directamente en los SVGs (frente/espalda)
-    // Esto permite cambiar de vista al hacer clic en el poleron
-    function inicializarClicksVista() {
+    // Función para detectar sobre qué vista (frente/espalda) está el mouse
+    function detectarVistaEnPosicion(clientX: number, clientY: number): "frontal" | "trasera" | null {
       const cfg = modelosConfig[estadoDiseno.modelo];
       const frenteSvg = document.getElementById(cfg.frenteId);
       const espaldaSvg = document.getElementById(cfg.espaldaId);
 
-      const svgs = [frenteSvg, espaldaSvg];
+      if (!frenteSvg || !espaldaSvg) return null;
 
-      svgs.forEach((svg) => {
-        if (!svg) return;
+      const frenteRect = frenteSvg.getBoundingClientRect();
+      const espaldaRect = espaldaSvg.getBoundingClientRect();
 
-        svg.addEventListener("click", (e) => {
-          const target = e.target as SVGElement;
+      // Verificar si el mouse está sobre el SVG del frente
+      if (
+        clientX >= frenteRect.left &&
+        clientX <= frenteRect.right &&
+        clientY >= frenteRect.top &&
+        clientY <= frenteRect.bottom
+      ) {
+        return "frontal";
+      }
 
-          // No hacer nada si se clickea un elemento overlay
-          if (
-            target.closest(".overlay-elemento") ||
-            target.classList.contains("overlay-elemento")
-          ) {
-            return;
-          }
+      // Verificar si el mouse está sobre el SVG de la espalda
+      if (
+        clientX >= espaldaRect.left &&
+        clientX <= espaldaRect.right &&
+        clientY >= espaldaRect.top &&
+        clientY <= espaldaRect.bottom
+      ) {
+        return "trasera";
+      }
 
-          // Cambiar la vista cuando se hace clic en el SVG
-          const vista = svg.getAttribute("data-vista") as "frente" | "espalda";
-          const vistaActual = vista === "frente" ? "frontal" : "trasera";
-
-          // Actualizar estado
-          estadoDiseno.vistaActual = vistaActual;
-
-          // Resaltar visualmente el contenedor activo
-          const contenedorFrente = document.querySelector(
-            '[data-vista-container="frontal"]',
-          );
-          const contenedorEspalda = document.querySelector(
-            '[data-vista-container="trasera"]',
-          );
-
-          contenedorFrente?.classList.remove("ring-4", "ring-blue-500");
-          contenedorEspalda?.classList.remove("ring-4", "ring-blue-500");
-
-          if (vistaActual === "frontal") {
-            contenedorFrente?.classList.add("ring-4", "ring-blue-500");
-          } else {
-            contenedorEspalda?.classList.add("ring-4", "ring-blue-500");
-          }
-        });
-      });
+      return null;
     }
-
-    // Inicializar clicks en vistas
-    inicializarClicksVista();
-
-    // Inicializar con frente seleccionado
-    document
-      .querySelector('[data-vista-container="frontal"]')
-      ?.classList.add("ring-4", "ring-blue-500");
 
     // Funciones para manejar múltiples imágenes
     function generarId(): string {
@@ -5379,29 +5383,6 @@ import Header from "../components/common/Header.astro";
         const actions = document.createElement("div");
         actions.className = "flex gap-1";
 
-        // Botón para transferir entre vistas
-        const btnTransferir = document.createElement("button");
-        btnTransferir.className =
-          "p-1 text-blue-500 hover:bg-blue-100 rounded transition-colors text-xs";
-        btnTransferir.innerHTML = "⇄";
-        btnTransferir.title = `Mover a ${el.vista === "frontal" ? "Espalda" : "Frente"}`;
-        btnTransferir.onclick = (e) => {
-          e.stopPropagation();
-          // Cambiar la vista del elemento
-          if (el.tipo === "imagen") {
-            const img = estadoDiseno.imagenes.find((i) => i.id === el.id);
-            if (img) {
-              img.vista = img.vista === "frontal" ? "trasera" : "frontal";
-            }
-          } else {
-            const txt = estadoDiseno.textos.find((t) => t.id === el.id);
-            if (txt) {
-              txt.vista = txt.vista === "frontal" ? "trasera" : "frontal";
-            }
-          }
-          actualizarOverlays();
-        };
-
         const btnDelete = document.createElement("button");
         btnDelete.className =
           "p-1 text-red-500 hover:bg-red-100 rounded transition-colors";
@@ -5412,7 +5393,6 @@ import Header from "../components/common/Header.astro";
           eliminarElemento(el.id, el.tipo);
         };
 
-        actions.appendChild(btnTransferir);
         actions.appendChild(btnDelete);
         div.appendChild(info);
         div.appendChild(actions);
@@ -5999,6 +5979,24 @@ import Header from "../components/common/Header.astro";
     document.addEventListener("mousemove", (e) => {
       if (!elementoSeleccionado || !modoInteraccion) return;
 
+      // Mostrar indicador visual de la vista sobre la que está el mouse durante drag
+      if (modoInteraccion === "drag") {
+        const vistaDetectada = detectarVistaEnPosicion(e.clientX, e.clientY);
+        const contenedorFrente = document.querySelector('[data-vista-container="frontal"]') as HTMLElement;
+        const contenedorEspalda = document.querySelector('[data-vista-container="trasera"]') as HTMLElement;
+
+        // Remover highlight previo
+        contenedorFrente?.classList.remove("ring-2", "ring-blue-400");
+        contenedorEspalda?.classList.remove("ring-2", "ring-purple-400");
+
+        // Añadir highlight a la vista detectada
+        if (vistaDetectada === "frontal") {
+          contenedorFrente?.classList.add("ring-2", "ring-blue-400");
+        } else if (vistaDetectada === "trasera") {
+          contenedorEspalda?.classList.add("ring-2", "ring-purple-400");
+        }
+      }
+
       if (elementoSeleccionado.tipo === "imagen") {
         const img = estadoDiseno.imagenes.find(
           (i) => i.id === elementoSeleccionado!.id,
@@ -6095,7 +6093,41 @@ import Header from "../components/common/Header.astro";
       }
     });
 
-    document.addEventListener("mouseup", () => {
+    document.addEventListener("mouseup", (e) => {
+      // Limpiar highlights visuales
+      const contenedorFrente = document.querySelector('[data-vista-container="frontal"]') as HTMLElement;
+      const contenedorEspalda = document.querySelector('[data-vista-container="trasera"]') as HTMLElement;
+      contenedorFrente?.classList.remove("ring-2", "ring-blue-400");
+      contenedorEspalda?.classList.remove("ring-2", "ring-purple-400");
+
+      if (modoInteraccion === "drag" && elementoSeleccionado) {
+        // Detectar sobre qué vista se soltó el elemento
+        const vistaDetectada = detectarVistaEnPosicion(e.clientX, e.clientY);
+        
+        if (vistaDetectada) {
+          // Cambiar la vista del elemento si es necesario
+          if (elementoSeleccionado.tipo === "imagen") {
+            const img = estadoDiseno.imagenes.find(i => i.id === elementoSeleccionado!.id);
+            if (img && img.vista !== vistaDetectada) {
+              img.vista = vistaDetectada;
+              // Ajustar posición si está fuera de límites
+              img.x = Math.max(0, Math.min(300 - img.width, img.x));
+              img.y = Math.max(0, Math.min(400 - img.height, img.y));
+              actualizarOverlays();
+            }
+          } else if (elementoSeleccionado.tipo === "texto") {
+            const txt = estadoDiseno.textos.find(t => t.id === elementoSeleccionado!.id);
+            if (txt && txt.vista !== vistaDetectada) {
+              txt.vista = vistaDetectada;
+              // Ajustar posición si está fuera de límites
+              txt.x = Math.max(0, Math.min(280, txt.x));
+              txt.y = Math.max(0, Math.min(380, txt.y));
+              actualizarOverlays();
+            }
+          }
+        }
+      }
+
       if (modoInteraccion === "rotate") {
         const rotateHandles = document.querySelectorAll(".handle-rotate");
         rotateHandles.forEach((h) => ((h as SVGElement).style.cursor = "grab"));
