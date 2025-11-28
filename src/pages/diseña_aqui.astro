@@ -6227,25 +6227,66 @@ import Header from "../components/common/Header.astro";
           if (elementoSeleccionado.tipo === "imagen") {
             const img = estadoDiseno.imagenes.find(i => i.id === elementoSeleccionado!.id);
             if (img && img.vista !== vistaDetectada) {
+              // Calcular la posición exacta del cursor en el nuevo SVG
+              const cfg = modelosConfig[estadoDiseno.modelo];
+              const nuevoSvgId = vistaDetectada === "trasera" ? cfg.espaldaId : cfg.frenteId;
+              const nuevoSvg = document.getElementById(nuevoSvgId);
+              
+              if (nuevoSvg) {
+                const rect = nuevoSvg.getBoundingClientRect();
+                const scaleX = 300 / rect.width;
+                const scaleY = 400 / rect.height;
+                
+                // Calcular coordenadas del cursor en el nuevo SVG
+                const cursorX = (pos.clientX - rect.left) * scaleX;
+                const cursorY = (pos.clientY - rect.top) * scaleY;
+                
+                // Centrar el elemento en la posición del cursor
+                img.x = cursorX - img.width / 2;
+                img.y = cursorY - img.height / 2;
+                
+                // Ajustar posición si está fuera de límites
+                img.x = Math.max(0, Math.min(300 - img.width, img.x));
+                img.y = Math.max(0, Math.min(400 - img.height, img.y));
+              }
+              
               img.vista = vistaDetectada;
               // Actualizar vista activa
               estadoDiseno.vistaActual = vistaDetectada;
               actualizarIndicadorVista();
-              // Ajustar posición si está fuera de límites
-              img.x = Math.max(0, Math.min(300 - img.width, img.x));
-              img.y = Math.max(0, Math.min(400 - img.height, img.y));
               actualizarOverlays();
             }
           } else if (elementoSeleccionado.tipo === "texto") {
             const txt = estadoDiseno.textos.find(t => t.id === elementoSeleccionado!.id);
             if (txt && txt.vista !== vistaDetectada) {
+              // Calcular la posición exacta del cursor en el nuevo SVG
+              const cfg = modelosConfig[estadoDiseno.modelo];
+              const nuevoSvgId = vistaDetectada === "trasera" ? cfg.espaldaId : cfg.frenteId;
+              const nuevoSvg = document.getElementById(nuevoSvgId);
+              
+              if (nuevoSvg) {
+                const rect = nuevoSvg.getBoundingClientRect();
+                const scaleX = 300 / rect.width;
+                const scaleY = 400 / rect.height;
+                
+                // Calcular coordenadas del cursor en el nuevo SVG
+                const cursorX = (pos.clientX - rect.left) * scaleX;
+                const cursorY = (pos.clientY - rect.top) * scaleY;
+                
+                // Posicionar el texto en la posición del cursor
+                // (el texto se posiciona desde su esquina superior izquierda)
+                txt.x = cursorX;
+                txt.y = cursorY;
+                
+                // Ajustar posición si está fuera de límites (con margen para el tamaño del texto)
+                txt.x = Math.max(0, Math.min(280, txt.x));
+                txt.y = Math.max(txt.size, Math.min(380, txt.y));
+              }
+              
               txt.vista = vistaDetectada;
               // Actualizar vista activa
               estadoDiseno.vistaActual = vistaDetectada;
               actualizarIndicadorVista();
-              // Ajustar posición si está fuera de límites
-              txt.x = Math.max(0, Math.min(280, txt.x));
-              txt.y = Math.max(0, Math.min(380, txt.y));
               actualizarOverlays();
             }
           }
