@@ -5016,15 +5016,23 @@ import Header from "../components/common/Header.astro";
 
       /* Mejorar feedback visual al tocar */
       .overlay-elemento {
-        touch-action: none;
+        touch-action: pan-y;
         -webkit-user-select: none;
         user-select: none;
       }
 
-      /* Prevenir zoom al hacer doble tap */
-      svg,
+      /* Permitir scroll en los contenedores de vista */
+      [data-vista-container] {
+        touch-action: pan-y;
+      }
+
+      /* Prevenir zoom al hacer doble tap en elementos editables, pero permitir scroll */
+      svg {
+        touch-action: pan-x pan-y;
+      }
+
       foreignObject {
-        touch-action: none;
+        touch-action: pan-y;
       }
     }
 
@@ -6424,6 +6432,10 @@ import Header from "../components/common/Header.astro";
       // Event listeners para imagen (mouse y touch)
       const handleImageStart = (e: MouseEvent | TouchEvent) => {
         e.stopPropagation();
+        // Prevenir scroll solo cuando se toca una imagen
+        if ("touches" in e) {
+          e.preventDefault();
+        }
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
         actualizarSeleccionVisual();
@@ -6449,12 +6461,16 @@ import Header from "../components/common/Header.astro";
 
       image.addEventListener("mousedown", handleImageStart);
       image.addEventListener("touchstart", handleImageStart, {
-        passive: true,
+        passive: false,
       });
 
       // Event listeners para handle de resize (mouse y touch)
       const handleResizeStart = (e: MouseEvent | TouchEvent) => {
         e.stopPropagation();
+        // Prevenir scroll solo cuando se toca el handle de resize
+        if ("touches" in e) {
+          e.preventDefault();
+        }
         modoInteraccion = "resize";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
 
@@ -6471,12 +6487,16 @@ import Header from "../components/common/Header.astro";
 
       handle.addEventListener("mousedown", handleResizeStart);
       handle.addEventListener("touchstart", handleResizeStart, {
-        passive: true,
+        passive: false,
       });
 
       // Event listeners para handle de rotación (mouse y touch)
       const handleRotateStart = (e: MouseEvent | TouchEvent) => {
         e.stopPropagation();
+        // Prevenir scroll solo cuando se toca el handle de rotación
+        if ("touches" in e) {
+          e.preventDefault();
+        }
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
         startElementRotation = img.rotation;
@@ -6485,7 +6505,7 @@ import Header from "../components/common/Header.astro";
 
       rotateHandle.addEventListener("mousedown", handleRotateStart);
       rotateHandle.addEventListener("touchstart", handleRotateStart, {
-        passive: true,
+        passive: false,
       });
 
       deleteBtn.addEventListener("click", (e) => {
@@ -6674,6 +6694,10 @@ import Header from "../components/common/Header.astro";
       const handleTextStart = (e: MouseEvent | TouchEvent) => {
         if ((e.target as HTMLElement).tagName === "BUTTON") return;
         e.stopPropagation();
+        // Prevenir scroll solo cuando se toca un texto
+        if ("touches" in e) {
+          e.preventDefault();
+        }
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
         actualizarSeleccionVisual();
@@ -6699,7 +6723,7 @@ import Header from "../components/common/Header.astro";
 
       container.addEventListener("mousedown", handleTextStart);
       container.addEventListener("touchstart", handleTextStart, {
-        passive: true,
+        passive: false,
       });
 
       deleteBtn.addEventListener("click", (e) => {
@@ -6749,6 +6773,10 @@ import Header from "../components/common/Header.astro";
       // Event listener para rotar texto (mouse y touch)
       const handleTextRotateStart = (e: MouseEvent | TouchEvent) => {
         e.stopPropagation();
+        // Prevenir scroll solo cuando se toca el botón de rotación
+        if ("touches" in e) {
+          e.preventDefault();
+        }
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
         startElementRotation = txt.rotation;
@@ -6757,7 +6785,7 @@ import Header from "../components/common/Header.astro";
 
       rotateBtn.addEventListener("mousedown", handleTextRotateStart);
       rotateBtn.addEventListener("touchstart", handleTextRotateStart, {
-        passive: true,
+        passive: false,
       });
 
       foreign.appendChild(container);
@@ -6837,6 +6865,11 @@ import Header from "../components/common/Header.astro";
     // Handlers globales de mouse/touch para todas las interacciones
     const handleGlobalMove = (e: MouseEvent | TouchEvent) => {
       if (!elementoSeleccionado || !modoInteraccion) return;
+
+      // Prevenir scroll solo cuando hay un elemento siendo arrastrado/manipulado
+      if ("touches" in e) {
+        e.preventDefault();
+      }
 
       const pos = obtenerPosicionEvento(e);
 
@@ -6966,7 +6999,7 @@ import Header from "../components/common/Header.astro";
 
     document.addEventListener("mousemove", handleGlobalMove);
     document.addEventListener("touchmove", handleGlobalMove, {
-      passive: true,
+      passive: false,
     });
 
     const handleGlobalEnd = (e: MouseEvent | TouchEvent) => {
