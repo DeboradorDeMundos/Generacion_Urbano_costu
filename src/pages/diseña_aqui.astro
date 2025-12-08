@@ -144,66 +144,35 @@ import Header from "../components/common/Header.astro";
             </div>
           </div>
 
-          <!-- Selector de Tipo de Cierre (oculto para modelo 1) -->
-          <div class="bg-white rounded-xl shadow-lg p-6" style="display:none;">
-            <h3 class="font-bold text-lg mb-4 text-gray-800">Tipo de Cierre</h3>
-            <div class="space-y-2">
-              <button
-                class="cierre-btn w-full px-4 py-3 border-2 rounded-lg font-semibold transition-all"
-                data-cierre="completo"
-              >
-                <div class="flex items-center justify-between">
-                  <span>⬇️ Cierre Completo</span>
-                  <svg class="w-16 h-16" viewBox="0 0 60 60">
-                    <rect
-                      x="28"
-                      y="10"
-                      width="4"
-                      height="40"
-                      fill="#666"
-                      rx="0.5"></rect>
-                    <rect x="27" y="12" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="18" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="24" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="30" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="36" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="42" width="2" height="3" fill="#888"></rect>
-                  </svg>
-                </div>
-              </button>
-              <button
-                class="cierre-btn w-full px-4 py-3 border-2 rounded-lg font-semibold transition-all"
-                data-cierre="corto"
-              >
-                <div class="flex items-center justify-between">
-                  <span>↗️ Cierre Corto</span>
-                  <svg class="w-16 h-16" viewBox="0 0 60 60">
-                    <rect
-                      x="28"
-                      y="10"
-                      width="4"
-                      height="20"
-                      fill="#666"
-                      rx="0.5"></rect>
-                    <rect x="27" y="12" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="18" width="2" height="3" fill="#888"></rect>
-                    <rect x="27" y="24" width="2" height="3" fill="#888"></rect>
-                  </svg>
-                </div>
-              </button>
-              <button
-                class="cierre-btn active w-full px-4 py-3 border-2 rounded-lg font-semibold transition-all"
-                data-cierre="sin-cierre"
-              >
-                <div class="flex items-center justify-between">
-                  <span>🔘 Sin Cierre (Broche)</span>
-                  <svg class="w-16 h-16" viewBox="0 0 60 60">
-                    <circle cx="30" cy="20" r="3" fill="#333"></circle>
-                    <circle cx="30" cy="30" r="3" fill="#333"></circle>
-                    <circle cx="30" cy="40" r="3" fill="#333"></circle>
-                  </svg>
-                </div>
-              </button>
+          <!-- Selector de Tipo de Cierre (solo para modelos 1, 2, 3 y 4) -->
+          <div
+            id="selectorTipoCierre"
+            class="bg-white rounded-xl shadow-lg p-6"
+            style="display:none;"
+          >
+            <div
+              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+            >
+              <h3 class="font-bold text-lg text-gray-800">Tipo de Cierre</h3>
+              <span class="transform transition-transform duration-200">▽</span>
+            </div>
+            <div class="panel-content">
+              <div class="grid grid-cols-2 gap-3">
+                <button
+                  class="tipo-cierre-btn border-2 border-gray-300 rounded-lg p-4 hover:border-red-600 hover:bg-red-50 transition-colors cursor-pointer text-center"
+                  data-cierre="solo-cierre"
+                >
+                  <div class="text-3xl mb-2">🤐</div>
+                  <div class="text-sm font-semibold">Solo Cierre</div>
+                </button>
+                <button
+                  class="tipo-cierre-btn active border-2 border-gray-300 rounded-lg p-4 hover:border-red-600 hover:bg-red-50 transition-colors cursor-pointer text-center"
+                  data-cierre="cierre-broche"
+                >
+                  <div class="text-3xl mb-2">🔘</div>
+                  <div class="text-sm font-semibold">Cierre y Broche</div>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -4825,6 +4794,20 @@ import Header from "../components/common/Header.astro";
                 >
                   Polerón
                 </div>
+                <div
+                  id="infoTipoCierreLabel"
+                  class="text-gray-600"
+                  style="display:none;"
+                >
+                  Tipo de Cierre
+                </div>
+                <div
+                  id="infoTipoCierre"
+                  class="font-semibold text-right"
+                  style="display:none;"
+                >
+                  Cierre y Broche
+                </div>
                 <div class="text-gray-600">Parte seleccionada</div>
                 <div id="infoParte" class="font-semibold text-right">
                   Cuerpo
@@ -4939,6 +4922,23 @@ import Header from "../components/common/Header.astro";
     }
     .tipo-prenda-btn:hover {
       @apply transform scale-105;
+    }
+
+    /* Estilos para botones de tipo de cierre */
+    .tipo-cierre-btn {
+      @apply border-2 border-gray-300 bg-white hover:border-red-600 hover:bg-red-50 transition-all cursor-pointer text-gray-700;
+    }
+    .tipo-cierre-btn.active {
+      @apply border-red-600 bg-red-50 text-red-600 font-bold;
+    }
+    .tipo-cierre-btn:hover {
+      @apply transform scale-105;
+    }
+
+    /* Estilo para la línea del cierre */
+    .linea-cierre {
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
     /* Las partes del polerón ya no tienen efectos hover porque no son clickeables */
@@ -5073,6 +5073,7 @@ import Header from "../components/common/Header.astro";
       textos: TextoOverlay[];
       vistaActual: "frontal" | "trasera"; // Controla qué vista está activa
       tipoPrenda: "poleron" | "cortaviento"; // Tipo de prenda (solo para modelos 3 y 4)
+      tipoCierre: "solo-cierre" | "cierre-broche"; // Tipo de cierre (para modelos 1-4)
     }
     // Colores por defecto para cada modelo
     const coloresPorModelo: Record<string, Record<string, string>> = {
@@ -5130,6 +5131,7 @@ import Header from "../components/common/Header.astro";
       textos: [],
       vistaActual: "frontal", // Vista inicial
       tipoPrenda: "poleron", // Tipo de prenda por defecto
+      tipoCierre: "cierre-broche", // Tipo de cierre por defecto
     };
 
     const emojiRegex = /[\p{Extended_Pictographic}]/u;
@@ -5179,6 +5181,25 @@ import Header from "../components/common/Header.astro";
         if (mostrarTipoPrenda) {
           infoTipoPrenda.textContent =
             estadoDiseno.tipoPrenda === "poleron" ? "Polerón" : "Cortaviento";
+        }
+      }
+
+      // Mostrar/ocultar tipo de cierre según el modelo
+      const mostrarTipoCierre =
+        estadoDiseno.modelo === "modelo-1" ||
+        estadoDiseno.modelo === "modelo-2" ||
+        estadoDiseno.modelo === "modelo-3" ||
+        estadoDiseno.modelo === "modelo-4";
+      if (infoTipoCierre && infoTipoCierreLabel) {
+        infoTipoCierre.style.display = mostrarTipoCierre ? "block" : "none";
+        infoTipoCierreLabel.style.display = mostrarTipoCierre
+          ? "block"
+          : "none";
+        if (mostrarTipoCierre) {
+          infoTipoCierre.textContent =
+            estadoDiseno.tipoCierre === "solo-cierre"
+              ? "Solo Cierre"
+              : "Cierre y Broche";
         }
       }
 
@@ -5412,6 +5433,8 @@ import Header from "../components/common/Header.astro";
     const infoParte = document.getElementById("infoParte");
     const infoTipoPrenda = document.getElementById("infoTipoPrenda");
     const infoTipoPrendaLabel = document.getElementById("infoTipoPrendaLabel");
+    const infoTipoCierre = document.getElementById("infoTipoCierre");
+    const infoTipoCierreLabel = document.getElementById("infoTipoCierreLabel");
     const infoColoresList = document.getElementById("infoColores");
     const infoTextosList = document.getElementById("infoTextos");
     const infoImagenesInfo = document.getElementById("infoImagenes");
@@ -5500,10 +5523,28 @@ import Header from "../components/common/Header.astro";
         }
       }
 
+      // Mostrar/ocultar selector de tipo de cierre según el modelo
+      const selectorTipoCierre = document.getElementById("selectorTipoCierre");
+      if (selectorTipoCierre) {
+        if (
+          modelo === "modelo-1" ||
+          modelo === "modelo-2" ||
+          modelo === "modelo-3" ||
+          modelo === "modelo-4"
+        ) {
+          selectorTipoCierre.style.display = "block";
+        } else {
+          selectorTipoCierre.style.display = "none";
+          // Resetear a cierre-broche cuando se oculta
+          estadoDiseno.tipoCierre = "cierre-broche";
+        }
+      }
+
       // Actualizar selector de partes dinámicamente
       actualizarSelectorPartes(modelo);
 
       actualizarColores();
+      actualizarLineaCierre(); // Actualizar línea del cierre
       actualizarOverlays();
       if (infoModelo) infoModelo.textContent = cfg.nombre;
       actualizarInfoDiseno();
@@ -5524,6 +5565,74 @@ import Header from "../components/common/Header.astro";
         });
       });
       actualizarInfoDiseno();
+    }
+
+    function actualizarLineaCierre() {
+      const cfg = modelosConfig[estadoDiseno.modelo];
+      const frenteSvg = document.getElementById(cfg.frenteId);
+
+      if (!frenteSvg) return;
+
+      // Remover línea existente si existe
+      const lineaExistente = frenteSvg.querySelector(".linea-cierre");
+      if (lineaExistente) {
+        lineaExistente.remove();
+      }
+
+      // Solo agregar línea si es "solo-cierre" y el modelo es 1-4
+      if (
+        estadoDiseno.tipoCierre === "solo-cierre" &&
+        ["modelo-1", "modelo-2", "modelo-3", "modelo-4"].includes(
+          estadoDiseno.modelo,
+        )
+      ) {
+        // Configuraciones específicas por modelo para la posición de la línea
+        const configuracionesCierre: Record<
+          string,
+          { startPercent: number; endPercent: number }
+        > = {
+          "modelo-1": { startPercent: 0.35, endPercent: 0.9 }, // Comienza más abajo (25% en vez de 15%)
+          "modelo-2": { startPercent: 0.35, endPercent: 0.9 },
+          "modelo-3": { startPercent: 0.3, endPercent: 0.82 },
+          "modelo-4": { startPercent: 0.37, endPercent: 0.9 },
+        };
+
+        const config = configuracionesCierre[estadoDiseno.modelo] || {
+          startPercent: 0.15,
+          endPercent: 0.75,
+        };
+
+        // Obtener el viewBox del SVG para calcular las coordenadas
+        const viewBox = frenteSvg.getAttribute("viewBox");
+        let centerX = 300; // valor por defecto
+        let startY = 100;
+        let endY = 400;
+
+        if (viewBox) {
+          const [, , width, height] = viewBox.split(" ").map(Number);
+          centerX = width / 2 + 4;
+          startY = height * config.startPercent;
+          endY = height * config.endPercent;
+        }
+
+        // Crear la línea del cierre
+        const linea = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        linea.setAttribute("class", "linea-cierre");
+        linea.setAttribute("x1", centerX.toString());
+        linea.setAttribute("y1", startY.toString());
+        linea.setAttribute("x2", centerX.toString());
+        linea.setAttribute("y2", endY.toString());
+        linea.setAttribute("stroke", "#000000");
+        linea.setAttribute("stroke-width", "6");
+        linea.setAttribute("stroke-linecap", "round");
+        linea.style.opacity = "0.8";
+
+        // Agregar la línea al SVG (al final para que esté encima)
+        frenteSvg.appendChild(linea);
+      }
     }
 
     function aplicarColor(color: string) {
@@ -5582,6 +5691,29 @@ import Header from "../components/common/Header.astro";
             ),
           );
 
+        actualizarInfoDiseno();
+      });
+    });
+
+    // Event listeners para tipo de cierre
+    document.querySelectorAll(".tipo-cierre-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const cierre =
+          (e.currentTarget as HTMLElement).dataset.cierre || "cierre-broche";
+        estadoDiseno.tipoCierre = cierre as "solo-cierre" | "cierre-broche";
+
+        // Actualizar botones activos
+        document
+          .querySelectorAll(".tipo-cierre-btn")
+          .forEach((b) =>
+            b.classList.toggle(
+              "active",
+              (b as HTMLElement).dataset.cierre === cierre,
+            ),
+          );
+
+        // Actualizar línea del cierre
+        actualizarLineaCierre();
         actualizarInfoDiseno();
       });
     });
