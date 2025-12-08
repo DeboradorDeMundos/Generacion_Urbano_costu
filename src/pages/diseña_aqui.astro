@@ -45,17 +45,18 @@ import Header from "../components/common/Header.astro";
                 >
                   <img
                     src="/images/services/modelo_1/frente/sombra-y-borde.png"
-                    alt="Modelo 1"
+                    alt="Canguro con cierre"
                     class="w-full h-24 object-contain"
                   />
                   <div class="text-xs font-semibold text-center mt-1">
-                    Modelo 1
+                    Canguro con cierre
                   </div>
                 </button>
+                <!-- Modelo 2 oculto - no utilizado por el cliente
                 <button
                   class="modelo-btn flex-shrink-0 snap-center"
                   data-modelo="modelo-2"
-                  style="min-width: 120px;"
+                  style="min-width: 120px; display: none;"
                 >
                   <img
                     src="/images/services/modelo_2/frente/sombra-y-borde.png"
@@ -66,6 +67,7 @@ import Header from "../components/common/Header.astro";
                     Modelo 2
                   </div>
                 </button>
+                -->
                 <button
                   class="modelo-btn flex-shrink-0 snap-center"
                   data-modelo="modelo-3"
@@ -73,11 +75,11 @@ import Header from "../components/common/Header.astro";
                 >
                   <img
                     src="/images/services/modelo_3/frente/sombra-y-borde.png"
-                    alt="Modelo 3"
+                    alt="Americano básico"
                     class="w-full h-24 object-contain"
                   />
                   <div class="text-xs font-semibold text-center mt-1">
-                    Modelo 3
+                    Americano básico
                   </div>
                 </button>
                 <button
@@ -87,11 +89,11 @@ import Header from "../components/common/Header.astro";
                 >
                   <img
                     src="/images/services/modelo_4/frente/sombra-y-borde.png"
-                    alt="Modelo 4"
+                    alt="Americano con gorro"
                     class="w-full h-24 object-contain"
                   />
                   <div class="text-xs font-semibold text-center mt-1">
-                    Modelo 4
+                    Americano con gorro
                   </div>
                 </button>
                 <button
@@ -101,11 +103,11 @@ import Header from "../components/common/Header.astro";
                 >
                   <img
                     src="/images/services/modelo_5/frente/sombra-y-borde.png"
-                    alt="Modelo 5"
+                    alt="Canguro"
                     class="w-full h-24 object-contain"
                   />
                   <div class="text-xs font-semibold text-center mt-1">
-                    Modelo 5
+                    Canguro
                   </div>
                 </button>
               </div>
@@ -5351,7 +5353,7 @@ import Header from "../components/common/Header.astro";
       }
     > = {
       "modelo-1": {
-        nombre: "Modelo 1",
+        nombre: "Canguro con cierre",
         tieneGorro: true,
         frenteId: "modelo1Frente",
         espaldaId: "modelo1Espalda",
@@ -5374,14 +5376,14 @@ import Header from "../components/common/Header.astro";
         partes: ["cuerpo", "mangas", "cintura"],
       },
       "modelo-3": {
-        nombre: "Modelo 3",
+        nombre: "Americano básico",
         tieneGorro: false,
         frenteId: "modelo3Frente",
         espaldaId: "modelo3Espalda",
         partes: ["cuerpo", "mangas", "cintura", "rayas-pretina"],
       },
       "modelo-4": {
-        nombre: "Modelo 4",
+        nombre: "Americano con gorro",
         tieneGorro: true,
         frenteId: "modelo4Frente",
         espaldaId: "modelo4Espalda",
@@ -5398,7 +5400,7 @@ import Header from "../components/common/Header.astro";
         ],
       },
       "modelo-5": {
-        nombre: "Modelo 5",
+        nombre: "Canguro",
         tieneGorro: true,
         frenteId: "modelo5Frente",
         espaldaId: "modelo5Espalda",
