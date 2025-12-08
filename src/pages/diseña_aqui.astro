@@ -5125,6 +5125,51 @@ import Header from "../components/common/Header.astro";
     function obtenerColoresModelo(modelo: string): Record<string, string> {
       return coloresPorModelo[modelo] ? { ...coloresPorModelo[modelo] } : {};
     }
+
+    // Mapa de colores hexadecimales a nombres descriptivos
+    const nombresColores: Record<string, string> = {
+      "#FFFFFF": "Blanco",
+      "#000000": "Negro",
+      "#FF00FF": "Fuxia",
+      "#2E5090": "Calipso",
+      "#318CE7": "Azul Francia",
+      "#FFFDD0": "Crema",
+      "#FFDB58": "Mostaza",
+      "#C8A2C8": "Lila",
+      "#E6E6FA": "Lila/Lavanda",
+      "#800080": "Púrpura",
+      "#9370DB": "Morado",
+      "#145A32": "Verde Petróleo",
+      "#1B4F72": "Azul Petróleo",
+      "#D62828": "Rojo Italiano",
+      "#FFC0CB": "Rosado",
+      "#E7B8B8": "Rosado Palo de Rosa",
+      "#F5F5DC": "Beige",
+      "#B0B0B0": "Gris Melange",
+      "#4A4A4A": "Gris Marengo",
+      "#88B04B": "Verde Cata",
+      "#4169E1": "Azul Rey",
+      "#800020": "Burdeo",
+      "#006A4E": "Verde Botella",
+      "#87CEEB": "Celeste",
+      "#50C878": "Verde Turquesa/Esmeralda",
+      "#00A86B": "Verde Jade",
+    };
+
+    // Función para obtener el nombre del color desde su código hexadecimal
+    function obtenerNombreColor(hex: string): string {
+      // Normalizar el formato del color
+      const normalizado = hex.toUpperCase();
+
+      // Si existe en el mapa, devolver el nombre
+      if (nombresColores[normalizado]) {
+        return nombresColores[normalizado];
+      }
+
+      // Si no existe, devolver el código hexadecimal
+      return hex;
+    }
+
     const estadoDiseno: EstadoDiseno = {
       modelo: "modelo-1",
       parteActual: "cuerpo",
@@ -5220,8 +5265,11 @@ import Header from "../components/common/Header.astro";
             swatch.style.backgroundColor =
               estadoDiseno.colores[parte] || "#fff";
             const valor = document.createElement("span");
-            valor.className = "font-semibold";
-            valor.textContent = estadoDiseno.colores[parte] || "-";
+            valor.className = "font-semibold text-xs";
+            const colorHex = estadoDiseno.colores[parte] || "-";
+            const nombreColor =
+              colorHex !== "-" ? obtenerNombreColor(colorHex) : "-";
+            valor.textContent = nombreColor;
             detalle.appendChild(swatch);
             detalle.appendChild(valor);
             li.appendChild(nombre);
@@ -7173,8 +7221,12 @@ import Header from "../components/common/Header.astro";
       mensaje += `*COLORES POR PARTE:*\n`;
       cfg.partes.forEach((parte) => {
         const nombreParte = nombresPartes[parte] || parte;
-        const color = estadoDiseno.colores[parte] || "Sin definir";
-        mensaje += `- ${nombreParte}: ${color}\n`;
+        const colorHex = estadoDiseno.colores[parte] || "Sin definir";
+        const nombreColor =
+          colorHex !== "Sin definir"
+            ? obtenerNombreColor(colorHex)
+            : "Sin definir";
+        mensaje += `- ${nombreParte}: ${nombreColor}\n`;
       });
 
       // Textos
