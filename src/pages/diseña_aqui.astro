@@ -480,9 +480,28 @@ import Header from "../components/common/Header.astro";
                     height="400"
                     viewBox="0 0 300 400"
                     class="max-w-full"
-                    style="display:none"
+                    style="display:none;"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="watermarkPattern"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <!-- Gradientes 3D HIPERREALISTAS -->
                       <linearGradient
                         id="bodyGradient"
@@ -675,6 +694,15 @@ import Header from "../components/common/Header.astro";
                         </feMerge>
                       </filter>
                     </defs>
+
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#watermarkPattern)"
+                      pointer-events="none"></rect>
 
                     <!-- Cuerpo principal HIPERREALISTA con forma anatómica y detalles -->
                     <path
@@ -2358,7 +2386,35 @@ import Header from "../components/common/Header.astro";
                           preserveAspectRatio="none"
                         /></mask
                       >
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m1f"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                     </defs>
+
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m1f)"
+                      pointer-events="none"></rect>
 
                     <!-- Capas colorizables -->
                     <rect
@@ -2462,6 +2518,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="frente"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m2f"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m2-fr-pecho"
                         ><image
                           href="/images/services/modelo_2/frente/pecho.png"
@@ -2493,6 +2568,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m2f)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="cuerpo"
                       class="parte-poleron"
@@ -2542,6 +2625,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="frente"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m3f"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m3-fr-color1"
                         ><image
                           href="/images/services/modelo_3/frente/color1.png"
@@ -2583,6 +2685,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m3f)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="cuerpo"
                       class="parte-poleron"
@@ -2641,6 +2751,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="frente"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m4f"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m4-fr-pecho">
                         <image
                           href="/images/services/modelo_4/frente/pecho.png"
@@ -2732,6 +2861,14 @@ import Header from "../components/common/Header.astro";
                         />
                       </mask>
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m4f)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="mangas"
                       class="parte-poleron"
@@ -2835,6 +2972,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="frente"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m5f"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m5-fr-pecho"
                         ><image
                           href="/images/services/modelo_5/frente/pecho.png"
@@ -2916,6 +3072,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m5f)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="mangas"
                       class="parte-poleron"
@@ -3021,9 +3185,28 @@ import Header from "../components/common/Header.astro";
                     height="400"
                     viewBox="0 0 300 400"
                     class="max-w-full"
-                    style="display:none"
+                    style="display:none;"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="watermarkPatternBack"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <!-- Gradientes y texturas para la vista trasera -->
                       <linearGradient
                         id="bodyGradientBack"
@@ -3181,6 +3364,15 @@ import Header from "../components/common/Header.astro";
                         </feMerge>
                       </filter>
                     </defs>
+
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#watermarkPatternBack)"
+                      pointer-events="none"></rect>
 
                     <!-- Cuerpo trasero hiperrealista -->
                     <path
@@ -3864,6 +4056,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="espalda"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m1b"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-bk-espalda"
                         ><image
                           href="/images/services/modelo_1/espalda/espalda.png"
@@ -3915,6 +4126,15 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m1b)"
+                      pointer-events="none"></rect>
 
                     <!-- Capas colorizables -->
                     <rect
@@ -3988,6 +4208,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="espalda"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m2b"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m2-bk-espalda"
                         ><image
                           href="/images/services/modelo_2/espalda/espalda.png"
@@ -4019,6 +4258,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m2b)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="cuerpo"
                       class="parte-poleron"
@@ -4068,6 +4315,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="espalda"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m3b"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m3-bk-color1"
                         ><image
                           href="/images/services/modelo_3/espalda/color1.png"
@@ -4109,6 +4375,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m3b)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="cuerpo"
                       class="parte-poleron"
@@ -4167,6 +4441,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="espalda"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m4b"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m4-es-mangas">
                         <image
                           href="/images/services/modelo_4/espalda/mangas.png"
@@ -4218,6 +4511,14 @@ import Header from "../components/common/Header.astro";
                         />
                       </mask>
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m4b)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="mangas"
                       class="parte-poleron"
@@ -4287,6 +4588,25 @@ import Header from "../components/common/Header.astro";
                     data-vista="espalda"
                   >
                     <defs>
+                      <!-- Patrón de marca de agua -->
+                      <pattern
+                        id="wmPattern_m5b"
+                        x="0"
+                        y="0"
+                        width="80"
+                        height="80"
+                        patternUnits="userSpaceOnUse"
+                      >
+                        <image
+                          href="/images/generacion_urbana_sello.jpg"
+                          x="0"
+                          y="0"
+                          width="80"
+                          height="80"
+                          opacity="0.08"
+                          style="filter: grayscale(100%);"
+                        />
+                      </pattern>
                       <mask id="mk-m5-es-espalda"
                         ><image
                           href="/images/services/modelo_5/espalda/espalda.png"
@@ -4338,6 +4658,14 @@ import Header from "../components/common/Header.astro";
                         /></mask
                       >
                     </defs>
+                    <!-- Fondo con patrón de marca de agua -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="300"
+                      height="400"
+                      fill="url(#wmPattern_m5b)"
+                      pointer-events="none"></rect>
                     <rect
                       data-parte="mangas"
                       class="parte-poleron"
