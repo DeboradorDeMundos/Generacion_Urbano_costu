@@ -9,39 +9,49 @@ import Header from "../components/common/Header.astro";
 >
   <Header />
 
-  <main class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <main class="min-h-screen bg-gray-50 py-2 sm:py-4 md:py-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
       <!-- Header del Diseñador -->
-      <div class="text-center mb-8">
-        <h1 class="text-4xl font-black text-black mb-2">
+      <div class="text-center mb-4 sm:mb-6 md:mb-8 py-2 sm:py-4">
+        <h1
+          class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-black mb-1 sm:mb-2"
+        >
           Diseñador de <span class="text-red-600">Polerones</span>
         </h1>
-        <p class="text-gray-600">
+        <p class="text-xs sm:text-sm md:text-base text-gray-600 px-2">
           Personaliza tu polerón, guarda y comparte tu diseño
         </p>
       </div>
 
       <!-- Layout Principal: 3 Columnas -->
-      <div class="grid lg:grid-cols-12 gap-8">
+      <div class="grid lg:grid-cols-12 gap-3 sm:gap-4 md:gap-6">
         <!-- Columna Izquierda: Controles (Modelos, Color, Imagen) -->
-        <div class="lg:col-span-3 space-y-6">
+        <div class="lg:col-span-3 space-y-3 sm:space-y-4 md:space-y-6">
           <!-- Selector de Modelo -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
+          <div
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6"
+          >
             <div
-              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+              class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4 cursor-pointer panel-header"
             >
-              <h3 class="font-bold text-lg text-gray-800">Modelo de Polerón</h3>
-              <span class="transform transition-transform duration-200">▽</span>
+              <h3
+                class="font-bold text-sm sm:text-base md:text-lg text-gray-800"
+              >
+                Modelo de Polerón
+              </h3>
+              <span class="transform transition-transform duration-200 text-sm"
+                >▽</span
+              >
             </div>
             <div class="panel-content">
               <div
-                class="flex overflow-x-auto gap-3 pb-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                class="flex overflow-x-auto gap-2 sm:gap-3 pb-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
                 style="scrollbar-width: thin;"
               >
                 <button
                   class="modelo-btn active flex-shrink-0 snap-center"
                   data-modelo="modelo-1"
-                  style="min-width: 120px;"
+                  style="min-width: 90px;"
                 >
                   <img
                     src="/images/services/modelo_1/frente/sombra-y-borde.png"
@@ -117,13 +127,17 @@ import Header from "../components/common/Header.astro";
           <!-- Selector de Tipo de Prenda (solo para modelos 3 y 4) -->
           <div
             id="selectorTipoPrenda"
-            class="bg-white rounded-xl shadow-lg p-6"
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6"
             style="display:none;"
           >
             <div
-              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+              class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4 cursor-pointer panel-header"
             >
-              <h3 class="font-bold text-lg text-gray-800">Tipo de Prenda</h3>
+              <h3
+                class="font-bold text-sm sm:text-base md:text-lg text-gray-800"
+              >
+                Tipo de Prenda
+              </h3>
               <span class="transform transition-transform duration-200">▽</span>
             </div>
             <div class="panel-content">
@@ -149,13 +163,17 @@ import Header from "../components/common/Header.astro";
           <!-- Selector de Tipo de Cierre (solo para modelos 1, 2, 3 y 4) -->
           <div
             id="selectorTipoCierre"
-            class="bg-white rounded-xl shadow-lg p-6"
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6"
             style="display:none;"
           >
             <div
-              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+              class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4 cursor-pointer panel-header"
             >
-              <h3 class="font-bold text-lg text-gray-800">Tipo de Cierre</h3>
+              <h3
+                class="font-bold text-sm sm:text-base md:text-lg text-gray-800"
+              >
+                Tipo de Cierre
+              </h3>
               <span class="transform transition-transform duration-200">▽</span>
             </div>
             <div class="panel-content">
@@ -179,11 +197,15 @@ import Header from "../components/common/Header.astro";
           </div>
 
           <!-- Personalizar Color (Fusionado) -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
+          <div
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6"
+          >
             <div
-              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+              class="flex items-center justify-between mb-2 sm:mb-3 md:mb-4 cursor-pointer panel-header"
             >
-              <h3 class="font-bold text-lg text-gray-800">
+              <h3
+                class="font-bold text-sm sm:text-base md:text-lg text-gray-800"
+              >
                 Personalizar Color
               </h3>
               <span class="transform transition-transform duration-200">▽</span>
@@ -458,24 +480,33 @@ import Header from "../components/common/Header.astro";
 
         <!-- Columna Central: Canvas de Diseño (Sticky) -->
         <div class="lg:col-span-6">
-          <div class="sticky top-8 bg-white rounded-xl shadow-lg p-6">
-            <div class="text-center mb-4">
-              <p class="text-sm text-gray-600">
+          <div
+            class="sticky top-2 sm:top-4 md:top-8 bg-white rounded-lg sm:rounded-xl shadow-lg p-2 sm:p-3 md:p-6"
+          >
+            <div class="text-center mb-2 sm:mb-3 md:mb-4">
+              <p class="text-xs sm:text-sm text-gray-600">
                 <span class="font-semibold">Tip:</span> Arrastra elementos entre
                 frente y espalda libremente
               </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6" id="canvasUnificado">
+            <div
+              class="grid md:grid-cols-2 gap-2 sm:gap-3 md:gap-6"
+              id="canvasUnificado"
+            >
               <!-- Vista Frontal -->
               <div
                 data-vista-container="frontal"
                 class="transition-all duration-300 cursor-pointer"
                 id="contenedorFrontal"
               >
-                <h3 class="text-center font-bold text-gray-700 mb-4">Frente</h3>
+                <h3
+                  class="text-center font-bold text-xs sm:text-sm md:text-base text-gray-700 mb-1 sm:mb-2"
+                >
+                  Frente
+                </h3>
                 <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-4 border-blue-500"
+                  class="bg-gray-100 rounded p-1 sm:p-2 md:p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-2 sm:border-4 border-blue-500"
                 >
                   <svg
                     id="svgFrontal"
@@ -3176,11 +3207,13 @@ import Header from "../components/common/Header.astro";
                 class="transition-all duration-300 cursor-pointer"
                 id="contenedorTrasero"
               >
-                <h3 class="text-center font-bold text-gray-700 mb-4">
+                <h3
+                  class="text-center font-bold text-xs sm:text-sm md:text-base text-gray-700 mb-1 sm:mb-2"
+                >
                   Espalda
                 </h3>
                 <div
-                  class="bg-gray-100 rounded-lg p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-4 border-transparent"
+                  class="bg-gray-100 rounded p-1 sm:p-2 md:p-4 flex items-center justify-center hover:bg-gray-200 transition-colors border-2 sm:border-4 border-transparent"
                 >
                   <svg
                     id="svgTrasero"
@@ -4757,10 +4790,16 @@ import Header from "../components/common/Header.astro";
         </div>
 
         <!-- columna derecha -->
-        <div class="lg:col-span-3 space-y-6">
+        <div class="lg:col-span-3 space-y-3 sm:space-y-4 md:space-y-6">
           <!-- Panel de Capas -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-lg text-gray-800 mb-4">Capas</h3>
+          <div
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6"
+          >
+            <h3
+              class="font-bold text-sm sm:text-base md:text-lg text-gray-800 mb-2 sm:mb-3"
+            >
+              Capas
+            </h3>
             <div
               id="listaCapas"
               class="space-y-2 overflow-y-auto"
@@ -4774,11 +4813,16 @@ import Header from "../components/common/Header.astro";
           </div>
 
           <!-- Info del diseño actual -->
-          <div class="bg-white rounded-xl shadow-lg p-6 space-y-4">
-            <h3 class="font-bold text-lg text-gray-800">
+          <div
+            class="bg-white rounded-lg sm:rounded-xl shadow-lg p-3 sm:p-4 md:p-6 space-y-2 sm:space-y-3"
+          >
+            <h3 class="font-bold text-sm sm:text-base md:text-lg text-gray-800">
               Info del diseño actual
             </h3>
-            <div id="infoDiseno" class="text-sm text-gray-700 space-y-3">
+            <div
+              id="infoDiseno"
+              class="text-xs sm:text-sm text-gray-700 space-y-2 sm:space-y-3"
+            >
               <div class="grid grid-cols-2 gap-2 text-xs">
                 <div class="text-gray-600">Modelo</div>
                 <div id="infoModelo" class="font-semibold text-right">
@@ -4864,18 +4908,24 @@ import Header from "../components/common/Header.astro";
       </div>
 
       <!-- Información Adicional -->
-      <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+      <div
+        class="mt-4 sm:mt-6 md:mt-8 bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 md:p-8"
+      >
         <div class="text-center">
-          <h3 class="font-bold text-xl mb-3 text-gray-800">
+          <h3
+            class="font-bold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 md:mb-4 text-gray-800"
+          >
             ¿Listo con tu diseño?
           </h3>
-          <p class="text-gray-600 mb-4">
+          <p
+            class="text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4 md:mb-6 px-2"
+          >
             Guarda tu diseño y envíanos un WhatsApp para cotizar y producir tu
             polerón personalizado
           </p>
           <a
             href="/contacto"
-            class="inline-block px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all"
+            class="inline-block px-5 sm:px-6 md:px-8 py-2 sm:py-3 text-sm sm:text-base md:text-lg bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all"
             style="box-shadow: 0 0 15px rgba(220, 38, 38, 0.6), 0 0 30px rgba(220, 38, 38, 0.4); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);"
           >
             Solicitar Cotización
@@ -5044,6 +5094,101 @@ import Header from "../components/common/Header.astro";
       -moz-user-drag: none;
       -o-user-drag: none;
       user-drag: none;
+    }
+
+    /* Estilos responsivos adicionales para móvil */
+    @media (max-width: 640px) {
+      /* Mejorar tamaño de botones en móvil */
+      .modelo-btn {
+        @apply p-1.5;
+        min-width: 90px !important;
+      }
+
+      .modelo-btn img {
+        height: 50px !important;
+      }
+
+      .modelo-btn .text-xs {
+        font-size: 9px;
+        line-height: 1.2;
+      }
+
+      /* Ajustar tamaño de iconos en botones */
+      .tipo-prenda-btn .text-3xl,
+      .tipo-cierre-btn .text-3xl {
+        font-size: 1.25rem;
+      }
+
+      .tipo-prenda-btn .text-sm,
+      .tipo-cierre-btn .text-sm {
+        font-size: 0.7rem;
+      }
+
+      .tipo-prenda-btn,
+      .tipo-cierre-btn {
+        @apply p-2;
+      }
+
+      /* Mejorar espaciado de inputs y selects */
+      select,
+      input[type="text"],
+      input[type="color"],
+      input[type="range"] {
+        @apply py-1.5 px-2 text-xs;
+      }
+
+      /* Ajustar botones de acción */
+      button {
+        @apply text-xs py-1.5 px-2;
+      }
+
+      /* Hacer el SVG más responsivo */
+      svg {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Mejorar espaciado de la lista de capas */
+      #listaCapas {
+        max-height: 120px !important;
+      }
+
+      /* Reducir padding en paneles colapsados */
+      .panel-content.hidden + .panel-header {
+        margin-bottom: 0;
+      }
+
+      /* Reducir tamaño de etiquetas y labels */
+      label {
+        @apply text-xs;
+      }
+
+      /* Ajustar altura de los SVG en móvil */
+      #svgFrontal,
+      svg[id*="modelo"] {
+        height: 300px !important;
+      }
+
+      /* Mejorar espaciado de grillas de colores */
+      .grid.grid-cols-4 {
+        @apply gap-1;
+      }
+
+      /* Botones más compactos */
+      .color-preset {
+        @apply w-8 h-8;
+      }
+    }
+
+    /* Estilos para tablets */
+    @media (min-width: 641px) and (max-width: 1023px) {
+      .modelo-btn {
+        min-width: 100px !important;
+      }
+
+      .modelo-btn img {
+        height: 60px !important;
+      }
     }
   </style>
 
