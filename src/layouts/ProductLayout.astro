@@ -1,6 +1,6 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import BreadCrumbs from '../components/common/BreadCrumbs.astro';
+import BaseLayout from "./BaseLayout.astro";
+import BreadCrumbs from "../components/common/BreadCrumbs.astro";
 
 export interface Props {
   title: string;
@@ -28,7 +28,7 @@ const {
   features = [],
   gallery = [],
   specifications,
-  breadcrumbs = []
+  breadcrumbs = [],
 } = Astro.props;
 ---
 
@@ -42,11 +42,13 @@ const {
   <div class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Breadcrumbs -->
-      {breadcrumbs.length > 0 && (
-        <div class="mb-6">
-          <BreadCrumbs items={breadcrumbs} />
-        </div>
-      )}
+      {
+        breadcrumbs.length > 0 && (
+          <div class="mb-6">
+            <BreadCrumbs items={breadcrumbs} />
+          </div>
+        )
+      }
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <!-- Product Images -->
@@ -54,50 +56,56 @@ const {
           <!-- Main Image -->
           <div class="aspect-square overflow-hidden rounded-lg bg-gray-100">
             <img
-              src={image || '/images/placeholder-product.jpg'}
+              src={image || "/images/placeholder-product.jpg"}
               alt={title}
               class="h-full w-full object-cover"
             />
           </div>
-          
+
           <!-- Gallery -->
-          {gallery.length > 0 && (
-            <div class="grid grid-cols-4 gap-4">
-              {gallery.map((galleryImage) => (
-                <div class="aspect-square overflow-hidden rounded-lg bg-gray-100 cursor-pointer hover:opacity-75 transition-opacity">
-                  <img
-                    src={galleryImage}
-                    alt={`${title} - vista adicional`}
-                    class="h-full w-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          {
+            gallery.length > 0 && (
+              <div class="grid grid-cols-4 gap-4">
+                {gallery.map((galleryImage) => (
+                  <div class="aspect-square overflow-hidden rounded-lg bg-gray-100 cursor-pointer hover:opacity-75 transition-opacity">
+                    <img
+                      src={galleryImage}
+                      alt={`${title} - vista adicional`}
+                      class="h-full w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )
+          }
         </div>
 
         <!-- Product Info -->
         <div class="space-y-6">
           <!-- Category -->
-          {category && (
-            <div>
-              <span class="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800">
-                {category}
-              </span>
-            </div>
-          )}
+          {
+            category && (
+              <div>
+                <span class="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800">
+                  {category}
+                </span>
+              </div>
+            )
+          }
 
           <!-- Title and Price -->
           <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 font-heading mb-4">
+            <h1
+              class="text-3xl md:text-4xl font-bold text-gray-900 font-heading mb-4"
+            >
               {title}
             </h1>
-            
-            {price && (
-              <p class="text-2xl font-bold text-primary-600">
-                {price}
-              </p>
-            )}
+
+            {
+              price && (
+                <p class="text-2xl font-bold text-primary-600">{price}</p>
+              )
+            }
           </div>
 
           <!-- Description -->
@@ -108,55 +116,69 @@ const {
           </div>
 
           <!-- Features -->
-          {features.length > 0 && (
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">
-                Características principales
-              </h3>
-              <ul class="space-y-2">
-                {features.map((feature) => (
-                  <li class="flex items-start">
-                    <svg class="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    <span class="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {
+            features.length > 0 && (
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                  Características principales
+                </h3>
+                <ul class="space-y-2">
+                  {features.map((feature) => (
+                    <li class="flex items-start">
+                      <svg
+                        class="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
 
           <!-- Specifications -->
-          {specifications && (
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">
-                Especificaciones
-              </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {Object.entries(specifications).map(([key, value]) => (
-                  <div class="bg-gray-50 rounded-lg p-4">
-                    <dt class="text-sm font-medium text-gray-500 capitalize">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900">
-                      {Array.isArray(value) ? value.join(', ') : value}
-                    </dd>
-                  </div>
-                ))}
+          {
+            specifications && (
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                  Especificaciones
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {Object.entries(specifications).map(([key, value]) => (
+                    <div class="bg-gray-50 rounded-lg p-4">
+                      <dt class="text-sm font-medium text-gray-500 capitalize">
+                        {key.replace(/([A-Z])/g, " $1").trim()}
+                      </dt>
+                      <dd class="mt-1 text-sm text-gray-900">
+                        {Array.isArray(value) ? value.join(", ") : value}
+                      </dd>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
 
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4">
             <a
-              href="/contacto"
+              href="https://wa.me/56993520202?text=Hola%2C%20me%20interesa%20solicitar%20una%20cotizaci%C3%B3n"
+              target="_blank"
+              rel="noopener"
               class="flex-1 bg-primary-600 text-white text-center py-3 px-6 rounded-md font-medium hover:bg-primary-700 transition-colors"
             >
               Solicitar Cotización
             </a>
             <a
-              href={`https://wa.me/56900000000?text=${encodeURIComponent(`Hola, me interesa el producto: ${title}`)}`}
+              href={`https://wa.me/56993520202?text=${encodeURIComponent(`Hola, me interesa el producto: ${title}`)}`}
               class="flex-1 border border-primary-600 text-primary-600 text-center py-3 px-6 rounded-md font-medium hover:bg-primary-50 transition-colors"
               target="_blank"
               rel="noopener"
@@ -183,31 +205,32 @@ const {
   .prose {
     @apply text-gray-700 leading-relaxed;
   }
-  
+
   .prose h2 {
     @apply text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading;
   }
-  
+
   .prose h3 {
     @apply text-xl font-semibold text-gray-900 mt-6 mb-3 font-heading;
   }
-  
+
   .prose p {
     @apply mb-4;
   }
-  
-  .prose ul, .prose ol {
+
+  .prose ul,
+  .prose ol {
     @apply mb-4 pl-6;
   }
-  
+
   .prose li {
     @apply mb-2;
   }
-  
+
   .prose a {
     @apply text-primary-600 hover:text-primary-700 underline;
   }
-  
+
   .prose strong {
     @apply font-semibold text-gray-900;
   }
