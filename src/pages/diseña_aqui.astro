@@ -5589,17 +5589,18 @@ import Header from "../components/common/Header.astro";
         // Configuraciones específicas por modelo para la posición de la línea
         const configuracionesCierre: Record<
           string,
-          { startPercent: number; endPercent: number }
+          { startPercent: number; endPercent: number; rotation: number }
         > = {
-          "modelo-1": { startPercent: 0.35, endPercent: 0.9 }, // Comienza más abajo (25% en vez de 15%)
-          "modelo-2": { startPercent: 0.35, endPercent: 0.9 },
-          "modelo-3": { startPercent: 0.3, endPercent: 0.82 },
-          "modelo-4": { startPercent: 0.37, endPercent: 0.9 },
+          "modelo-1": { startPercent: 0.35, endPercent: 0.9, rotation: -0.3 }, // rotation: grados (positivo = derecha, negativo = izquierda)
+          "modelo-2": { startPercent: 0.35, endPercent: 0.9, rotation: 0 },
+          "modelo-3": { startPercent: 0.3, endPercent: 0.82, rotation: -0.3 },
+          "modelo-4": { startPercent: 0.37, endPercent: 0.9, rotation: 0 },
         };
 
         const config = configuracionesCierre[estadoDiseno.modelo] || {
           startPercent: 0.15,
           endPercent: 0.75,
+          rotation: 0,
         };
 
         // Obtener el viewBox del SVG para calcular las coordenadas
@@ -5610,7 +5611,7 @@ import Header from "../components/common/Header.astro";
 
         if (viewBox) {
           const [, , width, height] = viewBox.split(" ").map(Number);
-          centerX = width / 2 + 4;
+          centerX = width / 2 + 4.5;
           startY = height * config.startPercent;
           endY = height * config.endPercent;
         }
@@ -5629,6 +5630,16 @@ import Header from "../components/common/Header.astro";
         linea.setAttribute("stroke-width", "6");
         linea.setAttribute("stroke-linecap", "round");
         linea.style.opacity = "0.8";
+
+        // Aplicar rotación si está configurada
+        if (config.rotation !== 0) {
+          // Calcular el punto medio de la línea para rotar desde el centro
+          const centerY = (startY + endY) / 2;
+          linea.setAttribute(
+            "transform",
+            `rotate(${config.rotation} ${centerX} ${centerY})`,
+          );
+        }
 
         // Agregar la línea al SVG (al final para que esté encima)
         frenteSvg.appendChild(linea);
