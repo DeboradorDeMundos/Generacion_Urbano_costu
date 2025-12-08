@@ -6420,7 +6420,6 @@ import Header from "../components/common/Header.astro";
 
       // Event listeners para imagen (mouse y touch)
       const handleImageStart = (e: MouseEvent | TouchEvent) => {
-        e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
@@ -6447,12 +6446,11 @@ import Header from "../components/common/Header.astro";
 
       image.addEventListener("mousedown", handleImageStart);
       image.addEventListener("touchstart", handleImageStart, {
-        passive: false,
+        passive: true,
       });
 
       // Event listeners para handle de resize (mouse y touch)
       const handleResizeStart = (e: MouseEvent | TouchEvent) => {
-        e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "resize";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
@@ -6470,12 +6468,11 @@ import Header from "../components/common/Header.astro";
 
       handle.addEventListener("mousedown", handleResizeStart);
       handle.addEventListener("touchstart", handleResizeStart, {
-        passive: false,
+        passive: true,
       });
 
       // Event listeners para handle de rotación (mouse y touch)
       const handleRotateStart = (e: MouseEvent | TouchEvent) => {
-        e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "imagen", id: img.id };
@@ -6485,7 +6482,7 @@ import Header from "../components/common/Header.astro";
 
       rotateHandle.addEventListener("mousedown", handleRotateStart);
       rotateHandle.addEventListener("touchstart", handleRotateStart, {
-        passive: false,
+        passive: true,
       });
 
       deleteBtn.addEventListener("click", (e) => {
@@ -6673,7 +6670,6 @@ import Header from "../components/common/Header.astro";
       // Event listener para arrastrar texto (mouse y touch)
       const handleTextStart = (e: MouseEvent | TouchEvent) => {
         if ((e.target as HTMLElement).tagName === "BUTTON") return;
-        e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "drag";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
@@ -6700,7 +6696,7 @@ import Header from "../components/common/Header.astro";
 
       container.addEventListener("mousedown", handleTextStart);
       container.addEventListener("touchstart", handleTextStart, {
-        passive: false,
+        passive: true,
       });
 
       deleteBtn.addEventListener("click", (e) => {
@@ -6749,7 +6745,6 @@ import Header from "../components/common/Header.astro";
 
       // Event listener para rotar texto (mouse y touch)
       const handleTextRotateStart = (e: MouseEvent | TouchEvent) => {
-        e.preventDefault();
         e.stopPropagation();
         modoInteraccion = "rotate";
         elementoSeleccionado = { tipo: "texto", id: txt.id };
@@ -6759,7 +6754,7 @@ import Header from "../components/common/Header.astro";
 
       rotateBtn.addEventListener("mousedown", handleTextRotateStart);
       rotateBtn.addEventListener("touchstart", handleTextRotateStart, {
-        passive: false,
+        passive: true,
       });
 
       foreign.appendChild(container);
@@ -6968,7 +6963,7 @@ import Header from "../components/common/Header.astro";
 
     document.addEventListener("mousemove", handleGlobalMove);
     document.addEventListener("touchmove", handleGlobalMove, {
-      passive: false,
+      passive: true,
     });
 
     const handleGlobalEnd = (e: MouseEvent | TouchEvent) => {
@@ -7077,7 +7072,7 @@ import Header from "../components/common/Header.astro";
     };
 
     document.addEventListener("mouseup", handleGlobalEnd);
-    document.addEventListener("touchend", handleGlobalEnd, { passive: false });
+    document.addEventListener("touchend", handleGlobalEnd, { passive: true });
 
     // Click fuera para deseleccionar
     document.addEventListener("click", (e) => {
