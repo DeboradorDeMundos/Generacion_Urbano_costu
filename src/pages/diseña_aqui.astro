@@ -112,6 +112,38 @@ import Header from "../components/common/Header.astro";
             </div>
           </div>
 
+          <!-- Selector de Tipo de Prenda (solo para modelos 3 y 4) -->
+          <div
+            id="selectorTipoPrenda"
+            class="bg-white rounded-xl shadow-lg p-6"
+            style="display:none;"
+          >
+            <div
+              class="flex items-center justify-between mb-4 cursor-pointer panel-header"
+            >
+              <h3 class="font-bold text-lg text-gray-800">Tipo de Prenda</h3>
+              <span class="transform transition-transform duration-200">▽</span>
+            </div>
+            <div class="panel-content">
+              <div class="grid grid-cols-2 gap-3">
+                <button
+                  class="tipo-prenda-btn active border-2 border-gray-300 rounded-lg p-4 hover:border-red-600 hover:bg-red-50 transition-colors cursor-pointer text-center"
+                  data-tipo="poleron"
+                >
+                  <div class="text-3xl mb-2">🧥</div>
+                  <div class="text-sm font-semibold">Polerón</div>
+                </button>
+                <button
+                  class="tipo-prenda-btn border-2 border-gray-300 rounded-lg p-4 hover:border-red-600 hover:bg-red-50 transition-colors cursor-pointer text-center"
+                  data-tipo="cortaviento"
+                >
+                  <div class="text-3xl mb-2">🌬️</div>
+                  <div class="text-sm font-semibold">Cortaviento</div>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Selector de Tipo de Cierre (oculto para modelo 1) -->
           <div class="bg-white rounded-xl shadow-lg p-6" style="display:none;">
             <h3 class="font-bold text-lg mb-4 text-gray-800">Tipo de Cierre</h3>
@@ -4779,6 +4811,20 @@ import Header from "../components/common/Header.astro";
                 <div id="infoModelo" class="font-semibold text-right">
                   Modelo 1
                 </div>
+                <div
+                  id="infoTipoPrendaLabel"
+                  class="text-gray-600"
+                  style="display:none;"
+                >
+                  Tipo de Prenda
+                </div>
+                <div
+                  id="infoTipoPrenda"
+                  class="font-semibold text-right"
+                  style="display:none;"
+                >
+                  Polerón
+                </div>
                 <div class="text-gray-600">Parte seleccionada</div>
                 <div id="infoParte" class="font-semibold text-right">
                   Cuerpo
@@ -4882,6 +4928,17 @@ import Header from "../components/common/Header.astro";
     .bolsillo-btn.active,
     .cierre-btn.active {
       @apply border-red-600 bg-red-100 text-red-700 font-bold;
+    }
+
+    /* Estilos para botones de tipo de prenda */
+    .tipo-prenda-btn {
+      @apply border-2 border-gray-300 bg-white hover:border-red-600 hover:bg-red-50 transition-all cursor-pointer text-gray-700;
+    }
+    .tipo-prenda-btn.active {
+      @apply border-red-600 bg-red-50 text-red-600 font-bold;
+    }
+    .tipo-prenda-btn:hover {
+      @apply transform scale-105;
     }
 
     /* Las partes del polerón ya no tienen efectos hover porque no son clickeables */
@@ -5015,6 +5072,7 @@ import Header from "../components/common/Header.astro";
       imagenes: ImagenOverlay[];
       textos: TextoOverlay[];
       vistaActual: "frontal" | "trasera"; // Controla qué vista está activa
+      tipoPrenda: "poleron" | "cortaviento"; // Tipo de prenda (solo para modelos 3 y 4)
     }
     // Colores por defecto para cada modelo
     const coloresPorModelo: Record<string, Record<string, string>> = {
@@ -5071,6 +5129,7 @@ import Header from "../components/common/Header.astro";
       imagenes: [],
       textos: [],
       vistaActual: "frontal", // Vista inicial
+      tipoPrenda: "poleron", // Tipo de prenda por defecto
     };
 
     const emojiRegex = /[\p{Extended_Pictographic}]/u;
@@ -5107,6 +5166,21 @@ import Header from "../components/common/Header.astro";
       if (infoParte)
         infoParte.textContent =
           nombresPartes[estadoDiseno.parteActual] || estadoDiseno.parteActual;
+
+      // Mostrar/ocultar tipo de prenda según el modelo
+      const mostrarTipoPrenda =
+        estadoDiseno.modelo === "modelo-3" ||
+        estadoDiseno.modelo === "modelo-4";
+      if (infoTipoPrenda && infoTipoPrendaLabel) {
+        infoTipoPrenda.style.display = mostrarTipoPrenda ? "block" : "none";
+        infoTipoPrendaLabel.style.display = mostrarTipoPrenda
+          ? "block"
+          : "none";
+        if (mostrarTipoPrenda) {
+          infoTipoPrenda.textContent =
+            estadoDiseno.tipoPrenda === "poleron" ? "Polerón" : "Cortaviento";
+        }
+      }
 
       if (infoColoresList) {
         infoColoresList.innerHTML = "";
@@ -5336,6 +5410,8 @@ import Header from "../components/common/Header.astro";
     ) as HTMLInputElement;
     const infoModelo = document.getElementById("infoModelo");
     const infoParte = document.getElementById("infoParte");
+    const infoTipoPrenda = document.getElementById("infoTipoPrenda");
+    const infoTipoPrendaLabel = document.getElementById("infoTipoPrendaLabel");
     const infoColoresList = document.getElementById("infoColores");
     const infoTextosList = document.getElementById("infoTextos");
     const infoImagenesInfo = document.getElementById("infoImagenes");
@@ -5412,6 +5488,18 @@ import Header from "../components/common/Header.astro";
         el.classList.toggle("hidden", !cfg.tieneGorro),
       );
 
+      // Mostrar/ocultar selector de tipo de prenda según el modelo
+      const selectorTipoPrenda = document.getElementById("selectorTipoPrenda");
+      if (selectorTipoPrenda) {
+        if (modelo === "modelo-3" || modelo === "modelo-4") {
+          selectorTipoPrenda.style.display = "block";
+        } else {
+          selectorTipoPrenda.style.display = "none";
+          // Resetear a polerón cuando se oculta
+          estadoDiseno.tipoPrenda = "poleron";
+        }
+      }
+
       // Actualizar selector de partes dinámicamente
       actualizarSelectorPartes(modelo);
 
@@ -5475,6 +5563,26 @@ import Header from "../components/common/Header.astro";
         const modelo =
           (e.currentTarget as HTMLElement).dataset.modelo || "modelo-1";
         actualizarModelo(modelo);
+      });
+    });
+
+    // Event listeners para tipo de prenda
+    document.querySelectorAll(".tipo-prenda-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const tipo = (e.currentTarget as HTMLElement).dataset.tipo || "poleron";
+        estadoDiseno.tipoPrenda = tipo as "poleron" | "cortaviento";
+
+        // Actualizar botones activos
+        document
+          .querySelectorAll(".tipo-prenda-btn")
+          .forEach((b) =>
+            b.classList.toggle(
+              "active",
+              (b as HTMLElement).dataset.tipo === tipo,
+            ),
+          );
+
+        actualizarInfoDiseno();
       });
     });
 
