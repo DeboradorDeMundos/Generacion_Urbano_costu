@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://generacionurbana.cl/sitemap.xml
+Sitemap: https://generacionurbano.cl/sitemap.xml
 
 # Disallow admin/private areas
 Disallow: /admin/

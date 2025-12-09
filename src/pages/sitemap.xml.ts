@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ site }) => {
-  const baseUrl = site?.toString() || "https://generacionurbana.cl";
+  const baseUrl = site?.toString() || "https://generacionurbano.cl";
 
   // Static pages
   const staticPages = ["", "diseña_aqui"];
