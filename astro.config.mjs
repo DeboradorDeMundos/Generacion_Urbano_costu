@@ -8,10 +8,9 @@ export default defineConfig({
   integrations: [tailwind()],
   output: "static",
   adapter: vercel(),
-  site: "https://generacionurbana.cl",
+  site: "https://generacionurbano.cl",
   compressHTML: true,
   build: {
     inlineStylesheets: "auto",
   },
-
 });

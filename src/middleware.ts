@@ -4,7 +4,7 @@ import type { APIRoute, MiddlewareNext } from "astro";
 // Configuration - Use environment-specific URLs
 // URL will be automatically set by Vercel or use the configured site URL
 const SITE_URL = import.meta.env.PROD
-  ? "https://generacionurbana.cl"
+  ? "https://generacionurbano.cl"
   : import.meta.env.DEV
   ? "http://localhost:4321"
   : "http://127.0.0.1:4321";

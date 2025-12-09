@@ -7,7 +7,7 @@ Sitio web oficial de Generación Urbano, especialistas en bordados de alta calid
 - **Framework:** Astro 5.13.7
 - **Styling:** Tailwind CSS
 - **Hosting:** Vercel
-- **Dominio:** generacionurbana.cl
+- **Dominio:** generacionurbano.cl
 
 ## 📦 Instalación
 

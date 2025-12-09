@@ -182,7 +182,7 @@ Para uniformes empresariales y clientes frecuentes, ofrecemos servicios de mante
 Si tienes alguna pregunta específica que no está aquí, no dudes en contactarnos:
 
 - **Teléfono/WhatsApp:** +56 9 XXXX XXXX
-- **Email:** costurera@generacionurbana.cl
+- **Email:** costurera@generacionurbano.cl
 - **Visita directa:** [Dirección en San Bernardo]
 
 **Horarios de atención:**

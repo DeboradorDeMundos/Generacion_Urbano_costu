@@ -11,7 +11,7 @@ export function buildTitle(
 
 export function buildCanonical(
   path: string,
-  baseUrl: string = "https://generacionurbana.cl"
+  baseUrl: string = "https://generacionurbano.cl"
 ): string {
   // Remove trailing slash except for root
   const cleanPath = path === "/" ? "/" : path.replace(/\/$/, "");
