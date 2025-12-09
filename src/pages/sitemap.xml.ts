@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ site }) => {
-  const baseUrl = site?.toString() || "https://generacionurbano.cl";
+export const GET: APIRoute = async () => {
+  // Dominio fijo sin trailing slash
+  const baseUrl = "https://generacionurbano.cl";
 
   // Static pages
   const staticPages = ["", "diseña_aqui"];
