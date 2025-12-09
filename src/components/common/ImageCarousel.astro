@@ -92,9 +92,9 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 <script define:vars={{ carouselId, autoplay, interval }}>
-  // Sistema de carrusel con navegación y autoplay
+  // Sistema de carrusel con navegación y autoplay - timing consistente
   const carousel = document.getElementById(carouselId);
-  if (!carousel) return;
+  if (!carousel) throw new Error("Carousel not found");
 
   const items = carousel.querySelectorAll(".carousel-item");
   const indicators = carousel.querySelectorAll(".carousel-indicator");
@@ -103,6 +103,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 
   let currentIndex = 0;
   let autoplayTimer = null;
+  const INTERVAL_TIME = interval; // Tiempo fijo para todas las imágenes
 
   // Función para mostrar imagen específica
   function showImage(index) {
@@ -140,10 +141,11 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     showImage(prev);
   }
 
-  // Configurar autoplay
+  // Configurar autoplay con timing consistente
   function startAutoplay() {
+    stopAutoplay(); // Siempre limpiar antes de iniciar
     if (autoplay && items.length > 1) {
-      autoplayTimer = setInterval(nextImage, interval);
+      autoplayTimer = setInterval(nextImage, INTERVAL_TIME);
     }
   }
 
@@ -154,28 +156,31 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     }
   }
 
+  // Función para reiniciar autoplay después de interacción
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
   // Event listeners
   prevBtn?.addEventListener("click", () => {
     prevImage();
-    stopAutoplay();
-    startAutoplay();
+    resetAutoplay();
   });
 
   nextBtn?.addEventListener("click", () => {
     nextImage();
-    stopAutoplay();
-    startAutoplay();
+    resetAutoplay();
   });
 
   indicators.forEach((indicator, index) => {
     indicator.addEventListener("click", () => {
       showImage(index);
-      stopAutoplay();
-      startAutoplay();
+      resetAutoplay();
     });
   });
 
-  // Pausar en hover
+  // Pausar en hover, reiniciar al salir
   carousel.addEventListener("mouseenter", stopAutoplay);
   carousel.addEventListener("mouseleave", startAutoplay);
 
