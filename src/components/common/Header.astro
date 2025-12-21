@@ -388,30 +388,41 @@ const { transparent = false } = Astro.props;
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  function initMobileMenu() {
     const button = document.getElementById("mobile-menu-button");
     const closeButton = document.getElementById("mobile-close-button");
     const menu = document.getElementById("mobile-menu-overlay");
     const backdrop = document.getElementById("mobile-backdrop");
 
+    if (!button || !menu) return;
+
     const openMenu = () => {
-      if (menu) {
-        menu.classList.remove("opacity-0", "invisible");
-        menu.classList.add("opacity-100", "visible");
-        button?.setAttribute("aria-expanded", "true");
-      }
+      menu.classList.remove("opacity-0", "invisible");
+      menu.classList.add("opacity-100", "visible");
+      button.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
     };
 
     const closeMenu = () => {
-      if (menu) {
-        menu.classList.add("opacity-0", "invisible");
-        menu.classList.remove("opacity-100", "visible");
-        button?.setAttribute("aria-expanded", "false");
-      }
+      menu.classList.add("opacity-0", "invisible");
+      menu.classList.remove("opacity-100", "visible");
+      button.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
     };
 
-    button?.addEventListener("click", openMenu);
+    button.addEventListener("click", openMenu);
     closeButton?.addEventListener("click", closeMenu);
     backdrop?.addEventListener("click", closeMenu);
-  });
+
+    // Cerrar al hacer clic en un link del menú
+    const menuLinks = menu.querySelectorAll("a");
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+  }
+
+  // Ejecutar inmediatamente y también en eventos de navegación
+  initMobileMenu();
+  document.addEventListener("DOMContentLoaded", initMobileMenu);
+  document.addEventListener("astro:page-load", initMobileMenu);
 </script>
