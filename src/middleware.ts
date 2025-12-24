@@ -1,11 +1,6 @@
 // Middleware for handling canonical URLs and basic security
 import type { APIRoute, MiddlewareNext } from "astro";
 
-// ⚠️ BLOQUEO DE SITIO POR FALTA DE PAGO ⚠️
-// Para activar el bloqueo: En Vercel, agregar variable de entorno SITE_DISABLED=true
-// Para desactivar: Eliminar la variable SITE_DISABLED o cambiarla a false
-const SITE_DISABLED = import.meta.env.SITE_DISABLED === "true";
-
 // Configuration - Use environment-specific URLs
 // URL will be automatically set by Vercel or use the configured site URL
 const SITE_URL = import.meta.env.PROD
@@ -36,10 +31,12 @@ export async function onRequest(context: any, next: MiddlewareNext) {
   const { request, url, locals } = context;
 
   // ⚠️ BLOQUEO TOTAL DEL SITIO ⚠️
-  // Si SITE_DISABLED está activo, redirigir TODAS las rutas a la página de inhabilitado
+  // Se evalúa en cada request, no en build time
+  const SITE_DISABLED = process.env.SITE_DISABLED === "true";
+  
   if (SITE_DISABLED) {
-    // Permitir solo la página de inhabilitado
-    if (!url.pathname.includes("/sitio-inhabilitado")) {
+    // Permitir solo la página de inhabilitado y archivos estáticos
+    if (!url.pathname.includes("/sitio-inhabilitado") && !url.pathname.startsWith("/images/")) {
       return Response.redirect(new URL("/sitio-inhabilitado", url.origin), 302);
     }
   }
