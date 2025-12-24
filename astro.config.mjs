@@ -6,7 +6,7 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  output: "static",
+  output: "server", // ⚠️ Cambiado a server para que el middleware de bloqueo funcione
   adapter: vercel(),
   site: "https://generacionurbano.cl",
   compressHTML: true,
