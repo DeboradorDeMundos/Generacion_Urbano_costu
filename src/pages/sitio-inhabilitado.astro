@@ -1,0 +1,138 @@
+---
+// Página que se muestra cuando el sitio está inhabilitado por falta de pago
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sitio Inhabilitado - Generación Urbano</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        padding: 60px 40px;
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo {
+        margin-bottom: 40px;
+      }
+
+      .logo img {
+        max-width: 250px;
+        height: auto;
+      }
+
+      h1 {
+        color: #2d3748;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      p {
+        color: #718096;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+      }
+
+      .contact-info {
+        background: #f7fafc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 30px;
+      }
+
+      .contact-info h2 {
+        color: #2d3748;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .contact-info a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img
+          src="/images/logos/generacion-urbano-logo.png"
+          alt="Generación Urbano"
+          onerror="this.style.display='none'"
+        />
+      </div>
+
+      <div class="icon">🔒</div>
+
+      <h1>Sitio Temporalmente Inhabilitado</h1>
+
+      <p>Este sitio web se encuentra actualmente inhabilitado.</p>
+
+      <p>
+        Si necesitas información sobre nuestros servicios o tienes alguna
+        consulta, por favor contacta directamente con nosotros.
+      </p>
+
+      <div class="contact-info">
+        <h2>Información de Contacto</h2>
+        <p>
+          Email: <a href="mailto:contacto@generacionurbano.cl"
+            >contacto@generacionurbano.cl</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
