@@ -32,14 +32,17 @@ export async function onRequest(context: any, next: MiddlewareNext) {
 
   // ⚠️ BLOQUEO TOTAL DEL SITIO ⚠️
   // Se evalúa en cada request, no en build time
-  const SITE_DISABLED = process.env.SITE_DISABLED === "true";
-  
-  if (SITE_DISABLED) {
-    // Permitir solo la página de inhabilitado y archivos estáticos
-    if (!url.pathname.includes("/sitio-inhabilitado") && !url.pathname.startsWith("/images/")) {
-      return Response.redirect(new URL("/sitio-inhabilitado", url.origin), 302);
-    }
-  }
+  // const SITE_DISABLED = process.env.SITE_DISABLED === "true";
+
+  // if (SITE_DISABLED) {
+  //   // Permitir solo la página de inhabilitado y archivos estáticos
+  //   if (
+  //     !url.pathname.includes("/sitio-inhabilitado") &&
+  //     !url.pathname.startsWith("/images/")
+  //   ) {
+  //     return Response.redirect(new URL("/sitio-inhabilitado", url.origin), 302);
+  //   }
+  // }
 
   // Security headers
   const headers = new Headers();
