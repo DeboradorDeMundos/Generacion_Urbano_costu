@@ -38,6 +38,16 @@
       "source": "/costurera-san-bernardo",
       "destination": "/servicios/costurera-san-bernardo",
       "permanent": true
+    },
+    {
+      "source": "/dise%C3%B1a_aqui",
+      "destination": "/disena-aqui",
+      "permanent": true
+    },
+    {
+      "source": "/diseña_aqui",
+      "destination": "/disena-aqui",
+      "permanent": true
     }
   ]
 }

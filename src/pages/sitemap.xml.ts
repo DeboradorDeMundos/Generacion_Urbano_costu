@@ -5,7 +5,7 @@ export const GET: APIRoute = async () => {
   const baseUrl = "https://generacionurbano.cl";
 
   // Static pages
-  const staticPages = ["", "diseña_aqui"];
+  const staticPages = ["", "disena-aqui"];
 
   // Generate XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

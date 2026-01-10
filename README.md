@@ -44,7 +44,7 @@ npm run preview
 
 - `/` - Página principal
 - `/contacto` - Formulario de contacto
-- `/diseña_aqui` - Diseñador interactivo de polerones
+- `/disena-aqui` - Diseñador interactivo de polerones
 
 ## 📝 Comandos Disponibles
 
