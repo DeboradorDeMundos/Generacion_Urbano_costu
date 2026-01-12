@@ -56,17 +56,22 @@ const { transparent = false } = Astro.props;
             </div>
           </div>
 
-          <!-- Brand Text con efecto neón de texto -->
+          <!-- Brand Text -->
           <div class="hidden sm:flex sm:flex-col">
             <h1
-              class="text-lg lg:text-xl font-bold leading-tight neon-text-white group-hover:neon-text-red transition-all duration-500"
+              class="text-base lg:text-lg font-bold leading-tight text-white transition-all duration-500"
             >
               Generación Urbano
             </h1>
             <span
-              class="text-sm lg:text-base italic text-white font-light tracking-wide"
+              class="text-2xl lg:text-3xl tracking-wider -mt-1"
+              style="font-family: 'Great Vibes', cursive; 
+                     color: #ffffff;
+                     font-weight: 400;
+                     transform: rotate(-5deg);
+                     display: inline-block;"
             >
-              BORDADO
+              Bordados
             </span>
             <div
               class="h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-red-600 to-red-400 transition-all duration-500 rounded-full"
