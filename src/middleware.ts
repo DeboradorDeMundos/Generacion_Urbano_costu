@@ -10,15 +10,16 @@ const SITE_URL = import.meta.env.PROD
   : "http://127.0.0.1:4321";
 const CSP_POLICY = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.tiktok.com https://*.tiktok.com https://connect.facebook.net https://www.instagram.com https://*.facebook.net;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.tiktok.com https://*.tiktok.com https://*.tiktokcdn.com https://connect.facebook.net https://www.instagram.com https://*.facebook.net https://*.cdninstagram.com;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.tiktokcdn.com;
+  font-src 'self' https://fonts.gstatic.com https://*.tiktokcdn.com;
   img-src 'self' data: https: blob:;
-  media-src 'self' https:;
+  media-src 'self' https: blob:;
   object-src 'none';
   frame-src 'self' https://www.youtube.com https://www.google.com https://www.instagram.com https://*.instagram.com https://www.tiktok.com https://*.tiktok.com https://www.facebook.com https://*.facebook.com;
-  connect-src 'self' https://www.google-analytics.com https://www.instagram.com https://*.instagram.com https://www.tiktok.com https://*.tiktok.com https://www.facebook.com https://*.facebook.com;
+  connect-src 'self' https://www.google-analytics.com https://www.instagram.com https://*.instagram.com https://www.tiktok.com https://*.tiktok.com https://*.tiktokcdn.com https://*.tiktokv.com https://www.facebook.com https://*.facebook.com https://*.cdninstagram.com;
   worker-src 'self' blob:;
+  child-src 'self' https://www.tiktok.com https://*.tiktok.com blob:;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
